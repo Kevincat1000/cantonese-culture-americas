@@ -27,6 +27,86 @@
     This timeline traces major moments in Cantonese migration from Guangdong to Vietnam and the Americas,
     situating cultural practices within historical events.
   </p>
+  <!-- ====== START: Interactive Route Map (copy/paste) ====== -->
+<link href="https://api.mapbox.com/mapbox-gl-js/v3.17.0/mapbox-gl.css" rel="stylesheet" />
+<section style="margin:32px 0;">
+  <h2 style="margin:0 0 12px 0; font-family:system-ui,-apple-system,Segoe UI,Roboto;">Migration Route Map</h2>
+  <div id="diaspora-map" style="width:100%; height:520px; border-radius:14px; overflow:hidden;"></div>
+</section>
+<script src="https://api.mapbox.com/mapbox-gl-js/v3.17.0/mapbox-gl.js"></script>
+<script>
+  mapboxgl.accessToken = "pk.eyJ1Ijoia2V2aW5jYXQxMDAiLCJhIjoiY21qbmFyN21yMTYzMzNlcHN5ZHVubTdpbiJ9.m8QPkEMJKLNIMvFyKUgTkw";
+  // 主标题：过去名字；副标题：现在名字（没有就空）；国家：country
+  const stops = [
+    { id:"gd",  title:"Guangdong",         subtitle:"",                 country:"China",    coords:[113.2644, 23.1291] },
+    { id:"ayu", title:"Ayutthaya Kingdom", subtitle:"Ayutthaya",         country:"Thailand", coords:[100.5689, 14.3532] },
+    { id:"hat", title:"Hà Tiên",           subtitle:"",                 country:"Vietnam",  coords:[104.4833, 10.3833] },
+    { id:"sai", title:"Saigon",            subtitle:"Ho Chi Minh City",  country:"Vietnam",  coords:[106.6297, 10.8231] },
+    { id:"coc", title:"Cochinchina",       subtitle:"Southern Vietnam",  country:"Vietnam",  coords:[106.7,   10.8] }
+  ];
+  const map = new mapboxgl.Map({
+    container: "diaspora-map",
+    style: "mapbox://styles/mapbox/light-v11",
+    center: [105, 16],
+    zoom: 3
+  });
+  map.addControl(new mapboxgl.NavigationControl(), "top-right");
+  map.on("load", () => {
+    const bounds = new mapboxgl.LngLatBounds();
+    for (const s of stops) {
+      const el = document.createElement("div");
+      el.style.width = "14px";
+      el.style.height = "14px";
+      el.style.borderRadius = "999px";
+      el.style.background = "#111";
+      el.style.border = "2px solid #fff";
+      el.style.boxShadow = "0 1px 6px rgba(0,0,0,.25)";
+      el.style.cursor = "pointer";
+      const popupHtml = `
+        <div style="font-family:system-ui,-apple-system,Segoe UI,Roboto; font-size:13px; line-height:1.25;">
+          <div style="font-weight:700; margin-bottom:4px;">${escapeHtml(s.title)}</div>
+          ${s.subtitle ? `<div style="opacity:.85; margin-bottom:4px;">${escapeHtml(s.subtitle)}</div>` : ``}
+          <div style="opacity:.7;">${escapeHtml(s.country)}</div>
+        </div>
+      `;
+      new mapboxgl.Marker({ element: el, anchor: "center" })
+        .setLngLat(s.coords)
+        .setPopup(new mapboxgl.Popup({ offset: 18 }).setHTML(popupHtml))
+        .addTo(map);
+      bounds.extend(s.coords);
+    }
+    map.fitBounds(bounds, { padding: 80 });
+    const routeGeojson = {
+      type: "FeatureCollection",
+      features: [{
+        type: "Feature",
+        properties: {},
+        geometry: { type: "LineString", coordinates: stops.map(s => s.coords) }
+      }]
+    };
+    map.addSource("route", { type: "geojson", data: routeGeojson });
+    map.addLayer({
+      id: "route-base",
+      type: "line",
+      source: "route",
+      layout: { "line-cap": "round", "line-join": "round" },
+      paint: { "line-width": 4, "line-color": "rgba(0,0,0,0.25)" }
+    });
+    map.addLayer({
+      id: "route-dashed",
+      type: "line",
+      source: "route",
+      layout: { "line-cap": "round", "line-join": "round" },
+      paint: { "line-width": 4, "line-color": "#111", "line-dasharray": [2, 2] }
+    });
+  });
+  function escapeHtml(str) {
+    return String(str).replace(/[&<>"']/g, (m) => ({
+      "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;"
+    }[m]));
+  }
+</script>
+<!-- ====== END: Interactive Route Map (copy/paste) ====== -->
 
   <p><em>（You can embed TimelineJS or StoryMapJS here later）</em></p>
 </main>
