@@ -27,7 +27,7 @@
     This timeline traces major moments in Cantonese migration from Guangdong to Vietnam and the Americas,
     situating cultural practices within historical events.
   </p>
-<!-- ====== START: Maritime Migration Routes (FINAL) ====== -->
+<!-- ====== START: Maritime Migration Routes (FINAL v2) ====== -->
 
 <link href="https://api.mapbox.com/mapbox-gl-js/v3.17.0/mapbox-gl.css" rel="stylesheet" />
 
@@ -42,15 +42,16 @@
 <script src="https://api.mapbox.com/mapbox-gl-js/v3.17.0/mapbox-gl.js"></script>
 
 <script>
-  /* ===== Mapbox Token ===== */
   mapboxgl.accessToken =
     "pk.eyJ1Ijoia2V2aW5jYXQxMDAiLCJhIjoiY21qbmFyN21yMTYzMzNlcHN5ZHVubTdpbiJ9.m8QPkEMJKLNIMvFyKUgTkw";
 
-  /* ===== Init Map ===== */
+  const ROUTE_COLOR = "#3d85c6";
+  const ROUTE_WIDTH = 2.5;
+
   const map = new mapboxgl.Map({
     container: "diaspora-map",
     style: "mapbox://styles/mapbox/light-v11",
-    center: [105, 16],
+    center: [105, 14],
     zoom: 3
   });
 
@@ -58,50 +59,30 @@
 
   map.on("load", () => {
 
-    /* ===== Points (ports / cities) ===== */
+    /* ===== Points ===== */
     const points = [
-      {
-        title: "Guangdong",
-        subtitle: "",
-        country: "China",
-        coords: [113.2644, 23.1291] // Guangzhou
-      },
-      {
-        title: "Ayutthaya Kingdom",
-        subtitle: "Ayutthaya",
-        country: "Thailand",
-        coords: [100.5689, 14.3532]
-      },
-      {
-        title: "Hà Tiên",
-        subtitle: "",
-        country: "Vietnam",
-        coords: [104.4833, 10.3833]
-      },
-      {
-        title: "Saigon",
-        subtitle: "Ho Chi Minh City",
-        country: "Vietnam",
-        coords: [106.6297, 10.8231]
-      }
+      { title:"Guangdong", subtitle:"", country:"China", coords:[113.2644, 23.1291] },
+      { title:"Ayutthaya Kingdom", subtitle:"Ayutthaya", country:"Thailand", coords:[100.5689, 14.3532] },
+      { title:"Hà Tiên", subtitle:"", country:"Vietnam", coords:[104.4833, 10.3833] },
+      { title:"Saigon", subtitle:"Ho Chi Minh City", country:"Vietnam", coords:[106.6297, 10.8231] }
     ];
 
     const bounds = new mapboxgl.LngLatBounds();
 
     points.forEach(p => {
       const el = document.createElement("div");
-      el.style.width = "14px";
-      el.style.height = "14px";
+      el.style.width = "12px";
+      el.style.height = "12px";
       el.style.borderRadius = "999px";
-      el.style.background = "#0B3D91";
+      el.style.background = ROUTE_COLOR;
       el.style.border = "2px solid #fff";
       el.style.boxShadow = "0 1px 6px rgba(0,0,0,.25)";
 
       const popupHtml = `
         <div style="font-family:system-ui; font-size:13px; line-height:1.25;">
-          <div style="font-weight:700; margin-bottom:4px;">${escapeHtml(p.title)}</div>
-          ${p.subtitle ? `<div style="opacity:.85; margin-bottom:4px;">${escapeHtml(p.subtitle)}</div>` : ``}
-          <div style="opacity:.7;">${escapeHtml(p.country)}</div>
+          <div style="font-weight:700; margin-bottom:4px;">${p.title}</div>
+          ${p.subtitle ? `<div style="opacity:.85; margin-bottom:4px;">${p.subtitle}</div>` : ``}
+          <div style="opacity:.7;">${p.country}</div>
         </div>
       `;
 
@@ -113,95 +94,85 @@
       bounds.extend(p.coords);
     });
 
-    map.fitBounds(bounds, { padding: 100 });
+    map.fitBounds(bounds, { padding: 110 });
 
-    /* ===== Route 1: Guangzhou → Ayutthaya (water route) ===== */
+    /* ===== Route 1: Guangzhou → Ayutthaya
+       南海 → 绕金瓯角（Cà Mau）→ 泰国湾（不走马六甲） ===== */
     const route1 = [
-      [113.2644, 23.1291],
-      [114.1694, 22.3193],
-      [112.0, 18.0],
-      [109.0, 12.0],
-      [103.8198, 1.3521],
-      [99.5, 6.0],
-      [96.0, 8.0],
-      [99.0, 9.5],
-      [101.5, 10.5],
-      [100.5689, 14.3532]
+      [113.2644, 23.1291], // Guangzhou
+      [114.5, 21.5],       // 南海出口
+      [112.0, 18.5],       // 南海
+      [110.0, 14.0],       // 越南中部外海
+      [109.0, 11.0],       // 越南南部外海
+      [104.5, 8.8],        // 绕过 Cà Mau（金瓯角）
+      [101.5, 9.5],        // 泰国湾入口
+      [100.9, 11.5],       // 泰国湾内部
+      [100.5689, 14.3532]  // Ayutthaya
     ];
 
     map.addSource("route-1", {
       type: "geojson",
-      data: { type: "Feature", geometry: { type: "LineString", coordinates: route1 } }
+      data: { type:"Feature", geometry:{ type:"LineString", coordinates: route1 } }
     });
 
     map.addLayer({
       id: "route-1-line",
       type: "line",
       source: "route-1",
-      layout: { "line-cap": "round", "line-join": "round" },
+      layout: { "line-cap":"round", "line-join":"round" },
       paint: {
-        "line-color": "#0B3D91",
-        "line-width": 4,
+        "line-color": ROUTE_COLOR,
+        "line-width": ROUTE_WIDTH,
         "line-dasharray": [2, 2]
       }
     });
 
-    /* ===== Route 2: Ayutthaya → Hà Tiên → Saigon (water route) ===== */
+    /* ===== Route 2: Ayutthaya → Hà Tiên → Saigon ===== */
     const route2 = [
       [100.5689, 14.3532],
-      [100.9, 12.5],
-      [101.6, 11.2],
-      [102.7, 10.7],
+      [101.2, 12.2],
+      [102.5, 11.0],
       [104.0, 10.5],
-      [104.4833, 10.3833],
-      [104.9, 9.8],
-      [105.6, 9.3],
+      [104.4833, 10.3833], // Hà Tiên
+      [105.4, 9.5],
       [106.2, 9.9],
-      [106.6297, 10.8231]
+      [106.6297, 10.8231]  // Saigon
     ];
 
     map.addSource("route-2", {
       type: "geojson",
-      data: { type: "Feature", geometry: { type: "LineString", coordinates: route2 } }
+      data: { type:"Feature", geometry:{ type:"LineString", coordinates: route2 } }
     });
 
     map.addLayer({
       id: "route-2-line",
       type: "line",
       source: "route-2",
-      layout: { "line-cap": "round", "line-join": "round" },
+      layout: { "line-cap":"round", "line-join":"round" },
       paint: {
-        "line-color": "#0B3D91",
-        "line-width": 4,
+        "line-color": ROUTE_COLOR,
+        "line-width": ROUTE_WIDTH,
         "line-dasharray": [2, 2]
       }
     });
 
-    /* ===== Animated dashed lines (both routes) ===== */
+    /* ===== Animated dashed lines ===== */
     const dashSeq = [
-      [0, 4, 3], [0.5, 4, 2.5], [1, 4, 2], [1.5, 4, 1.5],
-      [2, 4, 1], [2.5, 4, 0.5], [3, 4, 0],
-      [0, 0.5, 3, 3.5], [0, 1, 3, 3], [0, 1.5, 3, 2.5],
-      [0, 2, 3, 2], [0, 2.5, 3, 1.5], [0, 3, 3, 1], [0, 3.5, 3, 0.5]
+      [0,4,3],[0.5,4,2.5],[1,4,2],[1.5,4,1.5],
+      [2,4,1],[2.5,4,0.5],[3,4,0]
     ];
 
     let step = 0;
     setInterval(() => {
       const d = dashSeq[step];
-      map.setPaintProperty("route-1-line", "line-dasharray", d);
-      map.setPaintProperty("route-2-line", "line-dasharray", d);
+      map.setPaintProperty("route-1-line","line-dasharray", d);
+      map.setPaintProperty("route-2-line","line-dasharray", d);
       step = (step + 1) % dashSeq.length;
-    }, 180);
+    }, 220);
   });
-
-  function escapeHtml(str) {
-    return String(str).replace(/[&<>"']/g, m =>
-      ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;" }[m])
-    );
-  }
 </script>
 
-<!-- ====== END: Maritime Migration Routes (FINAL) ====== -->
+<!-- ====== END: Maritime Migration Routes (FINAL v2) ====== -->
 
 
   <p><em>（You can embed TimelineJS or StoryMapJS here later）</em></p>
