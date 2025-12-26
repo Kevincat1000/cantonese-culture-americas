@@ -27,7 +27,7 @@
     This timeline traces major moments in Cantonese migration from Guangdong to Vietnam and the Americas,
     situating cultural practices within historical events.
   </p>
-<!-- ====== START: Maritime Routes (FINAL v3) ====== -->
+<!-- ====== START: Integrated Maritime Migration Map ====== -->
 
 <link href="https://api.mapbox.com/mapbox-gl-js/v3.17.0/mapbox-gl.css" rel="stylesheet" />
 
@@ -36,138 +36,137 @@
     Maritime Migration Routes
   </h2>
   <div id="diaspora-map"
-       style="width:100%; height:520px; border-radius:14px; overflow:hidden;"></div>
+       style="width:100%; height:540px; border-radius:14px; overflow:hidden;"></div>
 </section>
 
 <script src="https://api.mapbox.com/mapbox-gl-js/v3.17.0/mapbox-gl.js"></script>
 
 <script>
-  mapboxgl.accessToken =
-    "pk.eyJ1Ijoia2V2aW5jYXQxMDAiLCJhIjoiY21qbmFyN21yMTYzMzNlcHN5ZHVubTdpbiJ9.m8QPkEMJKLNIMvFyKUgTkw";
+mapboxgl.accessToken =
+  "pk.eyJ1Ijoia2V2aW5jYXQxMDAiLCJhIjoiY21qbmFyN21yMTYzMzNlcHN5ZHVubTdpbiJ9.m8QPkEMJKLNIMvFyKUgTkw";
 
-  /* ===== Style Constants ===== */
-  const BLUE_ROUTE = "#3d85c6";
-  const GREY_ROUTE = "#9e9e9e";
-  const ROUTE_WIDTH = 2;
+/* ===== Style constants ===== */
+const BLUE_ROUTE = "#3d85c6";
+const GREY_ROUTE = "#666666";
+const ROUTE_WIDTH = 2;
 
-  const map = new mapboxgl.Map({
-    container: "diaspora-map",
-    style: "mapbox://styles/mapbox/light-v11",
-    center: [140, 20],
-    zoom: 2
+/* ===== Init map (your Studio v0 style) ===== */
+const map = new mapboxgl.Map({
+  container: "diaspora-map",
+  style: "mapbox://styles/kevincat100/cmjneo20k000v01sxghqb6aqr",
+  center: [150, 22],
+  zoom: 2
+});
+
+map.addControl(new mapboxgl.NavigationControl(), "top-right");
+
+map.on("load", () => {
+
+  /* ===== Points ===== */
+  const points = [
+    { title:"Si Yi", subtitle:"Sze Yup region of Guangdong", country:"China", coords:[112.98,22.54] },
+    { title:"Hong Kong", subtitle:"", country:"China", coords:[114.1694,22.3193] },
+    { title:"Ayutthaya Kingdom", subtitle:"Ayutthaya", country:"Thailand", coords:[100.5689,14.3532] },
+    { title:"Hà Tiên", subtitle:"", country:"Vietnam", coords:[104.4833,10.3833] },
+    { title:"Saigon", subtitle:"Ho Chi Minh City", country:"Vietnam", coords:[106.6297,10.8231] },
+    { title:"Penang", subtitle:"", country:"Malaysia", coords:[100.3354,5.4141] },
+    { title:"Singapore", subtitle:"", country:"Singapore", coords:[103.8198,1.3521] },
+    { title:"San Francisco", subtitle:"", country:"United States", coords:[-122.4194,37.7749] }
+  ];
+
+  const bounds = new mapboxgl.LngLatBounds();
+
+  points.forEach(p => {
+    const el = document.createElement("div");
+    el.style.width = "12px";
+    el.style.height = "12px";
+    el.style.borderRadius = "999px";
+    el.style.background = BLUE_ROUTE;
+    el.style.border = "2px solid #fff";
+    el.style.boxShadow = "0 1px 6px rgba(0,0,0,.25)";
+
+    const popupHtml = `
+      <div style="font-family:system-ui; font-size:13px; line-height:1.25;">
+        <div style="font-weight:700;">${p.title}</div>
+        ${p.subtitle ? `<div style="opacity:.8;">${p.subtitle}</div>` : ``}
+        <div style="opacity:.6;">${p.country}</div>
+      </div>
+    `;
+
+    new mapboxgl.Marker({ element: el })
+      .setLngLat(p.coords)
+      .setPopup(new mapboxgl.Popup({ offset: 18 }).setHTML(popupHtml))
+      .addTo(map);
+
+    bounds.extend(p.coords);
   });
 
-  map.addControl(new mapboxgl.NavigationControl(), "top-right");
+  map.fitBounds(bounds, { padding: 90 });
 
-  map.on("load", () => {
-
-    /* ===== Points ===== */
-    const points = [
-      { title:"Si Yi", subtitle:"Sze Yup region of Guangdong", country:"China", coords:[112.98,22.54] },
-      { title:"Hong Kong", subtitle:"", country:"China", coords:[114.1694,22.3193] },
-      { title:"Ayutthaya Kingdom", subtitle:"Ayutthaya", country:"Thailand", coords:[100.5689,14.3532] },
-      { title:"Hà Tiên", subtitle:"", country:"Vietnam", coords:[104.4833,10.3833] },
-      { title:"Saigon", subtitle:"Ho Chi Minh City", country:"Vietnam", coords:[106.6297,10.8231] },
-      { title:"Penang", subtitle:"", country:"Malaysia", coords:[100.3354,5.4141] },
-      { title:"Singapore", subtitle:"", country:"Singapore", coords:[103.8198,1.3521] },
-      { title:"San Francisco", subtitle:"", country:"United States", coords:[-122.4194,37.7749] }
-    ];
-
-    const bounds = new mapboxgl.LngLatBounds();
-
-    points.forEach(p => {
-      const el = document.createElement("div");
-      el.style.width = "12px";
-      el.style.height = "12px";
-      el.style.borderRadius = "999px";
-      el.style.background = BLUE_ROUTE;
-      el.style.border = "2px solid #fff";
-      el.style.boxShadow = "0 1px 6px rgba(0,0,0,.25)";
-
-      const popupHtml = `
-        <div style="font-family:system-ui; font-size:13px;">
-          <div style="font-weight:700;">${p.title}</div>
-          ${p.subtitle ? `<div style="opacity:.8;">${p.subtitle}</div>` : ``}
-          <div style="opacity:.6;">${p.country}</div>
-        </div>
-      `;
-
-      new mapboxgl.Marker({ element: el })
-        .setLngLat(p.coords)
-        .setPopup(new mapboxgl.Popup({ offset: 18 }).setHTML(popupHtml))
-        .addTo(map);
-
-      bounds.extend(p.coords);
+  /* ===== helper ===== */
+  function addRoute(id, coords, color) {
+    map.addSource(id, {
+      type:"geojson",
+      data:{ type:"Feature", geometry:{ type:"LineString", coordinates: coords } }
     });
+    map.addLayer({
+      id: id+"-line",
+      type:"line",
+      source:id,
+      layout:{ "line-cap":"round", "line-join":"round" },
+      paint:{
+        "line-color": color,
+        "line-width": ROUTE_WIDTH,
+        "line-dasharray":[2,2]
+      }
+    });
+  }
 
-    map.fitBounds(bounds, { padding: 90 });
+  /* ===== Blue routes ===== */
+  addRoute("r1",[
+    [112.98,22.54],[114,21.5],[112,18.5],[110,14],[109,11],
+    [104.5,8.8],[101.5,9.5],[100.9,11.5],[100.5689,14.3532]
+  ], BLUE_ROUTE);
 
-    /* ===== Helper to add dashed route ===== */
-    function addRoute(sourceId, layerId, coords, color) {
-      map.addSource(sourceId, {
-        type: "geojson",
-        data: { type:"Feature", geometry:{ type:"LineString", coordinates: coords } }
-      });
+  addRoute("r2",[
+    [100.5689,14.3532],[101.2,12.2],[102.5,11],[104,10.5],
+    [104.4833,10.3833],[105.4,9.5],[106.2,9.9],[106.6297,10.8231]
+  ], BLUE_ROUTE);
 
-      map.addLayer({
-        id: layerId,
-        type: "line",
-        source: sourceId,
-        layout: { "line-cap":"round", "line-join":"round" },
-        paint: {
-          "line-color": color,
-          "line-width": ROUTE_WIDTH,
-          "line-dasharray": [2,2]
-        }
-      });
-    }
+  addRoute("r3",[
+    [112.98,22.54],[113.8,20.5],[112,17],[109.5,12.5],
+    [105.8,8.5],[101.8,6.8],[100.3354,5.4141],[103.8198,1.3521]
+  ], BLUE_ROUTE);
 
-    /* ===== Blue routes (existing narrative) ===== */
-    addRoute("r1","r1-line",[
-      [112.98,22.54],[114,21.5],[112,18.5],[110,14],[109,11],
-      [104.5,8.8],[101.5,9.5],[100.9,11.5],[100.5689,14.3532]
-    ], BLUE_ROUTE);
+  /* ===== Grey Pacific routes (via Hawaii) ===== */
+  addRoute("r4",[
+    [106.6297,10.8231],[120,20],[140,30],[160,40],
+    [-157.8583,21.3069],[-140,40],[-125,38],[-122.4194,37.7749]
+  ], GREY_ROUTE);
 
-    addRoute("r2","r2-line",[
-      [100.5689,14.3532],[101.2,12.2],[102.5,11],[104,10.5],
-      [104.4833,10.3833],[105.4,9.5],[106.2,9.9],[106.6297,10.8231]
-    ], BLUE_ROUTE);
+  addRoute("r5",[
+    [114.1694,22.3193],[135,30],[155,40],
+    [-157.8583,21.3069],[-140,40],[-125,38],[-122.4194,37.7749]
+  ], GREY_ROUTE);
 
-    addRoute("r3","r3-line",[
-      [112.98,22.54],[113.8,20.5],[112,17],[109.5,12.5],
-      [105.8,8.5],[101.8,6.8],[100.3354,5.4141],
-      [102,3],[103.8198,1.3521]
-    ], BLUE_ROUTE);
+  /* ===== Animated dashed lines ===== */
+  const dashSeq = [
+    [0,4,3],[0.5,4,2.5],[1,4,2],[1.5,4,1.5],
+    [2,4,1],[2.5,4,0.5],[3,4,0]
+  ];
+  const animated = ["r1","r2","r3","r4","r5"].map(id=>id+"-line");
 
-    /* ===== Grey routes: Vietnam → California ===== */
-    addRoute("r4","r4-line",[
-      [106.6297,10.8231],[120,20],[140,35],[170,50],
-      [-150,50],[-135,45],[-125,38],[-122.4194,37.7749]
-    ], GREY_ROUTE);
-
-    /* ===== Grey routes: Hong Kong → California ===== */
-    addRoute("r5","r5-line",[
-      [114.1694,22.3193],[130,30],[150,40],[170,50],
-      [-150,50],[-135,45],[-125,38],[-122.4194,37.7749]
-    ], GREY_ROUTE);
-
-    /* ===== Animated dashed lines (all routes) ===== */
-    const dashSeq = [
-      [0,4,3],[0.5,4,2.5],[1,4,2],[1.5,4,1.5],
-      [2,4,1],[2.5,4,0.5],[3,4,0]
-    ];
-
-    const animated = ["r1-line","r2-line","r3-line","r4-line","r5-line"];
-    let step = 0;
-    setInterval(() => {
-      const d = dashSeq[step];
-      animated.forEach(id => map.setPaintProperty(id,"line-dasharray",d));
-      step = (step + 1) % dashSeq.length;
-    }, 260);
-  });
+  let step=0;
+  setInterval(()=>{
+    const d=dashSeq[step];
+    animated.forEach(l=>map.setPaintProperty(l,"line-dasharray",d));
+    step=(step+1)%dashSeq.length;
+  },260);
+});
 </script>
 
-<!-- ====== END: Maritime Routes (FINAL v3) ====== -->
+<!-- ====== END: Integrated Maritime Migration Map ====== -->
+
 
 
 
