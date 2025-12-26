@@ -62,9 +62,12 @@ const ANIM_MS = 260;        // 流动速度（越大越慢）
 const map = new mapboxgl.Map({
   container: "diaspora-map",
   style: STYLE_URL,
-  center: [120, 28],  // East Asia
-  zoom: 3.6
+  center: [104.9, 12.6], // Cambodia 附近（Phnom Penh 一带）
+  zoom: 4.2,
+  bearing: 0,            // 取消旋转（避免“歪”）
+  pitch: 0               // 取消倾斜
 });
+
 
 map.addControl(new mapboxgl.NavigationControl(), "top-right");
 
