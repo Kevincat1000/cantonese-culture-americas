@@ -7,206 +7,252 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <section class="timeline-wrap">
-  <header class="timeline-header">
+  <section class="tl-wrap">
+  <header class="tl-header">
     <h2>Timeline of Cantonese Migration</h2>
-    <p>Scroll left → right (or swipe). Each panel is one phase/event.</p>
+    <p>Use the arrows to move through panels.</p>
 
-    <div class="timeline-controls">
-      <button type="button" id="prevBtn">←</button>
-      <button type="button" id="nextBtn">→</button>
+    <div class="tl-controls">
+      <button type="button" class="tl-btn" id="tlPrev" aria-label="Previous">←</button>
+      <div class="tl-dots" id="tlDots"></div>
+      <button type="button" class="tl-btn" id="tlNext" aria-label="Next">→</button>
     </div>
   </header>
 
-  <div class="timeline" id="timeline">
-    <!-- PANEL 1 -->
-    <article class="panel">
-      <div class="panel-meta">
-        <span class="tag">Phase I</span>
-        <span class="date">17th–19th Centuries</span>
-      </div>
-      <h3>Early Migration within Southeast Asia</h3>
-      <p>
-        Following the Qing conquest of South China (c. 1644–1660s), Cantonese migrants moved south by sea…
-      </p>
-    </article>
+  <!-- 轮播本体（在 header 下方） -->
+  <div class="tl-stage" id="tlStage">
+    <div class="tl-track" id="tlTrack">
+      <!-- CARD 1 -->
+      <article class="tl-card">
+        <div class="tl-meta">
+          <span class="tl-tag">Phase I</span>
+          <span class="tl-date">17th–19th Centuries</span>
+        </div>
+        <h3>Early Migration within Southeast Asia</h3>
+        <p>Following the Qing conquest of South China (c. 1644–1660s), Cantonese migrants moved south by sea…</p>
+      </article>
 
-    <!-- PANEL 2 -->
-    <article class="panel">
-      <div class="panel-meta">
-        <span class="tag">Event</span>
-        <span class="date">1640s–1770s</span>
-      </div>
-      <h3>Migration to Siam (Thailand)</h3>
-      <p>
-        Maritime routes linked Guangdong’s coastal communities to Siam, Cambodia, and southern Vietnam…
-      </p>
-    </article>
+      <!-- CARD 2 -->
+      <article class="tl-card">
+        <div class="tl-meta">
+          <span class="tl-tag">Event</span>
+          <span class="tl-date">1640s–1770s</span>
+        </div>
+        <h3>Migration to Siam (Thailand)</h3>
+        <p>Maritime routes linked Guangdong’s coastal communities to Siam (Thailand), Cambodia, and southern Vietnam…</p>
+      </article>
 
-    <!-- PANEL 3 -->
-    <article class="panel">
-      <div class="panel-meta">
-        <span class="tag">Event</span>
-        <span class="date">1680s–1790s</span>
-      </div>
-      <h3>Settlement in Southern Vietnam (Cochinchina)</h3>
-      <p>
-        Mạc Cửu developed Hà Tiên and established a semi-autonomous principality in 1708…
-      </p>
-    </article>
+      <!-- CARD 3 -->
+      <article class="tl-card">
+        <div class="tl-meta">
+          <span class="tl-tag">Event</span>
+          <span class="tl-date">1680s–1790s</span>
+        </div>
+        <h3>Settlement in Southern Vietnam (Cochinchina)</h3>
+        <p>Mạc Cửu developed Hà Tiên and established his polity in 1708… Chợ Lớn formed in 1778…</p>
+      </article>
 
-    <!-- PANEL 4 -->
-    <article class="panel">
-      <div class="panel-meta">
-        <span class="tag">Event</span>
-        <span class="date">1786–1820s</span>
-      </div>
-      <h3>British Ports: Penang & Singapore</h3>
-      <p>
-        Penang (1786) and Singapore (1819) reshaped migration routes… Ning Yeung Wui Kuan (1822)…
-      </p>
-    </article>
+      <!-- CARD 4 -->
+      <article class="tl-card">
+        <div class="tl-meta">
+          <span class="tl-tag">Event</span>
+          <span class="tl-date">1786–1820s</span>
+        </div>
+        <h3>British Ports: Penang & Singapore</h3>
+        <p>Penang (1786) drew migrants; Singapore (1819) reshaped routes; Ning Yeung Wui Kuan founded in 1822…</p>
+      </article>
 
-    <!-- PANEL 5 -->
-    <article class="panel">
-      <div class="panel-meta">
-        <span class="tag">Event</span>
-        <span class="date">1840s–1870s</span>
-      </div>
-      <h3>Tin Mining Expansion in British Malaya</h3>
-      <p>
-        New migration waves moved from Penang/Singapore into Perak, Selangor, Negeri Sembilan…
-      </p>
-    </article>
+      <!-- CARD 5 -->
+      <article class="tl-card">
+        <div class="tl-meta">
+          <span class="tl-tag">Event</span>
+          <span class="tl-date">1840s–1870s</span>
+        </div>
+        <h3>Tin Mining Expansion in British Malaya</h3>
+        <p>New waves moved from Penang and Singapore into Perak, Selangor, and Negeri Sembilan mining districts…</p>
+      </article>
 
-    <!-- PANEL 6 -->
-    <article class="panel">
-      <div class="panel-meta">
-        <span class="tag">Summary</span>
-        <span class="date">By late 19th c.</span>
-      </div>
-      <h3>Population, Social Position, Economic Role</h3>
-      <p>
-        Tens of thousands regionally; high mobility via brotherhoods & associations; emergence of Taukes…
-      </p>
-    </article>
+      <!-- CARD 6 -->
+      <article class="tl-card">
+        <div class="tl-meta">
+          <span class="tl-tag">Summary</span>
+          <span class="tl-date">By late 19th c.</span>
+        </div>
+        <h3>Population, Social Position, Economic Role</h3>
+        <p>Tens of thousands regionally; high mobility via brotherhoods & associations; Taukes emerged controlling mines and networks…</p>
+      </article>
+    </div>
   </div>
 
-  <div class="timeline-progress">
-    <div class="bar" id="progressBar"></div>
+  <div class="tl-progress">
+    <div class="tl-bar" id="tlBar"></div>
   </div>
 </section>
 
 <style>
-  .timeline-wrap{
-    margin: 32px 0;
-    font-family: system-ui,-apple-system,Segoe UI,Roboto;
+  .tl-wrap{ margin:32px 0; font-family:system-ui,-apple-system,Segoe UI,Roboto; }
+  .tl-header h2{ margin:0 0 6px 0; }
+  .tl-header p{ margin:0 0 12px 0; opacity:.72; }
+
+  .tl-controls{ display:flex; align-items:center; gap:10px; }
+  .tl-btn{
+    border:1px solid rgba(0,0,0,.18);
+    background:#fff;
+    border-radius:12px;
+    padding:10px 14px;
+    cursor:pointer;
   }
-  .timeline-header h2{ margin: 0 0 6px 0; }
-  .timeline-header p{ margin: 0 0 12px 0; opacity: .75; }
-  .timeline-controls{ display:flex; gap:8px; margin-bottom: 12px; }
-  .timeline-controls button{
-    border: 1px solid rgba(0,0,0,.2);
-    background: white;
-    border-radius: 10px;
-    padding: 8px 12px;
-    cursor: pointer;
+  .tl-dots{ display:flex; gap:6px; flex-wrap:wrap; }
+  .tl-dot{
+    width:8px; height:8px; border-radius:999px;
+    background: rgba(0,0,0,.18);
+    border:0; cursor:pointer;
+  }
+  .tl-dot.active{ background: rgba(0,0,0,.55); }
+
+  /* 关键：外层不裁切，避免“被cut掉”；卡片内部自己滚动 */
+  .tl-stage{
+    position:relative;
+    overflow: visible;
+    padding: 6px 0 12px 0;
   }
 
-  /* horizontal scroll + snap */
-  .timeline{
-    display: grid;
-    grid-auto-flow: column;
-    grid-auto-columns: min(78vw, 520px);
-    gap: 14px;
-    overflow-x: auto;
-    padding: 8px 6px 14px 6px;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-    border-radius: 14px;
+  .tl-track{
+    display:flex;
+    align-items:stretch;
+    gap:14px;
+    transform: translateX(0);
+    transition: transform 420ms cubic-bezier(.2,.8,.2,1);
+    will-change: transform;
   }
-  .timeline::-webkit-scrollbar{ height: 10px; }
-  .timeline::-webkit-scrollbar-thumb{ background: rgba(0,0,0,.18); border-radius: 999px; }
-  .timeline::-webkit-scrollbar-track{ background: rgba(0,0,0,.06); border-radius: 999px; }
 
-  .panel{
-    scroll-snap-align: start;
-    border-radius: 16px;
-    padding: 16px 16px 14px 16px;
-    background: rgba(255,255,255,.92);
+  .tl-card{
+    width: min(76vw, 520px);
+    height: 360px;                 /* 固定高度避免上下跳动 */
+    flex: 0 0 auto;
+    border-radius: 18px;
+    padding: 16px;
+    background: rgba(255,255,255,.94);
     border: 1px solid rgba(0,0,0,.12);
-    box-shadow: 0 6px 18px rgba(0,0,0,.08);
+    box-shadow: 0 10px 24px rgba(0,0,0,.10);
+    overflow: auto;                /* 内容太长就卡片内部滚动，不会被cut */
   }
-  .panel-meta{ display:flex; gap:10px; align-items:center; margin-bottom: 10px; }
-  .tag{
-    font-size: 12px;
-    padding: 3px 8px;
-    border-radius: 999px;
-    border: 1px solid rgba(0,0,0,.18);
-  }
-  .date{ font-size: 12px; opacity: .7; }
-  .panel h3{ margin: 0 0 8px 0; font-size: 18px; }
-  .panel p{ margin: 0; line-height: 1.45; opacity: .9; }
 
-  .timeline-progress{
-    height: 6px;
-    background: rgba(0,0,0,.08);
-    border-radius: 999px;
-    overflow: hidden;
-    margin-top: 10px;
+  .tl-meta{ display:flex; gap:10px; align-items:center; margin-bottom:10px; }
+  .tl-tag{
+    font-size:12px; padding:3px 8px; border-radius:999px;
+    border:1px solid rgba(0,0,0,.18);
   }
-  .timeline-progress .bar{
-    height: 100%;
-    width: 0%;
-    background: rgba(0,0,0,.45);
-    transition: width .1s linear;
+  .tl-date{ font-size:12px; opacity:.7; }
+  .tl-card h3{ margin:0 0 8px 0; font-size:18px; }
+  .tl-card p{ margin:0; line-height:1.5; opacity:.92; }
+
+  /* 放大当前卡片、缩小两侧预览 */
+  .tl-card{ transform: scale(.88); opacity:.55; transition: transform 420ms cubic-bezier(.2,.8,.2,1), opacity 420ms; }
+  .tl-card.is-active{ transform: scale(1); opacity: 1; }
+  .tl-card.is-near{ transform: scale(.93); opacity: .78; }
+
+  .tl-progress{
+    height:6px; background: rgba(0,0,0,.08);
+    border-radius:999px; overflow:hidden; margin-top:10px;
   }
+  .tl-bar{ height:100%; width:0%; background: rgba(0,0,0,.45); transition: width .18s linear; }
 </style>
 
 <script>
-  const scroller = document.getElementById("timeline");
-  const prevBtn = document.getElementById("prevBtn");
-  const nextBtn = document.getElementById("nextBtn");
-  const progressBar = document.getElementById("progressBar");
+  const track = document.getElementById("tlTrack");
+  const stage = document.getElementById("tlStage");
+  const prev = document.getElementById("tlPrev");
+  const next = document.getElementById("tlNext");
+  const bar  = document.getElementById("tlBar");
+  const dotsWrap = document.getElementById("tlDots");
+  const cards = Array.from(track.querySelectorAll(".tl-card"));
 
-  function updateProgress(){
-    const max = scroller.scrollWidth - scroller.clientWidth;
-    const pct = max <= 0 ? 0 : (scroller.scrollLeft / max) * 100;
-    progressBar.style.width = pct + "%";
+  let index = 0;
+
+  // 生成 dots
+  const dots = cards.map((_, i) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "tl-dot";
+    b.addEventListener("click", () => goTo(i));
+    dotsWrap.appendChild(b);
+    return b;
+  });
+
+  function layout() {
+    // 把“当前卡片”移动到视野中央
+    const active = cards[index];
+    const stageRect = stage.getBoundingClientRect();
+    const aRect = active.getBoundingClientRect();
+    const trackRect = track.getBoundingClientRect();
+
+    const stageCenter = stageRect.left + stageRect.width / 2;
+    const cardCenter  = aRect.left + aRect.width / 2;
+
+    const dx = stageCenter - cardCenter;
+    const currentTx = getCurrentTranslateX(track);
+    const nextTx = currentTx + dx;
+
+    track.style.transform = `translateX(${nextTx}px)`;
+
+    // 高亮缩放状态
+    cards.forEach((c, i) => {
+      c.classList.remove("is-active", "is-near");
+      if (i === index) c.classList.add("is-active");
+      else if (Math.abs(i - index) === 1) c.classList.add("is-near");
+    });
+
+    // dots + progress
+    dots.forEach((d, i) => d.classList.toggle("active", i === index));
+    bar.style.width = ((index) / Math.max(1, cards.length - 1)) * 100 + "%";
+
+    // 按钮禁用
+    prev.disabled = index === 0;
+    next.disabled = index === cards.length - 1;
   }
 
-  function scrollByPanel(dir){
-    const panelWidth = scroller.querySelector(".panel")?.getBoundingClientRect().width || 400;
-    scroller.scrollBy({ left: dir * (panelWidth + 14), behavior: "smooth" });
+  function getCurrentTranslateX(el){
+    const m = new DOMMatrixReadOnly(getComputedStyle(el).transform);
+    return m.isIdentity ? 0 : m.m41;
   }
 
-  prevBtn.addEventListener("click", () => scrollByPanel(-1));
-  nextBtn.addEventListener("click", () => scrollByPanel(1));
-  scroller.addEventListener("scroll", updateProgress, { passive: true });
-  updateProgress();
+  function goTo(i){
+    index = Math.max(0, Math.min(cards.length - 1, i));
+    layout();
+  }
+
+  prev.addEventListener("click", () => goTo(index - 1));
+  next.addEventListener("click", () => goTo(index + 1));
+
+  // 键盘左右键
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft") goTo(index - 1);
+    if (e.key === "ArrowRight") goTo(index + 1);
+  });
+
+  // 可选：手机左右滑动（不需要滚轮）
+  let startX = null;
+  stage.addEventListener("touchstart", (e) => startX = e.touches[0].clientX, {passive:true});
+  stage.addEventListener("touchend", (e) => {
+    if (startX == null) return;
+    const endX = e.changedTouches[0].clientX;
+    const dx = endX - startX;
+    if (Math.abs(dx) > 40) goTo(index + (dx < 0 ? 1 : -1));
+    startX = null;
+  }, {passive:true});
+
+  // 初始定位：让第一张居中显示并放大
+  requestAnimationFrame(() => {
+    // 先给个初始 transform=0，避免取值 NaN
+    track.style.transform = "translateX(0px)";
+    layout();
+  });
+
+  // 窗口大小变化重新居中
+  window.addEventListener("resize", () => layout());
 </script>
 
-
-<header>
-  <div class="site-title">
-    <a href="index.html">Cantonese Culture in the Americas</a>
-  </div>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="timeline.html">Timeline</a>
-    <a href="research.html">Research</a>
-    <a href="archives.html">Archives</a>
-    <a href="resources.html">Resources</a>
-  </nav>
-</header>
-
-<main>
-  <h1>Timeline</h1>
-  <p>
-    This timeline traces major moments in Cantonese migration from Guangdong to Vietnam and the Americas,
-    situating cultural practices within historical events.
-  </p>
 <!-- ====== START: Integrated Maritime + Flight Routes (East Asia start, no auto-zoom) ====== -->
 
 <link href="https://api.mapbox.com/mapbox-gl-js/v3.17.0/mapbox-gl.css" rel="stylesheet" />
