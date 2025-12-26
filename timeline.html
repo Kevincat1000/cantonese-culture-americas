@@ -7,6 +7,186 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <section class="timeline-wrap">
+  <header class="timeline-header">
+    <h2>Timeline of Cantonese Migration</h2>
+    <p>Scroll left → right (or swipe). Each panel is one phase/event.</p>
+
+    <div class="timeline-controls">
+      <button type="button" id="prevBtn">←</button>
+      <button type="button" id="nextBtn">→</button>
+    </div>
+  </header>
+
+  <div class="timeline" id="timeline">
+    <!-- PANEL 1 -->
+    <article class="panel">
+      <div class="panel-meta">
+        <span class="tag">Phase I</span>
+        <span class="date">17th–19th Centuries</span>
+      </div>
+      <h3>Early Migration within Southeast Asia</h3>
+      <p>
+        Following the Qing conquest of South China (c. 1644–1660s), Cantonese migrants moved south by sea…
+      </p>
+    </article>
+
+    <!-- PANEL 2 -->
+    <article class="panel">
+      <div class="panel-meta">
+        <span class="tag">Event</span>
+        <span class="date">1640s–1770s</span>
+      </div>
+      <h3>Migration to Siam (Thailand)</h3>
+      <p>
+        Maritime routes linked Guangdong’s coastal communities to Siam, Cambodia, and southern Vietnam…
+      </p>
+    </article>
+
+    <!-- PANEL 3 -->
+    <article class="panel">
+      <div class="panel-meta">
+        <span class="tag">Event</span>
+        <span class="date">1680s–1790s</span>
+      </div>
+      <h3>Settlement in Southern Vietnam (Cochinchina)</h3>
+      <p>
+        Mạc Cửu developed Hà Tiên and established a semi-autonomous principality in 1708…
+      </p>
+    </article>
+
+    <!-- PANEL 4 -->
+    <article class="panel">
+      <div class="panel-meta">
+        <span class="tag">Event</span>
+        <span class="date">1786–1820s</span>
+      </div>
+      <h3>British Ports: Penang & Singapore</h3>
+      <p>
+        Penang (1786) and Singapore (1819) reshaped migration routes… Ning Yeung Wui Kuan (1822)…
+      </p>
+    </article>
+
+    <!-- PANEL 5 -->
+    <article class="panel">
+      <div class="panel-meta">
+        <span class="tag">Event</span>
+        <span class="date">1840s–1870s</span>
+      </div>
+      <h3>Tin Mining Expansion in British Malaya</h3>
+      <p>
+        New migration waves moved from Penang/Singapore into Perak, Selangor, Negeri Sembilan…
+      </p>
+    </article>
+
+    <!-- PANEL 6 -->
+    <article class="panel">
+      <div class="panel-meta">
+        <span class="tag">Summary</span>
+        <span class="date">By late 19th c.</span>
+      </div>
+      <h3>Population, Social Position, Economic Role</h3>
+      <p>
+        Tens of thousands regionally; high mobility via brotherhoods & associations; emergence of Taukes…
+      </p>
+    </article>
+  </div>
+
+  <div class="timeline-progress">
+    <div class="bar" id="progressBar"></div>
+  </div>
+</section>
+
+<style>
+  .timeline-wrap{
+    margin: 32px 0;
+    font-family: system-ui,-apple-system,Segoe UI,Roboto;
+  }
+  .timeline-header h2{ margin: 0 0 6px 0; }
+  .timeline-header p{ margin: 0 0 12px 0; opacity: .75; }
+  .timeline-controls{ display:flex; gap:8px; margin-bottom: 12px; }
+  .timeline-controls button{
+    border: 1px solid rgba(0,0,0,.2);
+    background: white;
+    border-radius: 10px;
+    padding: 8px 12px;
+    cursor: pointer;
+  }
+
+  /* horizontal scroll + snap */
+  .timeline{
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: min(78vw, 520px);
+    gap: 14px;
+    overflow-x: auto;
+    padding: 8px 6px 14px 6px;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 14px;
+  }
+  .timeline::-webkit-scrollbar{ height: 10px; }
+  .timeline::-webkit-scrollbar-thumb{ background: rgba(0,0,0,.18); border-radius: 999px; }
+  .timeline::-webkit-scrollbar-track{ background: rgba(0,0,0,.06); border-radius: 999px; }
+
+  .panel{
+    scroll-snap-align: start;
+    border-radius: 16px;
+    padding: 16px 16px 14px 16px;
+    background: rgba(255,255,255,.92);
+    border: 1px solid rgba(0,0,0,.12);
+    box-shadow: 0 6px 18px rgba(0,0,0,.08);
+  }
+  .panel-meta{ display:flex; gap:10px; align-items:center; margin-bottom: 10px; }
+  .tag{
+    font-size: 12px;
+    padding: 3px 8px;
+    border-radius: 999px;
+    border: 1px solid rgba(0,0,0,.18);
+  }
+  .date{ font-size: 12px; opacity: .7; }
+  .panel h3{ margin: 0 0 8px 0; font-size: 18px; }
+  .panel p{ margin: 0; line-height: 1.45; opacity: .9; }
+
+  .timeline-progress{
+    height: 6px;
+    background: rgba(0,0,0,.08);
+    border-radius: 999px;
+    overflow: hidden;
+    margin-top: 10px;
+  }
+  .timeline-progress .bar{
+    height: 100%;
+    width: 0%;
+    background: rgba(0,0,0,.45);
+    transition: width .1s linear;
+  }
+</style>
+
+<script>
+  const scroller = document.getElementById("timeline");
+  const prevBtn = document.getElementById("prevBtn");
+  const nextBtn = document.getElementById("nextBtn");
+  const progressBar = document.getElementById("progressBar");
+
+  function updateProgress(){
+    const max = scroller.scrollWidth - scroller.clientWidth;
+    const pct = max <= 0 ? 0 : (scroller.scrollLeft / max) * 100;
+    progressBar.style.width = pct + "%";
+  }
+
+  function scrollByPanel(dir){
+    const panelWidth = scroller.querySelector(".panel")?.getBoundingClientRect().width || 400;
+    scroller.scrollBy({ left: dir * (panelWidth + 14), behavior: "smooth" });
+  }
+
+  prevBtn.addEventListener("click", () => scrollByPanel(-1));
+  nextBtn.addEventListener("click", () => scrollByPanel(1));
+  scroller.addEventListener("scroll", updateProgress, { passive: true });
+  updateProgress();
+</script>
+
 
 <header>
   <div class="site-title">
