@@ -54,8 +54,8 @@ const ROUTE_WIDTH = 2;
 const map = new mapboxgl.Map({
   container: "diaspora-map",
   style: "mapbox://styles/kevincat100/cmjneo20k000v01sxghqb6aqr",
-  center: [150, 22],
-  zoom: 2
+  center: [120, 30],   // East Asia：华南 / 华东 / 日本 / 东南亚
+  zoom: 3.5            // 更贴近东亚区域
 });
 
 map.addControl(new mapboxgl.NavigationControl(), "top-right");
