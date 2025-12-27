@@ -5,18 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Map</title>
   <link rel="stylesheet" href="styles.css">
+
+  <!-- Leaflet (map library) -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""
+  />
 </head>
 <body>
 
 <header class="site-header">
   <h1 class="site-title">Cantonese Culture in the Americas</h1>
-
   <nav class="site-nav">
     <a href="index.html">Home</a>
 
     <div class="dropdown">
-      <button type="button" class="active">Timeline</button>
-      <div class="dropdown-menu">
+      <button type="button" class="active" aria-haspopup="true" aria-expanded="false">Timeline</button>
+      <div class="dropdown-menu" role="menu">
         <a href="timeline-phase1.html">Phase 1</a>
         <a href="timeline-phase2.html">Phase 2</a>
         <a href="timeline-phase3.html">Phase 3</a>
@@ -34,16 +41,55 @@
 <main class="main">
   <h2 class="page-title">Map</h2>
   <p class="page-subtitle">
-    Visualizing Cantonese migration routes and settlement nodes.
+    A route visualization for the diaspora pathway: Guangdong → Hong Kong → Vietnam → North America.
   </p>
 
-  <div style="border:1px solid #000; height:520px; padding:14px;">
-    <p style="margin:0; font-size:18px; color:#444;">
-      Map placeholder. Leaflet / Mapbox will go here.
-    </p>
-  </div>
+  <div id="map" class="map-frame" aria-label="Interactive map"></div>
+
+  <div class="footer">© Cantonese Culture in the Americas</div>
 </main>
 
 <script src="nav.js"></script>
+
+<!-- Leaflet JS -->
+<script
+  src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+  integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+  crossorigin=""
+></script>
+
+<script>
+  // ---- Map setup ----
+  const map = L.map("map", { scrollWheelZoom: true }).setView([20, 120], 3);
+
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 18,
+    attribution: "&copy; OpenStreetMap"
+  }).addTo(map);
+
+  // ---- Nodes (edit these anytime) ----
+  const nodes = [
+    { name: "Guangzhou (Guangdong)",  lat: 23.1291, lng: 113.2644, note: "Origin region cluster" },
+    { name: "Hong Kong",             lat: 22.3193, lng: 114.1694, note: "Transit + cultural hub" },
+    { name: "Ho Chi Minh City",      lat: 10.8231, lng: 106.6297, note: "Southeast Asia node" },
+    { name: "Los Angeles",           lat: 34.0522, lng: -118.2437, note: "North America node" },
+    { name: "San Francisco",         lat: 37.7749, lng: -122.4194, note: "Historic Chinatown + institutions" },
+  ];
+
+  nodes.forEach(n => {
+    L.marker([n.lat, n.lng]).addTo(map)
+      .bindPopup(`<b>${n.name}</b><br>${n.note}`);
+  });
+
+  // ---- Route line ----
+  const routeLatLngs = nodes.map(n => [n.lat, n.lng]);
+  const route = L.polyline(routeLatLngs, {
+    weight: 4,
+    opacity: 0.9
+  }).addTo(map);
+
+  map.fitBounds(route.getBounds(), { padding: [30, 30] });
+</script>
+
 </body>
 </html>
