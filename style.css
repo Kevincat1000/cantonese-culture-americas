@@ -1,184 +1,182 @@
-/* =========================
-   Cantonese History Palette
-   ========================= */
-
-:root {
-  /* Backgrounds */
-  --bg-main: #f6f4f1;          /* archival paper */
-  --bg-soft: #ffffff;
-  --bg-accent: #eef1ed;        /* porcelain gray */
-
-  /* Text */
-  --text-main: #2b2b2b;        /* ink black */
-  --text-muted: #6b6b6b;       /* annotation gray */
-  --text-light: #8a8a8a;
-
-  /* Accents */
-  --accent-primary: #8f6f5c;   /* tea brown */
-  --accent-secondary: #6f8f85; /* muted jade */
-  --accent-tertiary: #c7b8a0;  /* parchment gold */
-
-  /* Borders & UI */
-  --border-light: #e2ded8;
-  --border-medium: #d4cec6;
-
-  --radius: 14px;
-  --max-width: 960px;
-}
-
 /* ===== Base ===== */
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
-  font-family: "Georgia", "Times New Roman", serif;
-  background: var(--bg-main);
-  color: var(--text-main);
-  line-height: 1.7;
+  font-family: "Times New Roman", Georgia, serif;
+  color: #111;
 }
+
+a { color: inherit; }
 
 /* ===== Header ===== */
-header {
-  background: var(--bg-soft);
-  border-bottom: 1px solid var(--border-light);
+.site-header {
+  max-width: 1100px;
+  margin: 40px auto 0 auto;
+  padding: 0 20px 16px 20px;
+  border-bottom: 1px solid #000;
 }
 
-.header-inner {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 18px 24px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.site-title a {
-  text-decoration: none;
-  color: var(--text-main);
-  font-weight: 600;
-  font-size: 16px;
-  letter-spacing: 0.3px;
-}
-
-/* ===== Navigation ===== */
-nav a {
-  text-decoration: none;
-  color: var(--text-muted);
-  margin-left: 14px;
-  font-size: 14px;
-  padding-bottom: 2px;
-  border-bottom: 2px solid transparent;
-  transition: all 0.2s ease;
-}
-
-nav a:hover {
-  color: var(--accent-primary);
-  border-color: var(--accent-primary);
-}
-
-/* ===== Main Content ===== */
-main {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 48px 24px 72px;
-}
-
-h1 {
+.site-title {
   font-size: 40px;
-  font-weight: 500;
-  margin-bottom: 8px;
+  font-weight: 700;
+  margin: 0 0 12px 0;
 }
 
-.subtitle {
-  color: var(--text-muted);
-  font-size: 15px;
-  margin-bottom: 36px;
+.site-nav {
+  font-size: 22px;
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  align-items: baseline;
 }
 
-/* ===== Sections ===== */
-section {
-  background: var(--bg-soft);
-  padding: 28px 30px;
-  border: 1px solid var(--border-light);
-  border-radius: var(--radius);
-  margin-bottom: 28px;
+.site-nav > a,
+.dropdown > button {
+  text-decoration: none;
+  color: #555;
+  border: none;
+  background: transparent;
+  font: inherit;
+  padding: 0;
+  cursor: pointer;
 }
 
-h2 {
+.site-nav > a:hover,
+.dropdown > button:hover {
+  color: #000;
+  text-decoration: underline;
+}
+
+.site-nav a.active,
+.dropdown > button.active {
+  color: #000;
+  font-weight: 600;
+}
+
+/* ===== Dropdown ===== */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 28px;
+  left: 0;
+  min-width: 220px;
+  background: #fff;
+  border: 1px solid #000;
+  padding: 10px 0;
+  display: none;
+  z-index: 50;
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 8px 14px;
+  text-decoration: none;
+  color: #222;
   font-size: 20px;
-  font-weight: 500;
-  margin-top: 0;
-  margin-bottom: 14px;
-  color: var(--accent-primary);
 }
 
-/* ===== Cards ===== */
-.cards {
+.dropdown-menu a:hover {
+  background: #f2f2f2;
+}
+
+/* Desktop hover */
+@media (hover: hover) {
+  .dropdown:hover .dropdown-menu {
+    display: block;
+  }
+}
+
+/* Mobile toggle */
+.dropdown.open .dropdown-menu {
+  display: block;
+}
+
+/* ===== Page Layout ===== */
+.main {
+  max-width: 1100px;
+  margin: 28px auto 60px auto;
+  padding: 0 20px;
+}
+
+.page-title {
+  font-size: 30px;
+  margin: 0 0 14px 0;
+}
+
+.page-subtitle {
+  font-size: 18px;
+  color: #444;
+  margin: 0 0 26px 0;
+  line-height: 1.5;
+}
+
+/* ===== Timeline ===== */
+.timeline {
+  border-left: 2px solid #000;
+  padding-left: 18px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 20px;
 }
 
-.card {
-  background: var(--bg-accent);
-  padding: 22px;
-  border-radius: var(--radius);
-  border: 1px solid var(--border-medium);
-  text-decoration: none;
-  color: var(--text-main);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+.timeline-item {
+  position: relative;
+  padding-left: 8px;
 }
 
-.card h3 {
-  margin-top: 0;
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: -27px;
+  top: 6px;
+  width: 12px;
+  height: 12px;
+  border: 2px solid #000;
+  background: #fff;
+  border-radius: 50%;
+}
+
+.tl-date {
   font-size: 16px;
-  font-weight: 500;
-  color: var(--accent-secondary);
+  color: #444;
+  margin-bottom: 4px;
 }
 
-.card p {
-  font-size: 14px;
-  color: var(--text-muted);
+.tl-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0 0 6px 0;
 }
 
-.card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+.tl-body {
+  font-size: 18px;
+  line-height: 1.6;
+  margin: 0 0 8px 0;
 }
 
-/* ===== Footer ===== */
-footer {
-  background: var(--bg-soft);
-  border-top: 1px solid var(--border-light);
+.tl-tags {
+  font-size: 16px;
+  color: #444;
 }
 
-.footer-inner {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 22px 24px;
-  font-size: 13px;
-  color: var(--text-light);
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
+.tag {
+  display: inline-block;
+  border: 1px solid #000;
+  padding: 2px 8px;
+  margin-right: 8px;
+  margin-top: 6px;
 }
 
 /* ===== Mobile ===== */
 @media (max-width: 600px) {
-  .header-inner {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  nav {
-    margin-top: 10px;
-  }
-
-  h1 {
-    font-size: 32px;
-  }
+  .site-title { font-size: 30px; }
+  .site-nav { font-size: 18px; gap: 16px; }
+  .dropdown-menu a { font-size: 18px; }
+  .page-title { font-size: 26px; }
+  .tl-title { font-size: 20px; }
+  .tl-body { font-size: 17px; }
 }
-
-
