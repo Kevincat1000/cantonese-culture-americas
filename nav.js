@@ -18,17 +18,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.addEventListener("click", (e) => {
     dropdowns.forEach((dropdown) => {
-      if (!dropdown.contains(e.target)) {
-        dropdown.classList.remove("open");
-      }
+      if (!dropdown.contains(e.target)) dropdown.classList.remove("open");
     });
   });
 
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
-      dropdowns.forEach((dropdown) => {
-        dropdown.classList.remove("open");
-      });
+      dropdowns.forEach((dropdown) => dropdown.classList.remove("open"));
     }
   });
 });
