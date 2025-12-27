@@ -4,63 +4,140 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Phase IV</title>
+
   <style>
-    :root{--bg:#ffffff;--text:#0b0f19;--muted:#4b5563;--line:#e5e7eb;--blue-100:#e6f2ff;--shadow:0 10px 30px rgba(0,0,0,.06);--radius:18px;--max:1220px;--font:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,"Noto Sans","PingFang SC","Microsoft YaHei",sans-serif;}
-    *{box-sizing:border-box} body{margin:0;font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.5}
-    a{color:inherit;text-decoration:none} .container{max-width:var(--max);margin:0 auto;padding:0 24px}
-    .header{position:sticky;top:0;z-index:1000;background:rgba(255,255,255,.9);backdrop-filter:saturate(180%) blur(10px);border-bottom:1px solid var(--line);}
+    :root{
+      --bg:#ffffff;--text:#0b0f19;--muted:#4b5563;--line:#e5e7eb;
+      --blue-100:#e6f2ff;--shadow:0 10px 30px rgba(0,0,0,.06);
+      --radius:18px;--max:1220px;
+      --font:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,"Noto Sans","PingFang SC","Microsoft YaHei",sans-serif;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.5}
+    a{color:inherit;text-decoration:none}
+    .container{max-width:var(--max);margin:0 auto;padding:0 24px}
+
+    /* Header */
+    .header{
+      position:sticky;top:0;z-index:1000;
+      background:rgba(255,255,255,.9);
+      backdrop-filter:saturate(180%) blur(10px);
+      border-bottom:1px solid var(--line);
+    }
     .nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:18px}
     .brand{display:flex;align-items:center;gap:12px;min-width:220px}
     .brand img{width:44px;height:44px;border-radius:12px;object-fit:cover}
     .brand .title{font-weight:650;letter-spacing:.2px}
     .nav-right{display:flex;align-items:center;gap:18px}
-    .nav-item{position:relative;font-size:14px;font-weight:600;letter-spacing:.2px;padding:10px 10px;border-radius:12px;color:var(--text)}
+
+    .nav-item{
+      position:relative;
+      font-size:14px;font-weight:600;letter-spacing:.2px;
+      padding:10px 10px;border-radius:12px;color:var(--text);
+    }
     .nav-item:hover{background:#f4f6f8}
-    .dropdown{position:absolute;top:44px;left:0;width:360px;background:#fff;border:1px solid var(--line);box-shadow:0 10px 30px rgba(0,0,0,.06);border-radius:16px;padding:10px;display:none}
-    .nav-item::after{content:"";position:absolute;left:0;right:0;top:40px;height:10px;display:none}
+
+    .dropdown{
+      position:absolute;top:44px;left:0;width:360px;
+      background:#fff;border:1px solid var(--line);
+      box-shadow:var(--shadow);border-radius:16px;padding:10px;
+      display:none;
+    }
+
+    /* hover 下拉缝隙修复：透明桥 */
+    .nav-item::after{
+      content:"";
+      position:absolute;left:0;right:0;top:40px;height:10px;
+      display:none;
+    }
     .nav-item:hover::after{display:block}
     .nav-item:hover .dropdown{display:block}
-    .dropdown a{display:block;padding:10px 12px;border-radius:12px;font-size:13px;font-weight:600}
-    .dropdown a span{display:block;margin-top:3px;font-weight:500;color:var(--muted);font-size:12px;line-height:1.25}
+
+    .dropdown a{
+      display:block;padding:10px 12px;border-radius:12px;
+      font-size:13px;font-weight:600;color:var(--text);
+    }
+    .dropdown a span{
+      display:block;margin-top:3px;
+      font-weight:500;color:var(--muted);
+      font-size:12px;line-height:1.25;
+    }
     .dropdown a:hover{background:var(--blue-100)}
-    .lang{display:flex;align-items:center;gap:8px;border:1px solid var(--line);padding:8px 10px;border-radius:999px;font-size:13px;font-weight:650;cursor:pointer;user-select:none}
+
+    .lang{
+      display:flex;align-items:center;gap:8px;
+      border:1px solid var(--line);
+      padding:8px 10px;border-radius:999px;
+      font-size:13px;font-weight:650;
+      cursor:pointer;user-select:none;
+    }
     .lang:hover{background:#f4f6f8}
     .lang svg{width:18px;height:18px}
+
+    /* Page */
     .page{padding:56px 0 60px}
     .page h1{font-size:44px;line-height:1.1;margin:0 0 12px;font-weight:800}
     .page .lead{font-size:18px;color:var(--muted);margin:0 0 18px;max-width:900px}
     .page .body{font-size:16px;margin:0 0 14px;max-width:980px;color:#111827}
-    .cta{display:inline-flex;align-items:center;gap:10px;padding:12px 16px;border:1px solid var(--line);border-radius:14px;font-weight:700;font-size:14px;background:#fff}
+    .cta{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:12px 16px;border:1px solid var(--line);
+      border-radius:14px;font-weight:700;font-size:14px;background:#fff;
+    }
     .cta:hover{border-color:#cbd5e1;box-shadow:0 8px 22px rgba(0,0,0,.06)}
+
     .footer{border-top:1px solid var(--line);padding:24px 0;color:var(--muted);font-size:13px}
   </style>
 </head>
+
 <body>
   <header class="header">
     <div class="container">
-      <nav class="nav">
-        <a class="brand" href="index.html"><img src="assets/logo.jpeg" alt="Logo" /><div class="title">Cantonese in Americas</div></a>
+      <nav class="nav" aria-label="Primary">
+        <a class="brand" href="index.html" aria-label="Home">
+          <img src="assets/logo.jpeg" alt="Logo" />
+          <div class="title">Cantonese in Americas</div>
+        </a>
+
         <div class="nav-right">
           <a class="nav-item" href="index.html">Home</a>
-          <div class="nav-item" role="button" tabindex="0">Timeline
-            <div class="dropdown">
-              <a href="phase1.html">Phase I <span>17th–19th Centuries: Early Migration within Southeast Asia</span></a>
-              <a href="phase2.html">Phase II <span>17th–19th Centuries: Early Migration within Southeast Asia</span></a>
-              <a href="phase3.html">Phase III <span>17th–19th Centuries: Early Migration within Southeast Asia</span></a>
-              <a href="phase4.html">Phase IV <span>17th–19th Centuries: Early Migration within Southeast Asia</span></a>
+
+          <div class="nav-item" role="button" tabindex="0">
+            Timeline
+            <div class="dropdown" aria-label="Timeline dropdown">
+              <a href="phase1.html">Phase I
+                <span>17th–19th Centuries: Early Migration within Southeast Asia</span>
+              </a>
+              <a href="phase2.html">Phase II
+                <span>17th–19th Centuries: Early Migration within Southeast Asia</span>
+              </a>
+              <a href="phase3.html">Phase III
+                <span>17th–19th Centuries: Early Migration within Southeast Asia</span>
+              </a>
+              <a href="phase4.html">Phase IV
+                <span>17th–19th Centuries: Early Migration within Southeast Asia</span>
+              </a>
             </div>
           </div>
-          <div class="nav-item" role="button" tabindex="0">Research
-            <div class="dropdown" style="width:300px">
+
+          <div class="nav-item" role="button" tabindex="0">
+            Research
+            <div class="dropdown" aria-label="Research dropdown" style="width:300px">
               <a href="oral.html">Oral History</a>
               <a href="culture.html">Culture Record</a>
               <a href="influence.html">Influence Research</a>
             </div>
           </div>
+
           <a class="nav-item" href="archives.html">Archives</a>
           <a class="nav-item" href="resources.html">Resources</a>
-          <div class="lang" id="langBtn" data-current="en">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z" stroke="currentColor" stroke-width="1.6"/><path d="M2 12h20" stroke="currentColor" stroke-width="1.6"/><path d="M12 2c2.7 2.6 4.3 6.1 4.3 10S14.7 19.4 12 22c-2.7-2.6-4.3-6.1-4.3-10S9.3 4.6 12 2Z" stroke="currentColor" stroke-width="1.6"/></svg>
+
+          <div class="lang" id="langBtn" data-current="en" aria-label="Toggle language">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z" stroke="currentColor" stroke-width="1.6"/>
+              <path d="M2 12h20" stroke="currentColor" stroke-width="1.6"/>
+              <path d="M12 2c2.7 2.6 4.3 6.1 4.3 10S14.7 19.4 12 22c-2.7-2.6-4.3-6.1-4.3-10S9.3 4.6 12 2Z" stroke="currentColor" stroke-width="1.6"/>
+            </svg>
             <span class="langLabel">EN</span>
           </div>
         </div>
@@ -70,17 +147,30 @@
 
   <main class="page">
     <div class="container">
-      <h1>Phase III</h1>
+      <h1>Phase IV</h1>
       <p class="lead">17th–19th Centuries: Early Migration within Southeast Asia</p>
-      <p class="body">Paste Phase III content here.</p>
+
+      <p class="body">
+        Paste Phase IV content here. You can add sections, images, quotes, and embedded maps later.
+      </p>
+
       <a class="cta" href="index.html">← Back to Home</a>
     </div>
   </main>
 
-  <footer class="footer"><div class="container">© <span id="year"></span> Cantonese Culture in the Americas</div></footer>
+  <footer class="footer">
+    <div class="container">© <span id="year"></span> Cantonese Culture in the Americas</div>
+  </footer>
+
   <script>
-    document.getElementById("year").textContent=new Date().getFullYear();
-    document.getElementById("langBtn").addEventListener("click",()=>{const b=document.getElementById("langBtn");const c=b.getAttribute("data-current")||"en";b.setAttribute("data-current",c==="en"?"zh":"en");b.querySelector(".langLabel").textContent=(c==="en"?"中文":"EN");});
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    document.getElementById("langBtn").addEventListener("click", ()=>{
+      const btn = document.getElementById("langBtn");
+      const curr = btn.getAttribute("data-current") || "en";
+      btn.setAttribute("data-current", curr === "en" ? "zh" : "en");
+      btn.querySelector(".langLabel").textContent = (curr === "en" ? "中文" : "EN");
+    });
   </script>
 </body>
 </html>
