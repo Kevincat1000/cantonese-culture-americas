@@ -2,68 +2,74 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Cantonese Culture in the Americas</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="style.css">
+  <title>Cantonese Culture in the Americas</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<header>
-  <div class="site-title">
-    <a href="index.html">Cantonese Culture in the Americas</a>
-  </div>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="timeline.html">Timeline</a>
+<header class="site-header">
+  <h1 class="site-title">Cantonese Culture in the Americas</h1>
+
+  <nav class="site-nav">
+    <a class="active" href="index.html">Home</a>
+
+    <div class="dropdown">
+      <button type="button" aria-haspopup="true" aria-expanded="false">Timeline</button>
+      <div class="dropdown-menu" role="menu">
+        <a href="timeline-phase1.html">Phase 1</a>
+        <a href="timeline-phase2.html">Phase 2</a>
+        <a href="timeline-phase3.html">Phase 3</a>
+        <a href="timeline-phase4.html">Phase 4</a>
+        <a href="map.html">Map</a>
+      </div>
+    </div>
+
     <a href="research.html">Research</a>
     <a href="archives.html">Archives</a>
     <a href="resources.html">Resources</a>
   </nav>
 </header>
 
-<main>
-  <h1>Cantonese Culture in the Americas</h1>
-  <p class="subtitle">Public History · Oral History · Cultural Research</p>
+<main class="main">
+  <h2 class="page-title">Cantonese Culture in the Americas</h2>
+  <p class="page-subtitle">Public History · Oral History · Cultural Research</p>
 
-  <section>
-    <h2>Introduction</h2>
-    <p>
-      Since the seventeenth century, hundreds of thousands of Cantonese migrants from Guangdong’s coastal region
-      have crossed the South China Sea and the Pacific through commerce, contract labor, education, and family reunification.
-      They moved back and forth among Hong Kong, Southeast Asia, and North America.
-    </p>
+  <h2 class="page-title" style="font-size:28px;">Introduction</h2>
+  <p style="font-size:18px; line-height:1.7; margin:0 0 18px 0;">
+    Since the seventeenth century, hundreds of thousands of Cantonese migrants from Guangdong’s coastal region have crossed
+    the South China Sea and the Pacific through commerce, contract labor, education, and family reunification. They moved
+    back and forth among Hong Kong, Southeast Asia, and North America.
+  </p>
+  <p style="font-size:18px; line-height:1.7; margin:0 0 26px 0;">
+    This project shifts the focus from a group of Guangdong people to a broader question: how Cantonese culture has been
+    carried abroad, transformed, and transmitted across generations. Through oral histories, visual archives, and digital
+    humanities methods, this project documents cultural survival, migration, and memory.
+  </p>
 
-    <p>
-      This project shifts the focus from a group of Guangdong people to a broader question:
-      how Cantonese culture has been carried abroad, transformed, and transmitted across generations.
-      Through oral histories, visual archives, and digital humanities methods, this project documents
-      cultural survival, migration, and memory.
-    </p>
-  </section>
+  <h2 class="page-title" style="font-size:28px;">Timeline</h2>
+  <p style="font-size:18px; line-height:1.7; margin:0 0 26px 0;">
+    Historical pathways of Cantonese migration. Use the Timeline dropdown to explore Phases 1–4.
+  </p>
 
-  <section class="cards">
-    <a class="card" href="timeline.html">
-      <h3>Timeline</h3>
-      <p>Historical pathways of Cantonese migration</p>
-    </a>
-    <a class="card" href="research.html">
-      <h3>Research</h3>
-      <p>Oral history interviews and cultural videos</p>
-    </a>
-    <a class="card" href="archives.html">
-      <h3>Archives</h3>
-      <p>Museum artifacts and historical photographs</p>
-    </a>
-    <a class="card" href="resources.html">
-      <h3>Resources</h3>
-      <p>Books and learning materials</p>
-    </a>
-  </section>
+  <h2 class="page-title" style="font-size:28px;">Research</h2>
+  <p style="font-size:18px; line-height:1.7; margin:0 0 26px 0;">
+    Oral history interviews and cultural videos.
+  </p>
+
+  <h2 class="page-title" style="font-size:28px;">Archives</h2>
+  <p style="font-size:18px; line-height:1.7; margin:0 0 26px 0;">
+    Museum artifacts and historical photographs.
+  </p>
+
+  <h2 class="page-title" style="font-size:28px;">Resources</h2>
+  <p style="font-size:18px; line-height:1.7; margin:0 0 26px 0;">
+    Books and learning materials.
+  </p>
+
+  <p style="font-size:16px; color:#444; margin-top:40px;">© Cantonese Culture in the Americas</p>
 </main>
 
-<footer>
-  <p>© Cantonese Culture in the Americas</p>
-</footer>
-
+<script src="nav.js"></script>
 </body>
 </html>
