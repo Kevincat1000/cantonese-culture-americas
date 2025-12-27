@@ -3,72 +3,51 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Resources</title>
-  <style>
-    :root{
-      --bg:#ffffff;--text:#0b0f19;--muted:#4b5563;--line:#e5e7eb;
-      --blue-100:#e6f2ff;--shadow:0 10px 30px rgba(0,0,0,.06);
-      --radius:18px;--max:1220px;
-      --font:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,"Noto Sans","PingFang SC","Microsoft YaHei",sans-serif;
-    }
-    *{box-sizing:border-box}
-    body{margin:0;font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.5}
-    a{color:inherit;text-decoration:none}
-    .container{max-width:var(--max);margin:0 auto;padding:0 24px}
+  <title>Resources | Cantonese Culture in the Americas</title>
 
-    .header{position:sticky;top:0;z-index:1000;background:rgba(255,255,255,.9);backdrop-filter:saturate(180%) blur(10px);border-bottom:1px solid var(--line);}
-    .nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+  <style>
+    :root{--bg:#fff;--text:#0b0f19;--muted:#4b5563;--line:#e5e7eb;--blue-100:#e6f2ff;--shadow:0 10px 30px rgba(0,0,0,.06);
+      --radius:18px;--max:1220px;--font:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,"Noto Sans","PingFang SC","Microsoft YaHei",sans-serif;}
+    *{box-sizing:border-box} html,body{height:100%}
+    body{margin:0;font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.55}
+    a{color:inherit;text-decoration:none}
+    .container{max-width:var(--max);margin:0 auto;padding:0}
+    .pad{padding:0}
+    .header{position:sticky;top:0;z-index:1000;background:rgba(255,255,255,.92);backdrop-filter:saturate(180%) blur(10px);border-bottom:1px solid var(--line);}
+    .nav{height:72px;display:flex;align-items:center;justify-content:space-between;gap:14px}
     .brand{display:flex;align-items:center;gap:12px;min-width:220px}
     .brand img{width:44px;height:44px;border-radius:12px;object-fit:cover}
     .brand .title{font-weight:650;letter-spacing:.2px}
-    .nav-right{display:flex;align-items:center;gap:18px}
-
-    .nav-item{position:relative;font-size:14px;font-weight:600;letter-spacing:.2px;padding:10px 10px;border-radius:12px;color:var(--text)}
+    .nav-right{display:flex;align-items:center;gap:12px}
+    .nav-item{position:relative;font-size:14px;font-weight:650;letter-spacing:.2px;padding:10px 12px;border-radius:12px}
     .nav-item:hover{background:#f4f6f8}
-
     .dropdown{position:absolute;top:44px;left:0;width:360px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow);border-radius:16px;padding:10px;display:none}
     .nav-item::after{content:"";position:absolute;left:0;right:0;top:40px;height:10px;display:none}
     .nav-item:hover::after{display:block}
     .nav-item:hover .dropdown{display:block}
-
-    .dropdown a{display:block;padding:10px 12px;border-radius:12px;font-size:13px;font-weight:600;color:var(--text)}
-    .dropdown a span{display:block;margin-top:3px;font-weight:500;color:var(--muted);font-size:12px;line-height:1.25}
+    .dropdown a{display:block;padding:10px 12px;border-radius:12px;font-size:13px;font-weight:650}
+    .dropdown a span{display:block;margin-top:3px;font-weight:520;color:var(--muted);font-size:12px;line-height:1.25}
     .dropdown a:hover{background:var(--blue-100)}
-
-    .lang{display:flex;align-items:center;gap:8px;border:1px solid var(--line);padding:8px 10px;border-radius:999px;font-size:13px;font-weight:650;cursor:pointer;user-select:none}
+    .lang{display:flex;align-items:center;gap:8px;border:1px solid var(--line);padding:9px 11px;border-radius:999px;font-size:13px;font-weight:800;cursor:pointer;user-select:none}
     .lang:hover{background:#f4f6f8}
     .lang svg{width:18px;height:18px}
 
-    .page{padding:56px 0 70px}
-    .page h1{font-size:44px;line-height:1.1;margin:0 0 12px;font-weight:800}
-    .page .lead{font-size:18px;color:var(--muted);margin:0 0 22px;max-width:980px}
-
-    .list{display:grid;grid-template-columns:1fr;gap:12px;margin-top:18px;max-width:980px}
-    .row{
-      border:1px solid var(--line);border-radius:16px;background:#fff;
-      padding:14px 14px;display:flex;gap:14px;align-items:flex-start;
-      box-shadow:0 10px 26px rgba(0,0,0,.03);
-      transition:background .15s,border-color .15s,transform .15s;
-    }
-    .row:hover{background:var(--blue-100);border-color:#bfdbfe;transform:translateY(-1px)}
-    .bullet{
-      width:10px;height:10px;border-radius:999px;background:#111;margin-top:6px;flex:0 0 auto;
-      border:2px solid #fff;box-shadow:0 1px 6px rgba(0,0,0,.2);
-    }
-    .row h3{margin:0 0 4px;font-size:15px;font-weight:800}
-    .row p{margin:0;color:var(--muted);font-size:14px}
-    .meta{margin-top:8px;font-size:12px;font-weight:700;color:#111827;opacity:.85}
-
-    .cta{display:inline-flex;align-items:center;gap:10px;padding:12px 16px;border:1px solid var(--line);border-radius:14px;font-weight:700;font-size:14px;background:#fff;margin-top:18px}
-    .cta:hover{border-color:#cbd5e1;box-shadow:0 8px 22px rgba(0,0,0,.06)}
-
-    .footer{border-top:1px solid var(--line);padding:24px 0;color:var(--muted);font-size:13px}
+    .hero{padding:46px 0 12px}
+    h1{font-size:54px;line-height:1.06;margin:0 0 10px;font-weight:900;letter-spacing:-.02em}
+    .lead{font-size:18px;color:var(--muted);margin:0 0 18px;max-width:980px}
+    .grid{display:grid;grid-template-columns:1fr;gap:14px;padding:0 0 44px}
+    .card{border:1px solid var(--line);border-radius:var(--radius);padding:18px;background:#fff;box-shadow:0 10px 26px rgba(0,0,0,.03)}
+    .h2{font-size:18px;font-weight:900;margin:0 0 10px}
+    .p{margin:0 0 12px;font-size:16px;color:#111827;max-width:980px}
+    .list{margin:0;padding-left:18px}
+    .list li{margin:6px 0}
+    .footer{border-top:1px solid var(--line);padding:22px 0;color:var(--muted);font-size:13px}
   </style>
 </head>
 
 <body>
   <header class="header">
-    <div class="container">
+    <div class="container pad">
       <nav class="nav" aria-label="Primary">
         <a class="brand" href="index.html" aria-label="Home">
           <img src="assets/logo.jpeg" alt="Logo" />
@@ -76,29 +55,29 @@
         </a>
 
         <div class="nav-right">
-          <a class="nav-item" href="index.html">Home</a>
+          <a class="nav-item" href="index.html" data-i18n="navHome">Home</a>
 
           <div class="nav-item" role="button" tabindex="0">
-            Timeline
-            <div class="dropdown" aria-label="Timeline dropdown">
-              <a href="phase1.html">Phase I <span>17th–19th Centuries: Early Migration within Southeast Asia</span></a>
-              <a href="phase2.html">Phase II <span>17th–19th Centuries: Early Migration within Southeast Asia</span></a>
-              <a href="phase3.html">Phase III <span>17th–19th Centuries: Early Migration within Southeast Asia</span></a>
-              <a href="phase4.html">Phase IV <span>17th–19th Centuries: Early Migration within Southeast Asia</span></a>
+            <span data-i18n="navTimeline">Timeline</span>
+            <div class="dropdown">
+              <a href="phase1.html"><span data-i18n="phase1Title">Phase I</span><span data-i18n="phaseSub">17th–19th Centuries: Early Migration within Southeast Asia</span></a>
+              <a href="phase2.html"><span data-i18n="phase2Title">Phase II</span><span data-i18n="phaseSub">17th–19th Centuries: Early Migration within Southeast Asia</span></a>
+              <a href="phase3.html"><span data-i18n="phase3Title">Phase III</span><span data-i18n="phaseSub">17th–19th Centuries: Early Migration within Southeast Asia</span></a>
+              <a href="phase4.html"><span data-i18n="phase4Title">Phase IV</span><span data-i18n="phaseSub">17th–19th Centuries: Early Migration within Southeast Asia</span></a>
             </div>
           </div>
 
           <div class="nav-item" role="button" tabindex="0">
-            Research
-            <div class="dropdown" aria-label="Research dropdown" style="width:300px">
-              <a href="oral.html">Oral History</a>
-              <a href="culture.html">Culture History</a>
-              <a href="influence.html">Influence Research</a>
+            <span data-i18n="navResearch">Research</span>
+            <div class="dropdown" style="width:300px">
+              <a href="oral.html" data-i18n="navOral">Oral History</a>
+              <a href="culture.html" data-i18n="navCulture">Culture History</a>
+              <a href="influence.html" data-i18n="navInfluence">Influence Research</a>
             </div>
           </div>
 
-          <a class="nav-item" href="archives.html">Archives</a>
-          <a class="nav-item" href="resources.html">Resources</a>
+          <a class="nav-item" href="archives.html" data-i18n="navArchives">Archives</a>
+          <a class="nav-item" href="resources.html" data-i18n="navResources">Resources</a>
 
           <div class="lang" id="langBtn" data-current="en" aria-label="Toggle language">
             <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -113,67 +92,96 @@
     </div>
   </header>
 
-  <main class="page">
-    <div class="container">
-      <h1>Resources</h1>
-      <p class="lead">
-        Bibliography, community partners, museums, digital collections, and method notes. Replace placeholders with your real links.
-      </p>
-
-      <div class="list">
-        <a class="row" href="#">
-          <div class="bullet"></div>
-          <div>
-            <h3>Reading List</h3>
-            <p>Key scholarship on Cantonese diaspora, race & power, intergenerational memory.</p>
-            <div class="meta">Category: Bibliography</div>
-          </div>
-        </a>
-
-        <a class="row" href="#">
-          <div class="bullet"></div>
-          <div>
-            <h3>Digital Archives</h3>
-            <p>Searchable repositories for photos, newspapers, and immigration records.</p>
-            <div class="meta">Category: Collections</div>
-          </div>
-        </a>
-
-        <a class="row" href="#">
-          <div class="bullet"></div>
-          <div>
-            <h3>Oral History Toolkit</h3>
-            <p>Consent, interview guides, transcription workflow, and ethics notes.</p>
-            <div class="meta">Category: Methods</div>
-          </div>
-        </a>
-
-        <a class="row" href="#">
-          <div class="bullet"></div>
-          <div>
-            <h3>Mapping & DH Methods</h3>
-            <p>Mapbox, data cleaning, metadata standards, and visualization choices.</p>
-            <div class="meta">Category: Digital Humanities</div>
-          </div>
-        </a>
+  <main>
+    <section class="hero">
+      <div class="container pad">
+        <h1 data-i18n="title">Resources</h1>
+        <p class="lead" data-i18n="lead">Reading list, archives to visit, and digital humanities references.</p>
       </div>
+    </section>
 
-      <a class="cta" href="index.html">← Back to Home</a>
-    </div>
+    <section>
+      <div class="container pad grid">
+        <div class="card">
+          <div class="h2" data-i18n="h1">How to use this page</div>
+          <p class="p" data-i18n="p1">Add links to books, articles, museum collections, oral history projects, and community archives. Keep each item short and annotated with 1–2 lines.</p>
+        </div>
+
+        <div class="card">
+          <div class="h2" data-i18n="h2">Starter categories</div>
+          <ul class="list">
+            <li data-i18n="li1">Cantonese diaspora in Southeast Asia and North America</li>
+            <li data-i18n="li2">Chinatowns, race, law, and labor history</li>
+            <li data-i18n="li3">Food history and restaurant archives</li>
+            <li data-i18n="li4">Cantonese opera, temples, and ritual practice</li>
+            <li data-i18n="li5">Digital humanities: mapping, metadata, exhibits</li>
+          </ul>
+        </div>
+
+        <footer class="footer">
+          <div class="container pad">© <span id="year"></span> <span data-i18n="footerText">Cantonese Culture in the Americas · Built for public scholarship.</span></div>
+        </footer>
+      </div>
+    </section>
   </main>
-
-  <footer class="footer">
-    <div class="container">© <span id="year"></span> Cantonese Culture in the Americas</div>
-  </footer>
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
-    document.getElementById("langBtn").addEventListener("click", ()=>{
+
+    const I18N = {
+      en:{
+        navHome:"Home",navTimeline:"Timeline",navResearch:"Research",navArchives:"Archives",navResources:"Resources",
+        navOral:"Oral History",navCulture:"Culture History",navInfluence:"Influence Research",
+        phase1Title:"Phase I",phase2Title:"Phase II",phase3Title:"Phase III",phase4Title:"Phase IV",
+        phaseSub:"17th–19th Centuries: Early Migration within Southeast Asia",
+
+        title:"Resources",
+        lead:"Reading list, archives to visit, and digital humanities references.",
+        h1:"How to use this page",
+        p1:"Add links to books, articles, museum collections, oral history projects, and community archives. Keep each item short and annotated with 1–2 lines.",
+        h2:"Starter categories",
+        li1:"Cantonese diaspora in Southeast Asia and North America",
+        li2:"Chinatowns, race, law, and labor history",
+        li3:"Food history and restaurant archives",
+        li4:"Cantonese opera, temples, and ritual practice",
+        li5:"Digital humanities: mapping, metadata, exhibits",
+        footerText:"Cantonese Culture in the Americas · Built for public scholarship."
+      },
+      zh:{
+        navHome:"主页",navTimeline:"时间线",navResearch:"研究",navArchives:"档案",navResources:"资源",
+        navOral:"口述史",navCulture:"文化史",navInfluence:"影响研究",
+        phase1Title:"第一阶段",phase2Title:"第二阶段",phase3Title:"第三阶段",phase4Title:"第四阶段",
+        phaseSub:"17–19 世纪：东南亚内部的早期迁移",
+
+        title:"资源",
+        lead:"阅读书单、可访问的档案馆与数字人文参考。",
+        h1:"如何使用本页",
+        p1:"在这里添加书籍、论文、博物馆收藏、口述史项目与社群档案的链接。每条尽量简短，并用 1–2 句做注释说明。",
+        h2:"建议分类",
+        li1:"东南亚与北美的粤籍离散史",
+        li2:"唐人街、种族、法律与劳工史",
+        li3:"饮食史与餐馆档案",
+        li4:"粤剧、寺庙与仪式实践",
+        li5:"数字人文：制图、元数据、线上展览",
+        footerText:"美洲的粤语文化 · 面向公众的公共学术项目。"
+      }
+    };
+
+    function applyLang(lang){
+      document.querySelectorAll("[data-i18n]").forEach(el=>{
+        const k = el.getAttribute("data-i18n");
+        if(I18N[lang] && I18N[lang][k]) el.textContent = I18N[lang][k];
+      });
       const btn = document.getElementById("langBtn");
-      const curr = btn.getAttribute("data-current") || "en";
-      btn.setAttribute("data-current", curr === "en" ? "zh" : "en");
-      btn.querySelector(".langLabel").textContent = (curr === "en" ? "中文" : "EN");
+      btn.setAttribute("data-current", lang);
+      btn.querySelector(".langLabel").textContent = (lang==="en"?"EN":"中文");
+      document.documentElement.lang = (lang==="en"?"en":"zh");
+    }
+    document.getElementById("langBtn").addEventListener("click", ()=>{
+      const curr = document.getElementById("langBtn").getAttribute("data-current") || "en";
+      applyLang(curr==="en" ? "zh" : "en");
     });
+    applyLang("en");
   </script>
 </body>
 </html>
