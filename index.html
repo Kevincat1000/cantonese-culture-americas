@@ -84,30 +84,29 @@
         </a>
 
         <div class="nav-right">
-          <!-- ✅ 新增 Home -->
-          <a class="nav-item" href="index.html">Home</a>
+          <a class="nav-item" href="index.html" data-i18n="navHome">Home</a>
 
           <div class="nav-item" role="button" tabindex="0">
             <span data-i18n="navTimeline">Timeline</span>
             <div class="dropdown" aria-label="Timeline dropdown">
-              <a href="phase1.html">Phase I <span>17th–19th Centuries: Early Migration within Southeast Asia</span></a>
-              <a href="phase2.html">Phase II <span>17th–19th Centuries: Early Migration within Southeast Asia</span></a>
-              <a href="phase3.html">Phase III <span>17th–19th Centuries: Early Migration within Southeast Asia</span></a>
-              <a href="phase4.html">Phase IV <span>17th–19th Centuries: Early Migration within Southeast Asia</span></a>
+              <a href="phase1.html">Phase I <span data-i18n="phaseSub">17th–19th Centuries: Early Migration within Southeast Asia</span></a>
+              <a href="phase2.html">Phase II <span data-i18n="phaseSub">17th–19th Centuries: Early Migration within Southeast Asia</span></a>
+              <a href="phase3.html">Phase III <span data-i18n="phaseSub">17th–19th Centuries: Early Migration within Southeast Asia</span></a>
+              <a href="phase4.html">Phase IV <span data-i18n="phaseSub">17th–19th Centuries: Early Migration within Southeast Asia</span></a>
             </div>
           </div>
 
           <div class="nav-item" role="button" tabindex="0">
             <span data-i18n="navResearch">Research</span>
             <div class="dropdown" aria-label="Research dropdown" style="width:300px">
-              <a href="oral.html">Oral History</a>
-              <a href="culture.html">Culture Record</a>
-              <a href="influence.html">Influence Research</a>
+              <a href="oral.html" data-i18n="navOral">Oral History</a>
+              <a href="culture.html" data-i18n="navCulture">Culture History</a>
+              <a href="influence.html" data-i18n="navInfluence">Influence Research</a>
             </div>
           </div>
 
-          <a class="nav-item" href="archives.html"><span data-i18n="navArchives">Archives</span></a>
-          <a class="nav-item" href="resources.html"><span data-i18n="navResources">Resources</span></a>
+          <a class="nav-item" href="archives.html" data-i18n="navArchives">Archives</a>
+          <a class="nav-item" href="resources.html" data-i18n="navResources">Resources</a>
 
           <div class="lang" id="langBtn" data-current="en" aria-label="Toggle language">
             <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -128,23 +127,35 @@
         <h1 data-i18n="h1">Cantonese culture in the Americas</h1>
         <p class="lead" data-i18n="sub">Public History · Oral History · Cultural Research</p>
 
-        <p class="body">
+        <p class="body" data-i18n="introP1">
           Since the seventeenth century, hundreds of thousands of Cantonese migrants from Guangdong’s coastal region have crossed the South China Sea and the Pacific through commerce, contract labor, education, and family reunification. They moved back and forth among Hong Kong, Southeast Asia, and North America.
         </p>
-        <p class="body">
+        <p class="body" data-i18n="introP2">
           This project shifts the focus from a single origin group to a broader question: how Cantonese culture has been carried abroad, transformed, and transmitted across generations. Through oral histories, visual archives, and digital humanities methods, this project documents cultural survival, migration, and memory.
         </p>
 
-        <a class="cta" href="introduction.html"><span data-i18n="introTitle">View the full introduction</span> →</a>
+        <a class="cta" href="introduction.html"><span data-i18n="introBtn">View the full introduction</span> →</a>
 
         <div class="row" style="margin-top:26px">
           <div class="card">
             <h2 class="section-title" data-i18n="sectionTimeline">Timeline</h2>
             <div class="phase-grid">
-              <a class="phase" href="phase1.html">Phase I <small>17th–19th Centuries: Early Migration within Southeast Asia</small></a>
-              <a class="phase" href="phase2.html">Phase II <small>17th–19th Centuries: Early Migration within Southeast Asia</small></a>
-              <a class="phase" href="phase3.html">Phase III <small>17th–19th Centuries: Early Migration within Southeast Asia</small></a>
-              <a class="phase" href="phase4.html">Phase IV <small>17th–19th Centuries: Early Migration within Southeast Asia</small></a>
+              <a class="phase" href="phase1.html">
+                <span data-i18n="phase1Title">Phase I</span>
+                <small data-i18n="phaseSub">17th–19th Centuries: Early Migration within Southeast Asia</small>
+              </a>
+              <a class="phase" href="phase2.html">
+                <span data-i18n="phase2Title">Phase II</span>
+                <small data-i18n="phaseSub">17th–19th Centuries: Early Migration within Southeast Asia</small>
+              </a>
+              <a class="phase" href="phase3.html">
+                <span data-i18n="phase3Title">Phase III</span>
+                <small data-i18n="phaseSub">17th–19th Centuries: Early Migration within Southeast Asia</small>
+              </a>
+              <a class="phase" href="phase4.html">
+                <span data-i18n="phase4Title">Phase IV</span>
+                <small data-i18n="phaseSub">17th–19th Centuries: Early Migration within Southeast Asia</small>
+              </a>
             </div>
           </div>
 
@@ -173,7 +184,7 @@
     </section>
 
     <footer class="footer">
-      <div class="container">© <span id="year"></span> Cantonese Culture in the Americas · Built for public scholarship.</div>
+      <div class="container">© <span id="year"></span> <span data-i18n="footer">Cantonese Culture in the Americas · Built for public scholarship.</span></div>
     </footer>
   </main>
 
@@ -240,15 +251,73 @@
 
   <script>
     document.getElementById("year").textContent=new Date().getFullYear();
-    const I18N={
-      en:{navTimeline:"Timeline",navResearch:"Research",navArchives:"Archives",navResources:"Resources",h1:"Cantonese culture in the Americas",sub:"Public History · Oral History · Cultural Research",introTitle:"View the full introduction",sectionTimeline:"Timeline",mosaicTitle:"Visual archives (sample layout)"},
-      zh:{navTimeline:"时间线",navResearch:"研究",navArchives:"档案",navResources:"资源",h1:"美洲的粤语文化",sub:"公共史学 · 口述史 · 文化研究",introTitle:"查看完整介绍",sectionTimeline:"时间线",mosaicTitle:"视觉档案（示例布局）"}
+
+    const I18N = {
+      en: {
+        navHome: "Home",
+        navTimeline: "Timeline",
+        navResearch: "Research",
+        navArchives: "Archives",
+        navResources: "Resources",
+        navOral: "Oral History",
+        navCulture: "Culture History",
+        navInfluence: "Influence Research",
+        h1: "Cantonese culture in the Americas",
+        sub: "Public History · Oral History · Cultural Research",
+        introP1: "Since the seventeenth century, hundreds of thousands of Cantonese migrants from Guangdong’s coastal region have crossed the South China Sea and the Pacific through commerce, contract labor, education, and family reunification. They moved back and forth among Hong Kong, Southeast Asia, and North America.",
+        introP2: "This project shifts the focus from a single origin group to a broader question: how Cantonese culture has been carried abroad, transformed, and transmitted across generations. Through oral histories, visual archives, and digital humanities methods, this project documents cultural survival, migration, and memory.",
+        introBtn: "View the full introduction",
+        sectionTimeline: "Timeline",
+        phase1Title: "Phase I",
+        phase2Title: "Phase II",
+        phase3Title: "Phase III",
+        phase4Title: "Phase IV",
+        phaseSub: "17th–19th Centuries: Early Migration within Southeast Asia",
+        mosaicTitle: "Visual archives (sample layout)",
+        footer: "Cantonese Culture in the Americas · Built for public scholarship."
+      },
+      zh: {
+        navHome: "主页",
+        navTimeline: "时间线",
+        navResearch: "研究",
+        navArchives: "档案",
+        navResources: "资源",
+        navOral: "口述史",
+        navCulture: "文化史",
+        navInfluence: "影响研究",
+        h1: "美洲的粤语文化",
+        sub: "公共史学 · 口述史 · 文化研究",
+        introP1: "自十七世纪以来，来自广东沿海地区的数十万粤籍移民通过贸易、契约劳工、求学与家庭团聚跨越南海与太平洋。他们在香港、东南亚与北美之间往返迁徙，形成流动而多点的移民网络。",
+        introP2: "本项目将视角从单一“原乡群体”转向更广的问题：粤语文化如何在海外被携带、在不同社会情境中被重塑，并在代际传递中延续。通过口述史、视觉档案与数字人文方法，本项目记录文化生存、迁移轨迹与记忆的生成。",
+        introBtn: "查看完整介绍",
+        sectionTimeline: "时间线",
+        phase1Title: "第一阶段",
+        phase2Title: "第二阶段",
+        phase3Title: "第三阶段",
+        phase4Title: "第四阶段",
+        phaseSub: "17–19 世纪：东南亚内部的早期迁移",
+        mosaicTitle: "视觉档案（示例布局）",
+        footer: "美洲的粤语文化 · 面向公众的学术项目。"
+      }
     };
+
     function applyLang(lang){
-      document.querySelectorAll("[data-i18n]").forEach(el=>{const k=el.getAttribute("data-i18n");if(I18N[lang]&&I18N[lang][k]) el.textContent=I18N[lang][k];});
-      const btn=document.getElementById("langBtn");btn.setAttribute("data-current",lang);btn.querySelector(".langLabel").textContent=(lang==="en"?"EN":"中文");
+      document.querySelectorAll("[data-i18n]").forEach(el=>{
+        const k = el.getAttribute("data-i18n");
+        if(I18N[lang] && I18N[lang][k]) el.textContent = I18N[lang][k];
+      });
+      const btn = document.getElementById("langBtn");
+      btn.setAttribute("data-current", lang);
+      btn.querySelector(".langLabel").textContent = (lang === "en" ? "EN" : "中文");
+      document.documentElement.lang = (lang === "en" ? "en" : "zh");
     }
-    document.getElementById("langBtn").addEventListener("click",()=>{const btn=document.getElementById("langBtn");const curr=btn.getAttribute("data-current")||"en";applyLang(curr==="en"?"zh":"en");});
+
+    document.getElementById("langBtn").addEventListener("click",()=>{
+      const btn=document.getElementById("langBtn");
+      const curr=btn.getAttribute("data-current")||"en";
+      applyLang(curr==="en"?"zh":"en");
+    });
+
     applyLang("en");
   </script>
 </body>
