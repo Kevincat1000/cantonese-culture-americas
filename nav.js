@@ -1,23 +1,43 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const dropdown = document.querySelector(".dropdown");
-  const button = document.querySelector(".dropdown > button");
+  const dropdowns = document.querySelectorAll(".dropdown");
 
-  if (!dropdown || !button) return;
+  dropdowns.forEach((dropdown) => {
+    const btn = dropdown.querySelector("button");
+    const menu = dropdown.querySelector(".dropdown-menu");
+    if (!btn || !menu) return;
 
-  button.addEventListener("click", (e) => {
-    e.preventDefault();
-    dropdown.classList.toggle("open");
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+
+      // close other dropdowns
+      dropdowns.forEach((d) => {
+        if (d !== dropdown) d.classList.remove("open");
+      });
+
+      const isOpen = dropdown.classList.toggle("open");
+      btn.setAttribute("aria-expanded", String(isOpen));
+    });
   });
 
+  // click outside to close all
   document.addEventListener("click", (e) => {
-    if (!dropdown.contains(e.target)) {
-      dropdown.classList.remove("open");
-    }
+    dropdowns.forEach((dropdown) => {
+      if (!dropdown.contains(e.target)) {
+        dropdown.classList.remove("open");
+        const btn = dropdown.querySelector("button");
+        if (btn) btn.setAttribute("aria-expanded", "false");
+      }
+    });
   });
 
+  // ESC to close all
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
-      dropdown.classList.remove("open");
+      dropdowns.forEach((dropdown) => {
+        dropdown.classList.remove("open");
+        const btn = dropdown.querySelector("button");
+        if (btn) btn.setAttribute("aria-expanded", "false");
+      });
     }
   });
 });
