@@ -10,78 +10,103 @@
   <section class="tl-wrap">
   <header class="tl-header">
     <h2>Timeline of Cantonese Migration</h2>
-    <p>Use the arrows to move through panels.</p>
-
-    <div class="tl-controls">
-      <button type="button" class="tl-btn" id="tlPrev" aria-label="Previous">←</button>
-      <div class="tl-dots" id="tlDots"></div>
-      <button type="button" class="tl-btn" id="tlNext" aria-label="Next">→</button>
-    </div>
+    <p class="tl-sub">
+      Click the arrows to move through panels. The current panel is enlarged; neighboring panels are previews.
+      (Long text scrolls inside the card.)
+    </p>
   </header>
 
-  <!-- 轮播本体（在 header 下方） -->
-  <div class="tl-stage" id="tlStage">
+  <div class="tl-stage" id="tlStage" aria-label="Timeline carousel">
+    <button type="button" class="tl-arrow tl-left" id="tlPrev" aria-label="Previous">‹</button>
+    <button type="button" class="tl-arrow tl-right" id="tlNext" aria-label="Next">›</button>
+
     <div class="tl-track" id="tlTrack">
-      <!-- CARD 1 -->
+
+      <!-- CARD 1: Phase -->
       <article class="tl-card">
         <div class="tl-meta">
           <span class="tl-tag">Phase I</span>
           <span class="tl-date">17th–19th Centuries</span>
         </div>
         <h3>Early Migration within Southeast Asia</h3>
-        <p>Following the Qing conquest of South China (c. 1644–1660s), Cantonese migrants moved south by sea…</p>
+        <div class="tl-body">
+          <p>This phase traces early Cantonese migration networks across Southeast Asia from the 17th to 19th centuries, focusing on Siam (Thailand), southern Vietnam (Cochinchina), and later British colonial ports in Malaya and Singapore.</p>
+        </div>
       </article>
 
-      <!-- CARD 2 -->
+      <!-- CARD 2: Siam -->
       <article class="tl-card">
         <div class="tl-meta">
           <span class="tl-tag">Event</span>
           <span class="tl-date">1640s–1770s</span>
         </div>
         <h3>Migration to Siam (Thailand)</h3>
-        <p>Maritime routes linked Guangdong’s coastal communities to Siam (Thailand), Cambodia, and southern Vietnam…</p>
+        <div class="tl-body">
+          <p>Following the Qing dynasty’s conquest of South China (c. 1644–1660s), large numbers of Cantonese people migrated overseas. Anti-Qing Ming loyalists and refugees fled south by sea to escape warfare, while widespread corruption and hardship under Qing rule left many farmers and artisans unable to survive locally, forcing them to seek livelihoods abroad.</p>
+          <p>Maritime routes linked Guangdong’s coastal communities to Siam (Thailand), Cambodia, and southern Vietnam (Cochinchina under the Nguyễn lords), where local rulers and economies welcomed Cantonese traders and skilled workers for their commercial and fiscal value, strengthening the pull toward Southeast Asia.</p>
+          <p>By around 1700, the Chinese population in Ayutthaya (the former Thai kingdom) reportedly exceeded 3,000 and expanded significantly over the 18th century, with Cantonese immigrants becoming prominent in royal monopoly trade, navigation, commerce, and urban crafts. These Cantonese networks became increasingly influential in Siam’s port trade by the late 1700s.</p>
+        </div>
       </article>
 
-      <!-- CARD 3 -->
+      <!-- CARD 3: Cochinchina -->
       <article class="tl-card">
         <div class="tl-meta">
           <span class="tl-tag">Event</span>
           <span class="tl-date">1680s–1790s</span>
         </div>
         <h3>Settlement in Southern Vietnam (Cochinchina)</h3>
-        <p>Mạc Cửu developed Hà Tiên and established his polity in 1708… Chợ Lớn formed in 1778…</p>
+        <div class="tl-body">
+          <p>Around 1680, Mạc Cửu (Mo Jiu)—a refugee from Leizhou, Guangdong—began developing the Hà Tiên area and formally established his semi-autonomous principality at Hà Tiên (near the Vietnam–Cambodia border) in 1708, when he placed it under the suzerainty of the Vietnamese Nguyễn lords.</p>
+          <p>This polity functioned as a sanctuary and a major hub for Cantonese and other Chinese migrants before French colonization, linking frontier settlement, maritime trade, and the political protection of Nguyễn rule.</p>
+          <p>During the Tây Sơn conflicts, ethnic Chinese merchants—primarily Cantonese—founded a new settlement adjacent to Saigon (Ho Chi Minh City, Vietnam) in 1778. This settlement later became Chợ Lớn (“Big Market”). It developed into the most significant Cantonese commercial diaspora enclave in Indochina.</p>
+          <p>The community suffered severe violence (notably in 1782), but survivors rebuilt, laying the foundations for Saigon’s enduring Chinatown. By the end of the 18th century, historical records indicate the Cantonese population in Cochinchina (Southern Vietnam) reached an estimated 30,000–40,000, controlling key rice and silk trade routes.</p>
+        </div>
       </article>
 
-      <!-- CARD 4 -->
+      <!-- CARD 4: Penang & Singapore -->
       <article class="tl-card">
         <div class="tl-meta">
           <span class="tl-tag">Event</span>
           <span class="tl-date">1786–1820s</span>
         </div>
         <h3>British Ports: Penang & Singapore</h3>
-        <p>Penang (1786) drew migrants; Singapore (1819) reshaped routes; Ning Yeung Wui Kuan founded in 1822…</p>
+        <div class="tl-body">
+          <p>From the late 18th century, British colonial ports reshaped Guangdong migration routes, and Penang (1786) offered security and strong commercial prospects that drew migrants already circulating in the region.</p>
+          <p>In the 1790s, the Ghee Hin Kongsi (义兴公司) emerged as one of the earliest major Chinese brotherhoods in Penang and was strongly associated with Cantonese networks, helping organize labor, protection, and mutual aid while anchoring Cantonese community life in the Straits Settlements.</p>
+          <p>After Singapore (1819) was established as a British entrepôt, Cantonese migrants moved into the colony’s expanding economy, and in 1822 the first Cantonese dialect association, the Ning Yeung Wui Kuan (宁阳会馆), was established by Cho Ah Chee, a carpenter from Taishan (then Xinning) who had accompanied Raffles from Penang.</p>
+          <p>This marked a major moment of institutional consolidation for the Cantonese community organization in Singapore alongside other dialect groups, reinforcing the role of associations in lodging, employment, welfare, dispute resolution, and collective representation.</p>
+        </div>
       </article>
 
-      <!-- CARD 5 -->
+      <!-- CARD 5: Tin mining -->
       <article class="tl-card">
         <div class="tl-meta">
           <span class="tl-tag">Event</span>
           <span class="tl-date">1840s–1870s</span>
         </div>
         <h3>Tin Mining Expansion in British Malaya</h3>
-        <p>New waves moved from Penang and Singapore into Perak, Selangor, and Negeri Sembilan mining districts…</p>
+        <div class="tl-body">
+          <p>With the discovery of massive tin deposits in Perak, Selangor, and Negeri Sembilan, a new wave of migration occurred across the 1840s–1870s, as Cantonese laborers and capitalists moved from Penang and Singapore into interior mining districts.</p>
+        </div>
       </article>
 
-      <!-- CARD 6 -->
+      <!-- CARD 6: Summary -->
       <article class="tl-card">
         <div class="tl-meta">
           <span class="tl-tag">Summary</span>
           <span class="tl-date">By late 19th c.</span>
         </div>
-        <h3>Population, Social Position, Economic Role</h3>
-        <p>Tens of thousands regionally; high mobility via brotherhoods & associations; Taukes emerged controlling mines and networks…</p>
+        <h3>Population Scale, Social Position, and Economic Role</h3>
+        <div class="tl-body">
+          <p>By the turn of the 19th century, the total Southern Asia overseas Cantonese population was relatively modest, numbering in the tens of thousands. The Cantonese community occupied a unique niche in the colonial hierarchy.</p>
+          <p>While the majority arrived as indentured laborers (coolies) or artisans, the community possessed high social mobility. Through the Ghee Hin brotherhoods and clan associations, they organized labor and capital.</p>
+          <p>By the late 19th century, a class of distinct Taukes (Bosses) emerged, controlling tin mines, revenue farms, and vast commercial networks.</p>
+        </div>
       </article>
+
     </div>
+
+    <div class="tl-dots" id="tlDots" aria-label="Timeline position"></div>
   </div>
 
   <div class="tl-progress">
@@ -91,72 +116,73 @@
 
 <style>
   .tl-wrap{ margin:32px 0; font-family:system-ui,-apple-system,Segoe UI,Roboto; }
+  .tl-header{ margin-bottom: 14px; }
   .tl-header h2{ margin:0 0 6px 0; }
-  .tl-header p{ margin:0 0 12px 0; opacity:.72; }
+  .tl-sub{ margin:0; opacity:.75; line-height:1.35; }
 
-  .tl-controls{ display:flex; align-items:center; gap:10px; }
-  .tl-btn{
-    border:1px solid rgba(0,0,0,.18);
-    background:#fff;
-    border-radius:12px;
-    padding:10px 14px;
-    cursor:pointer;
-  }
-  .tl-dots{ display:flex; gap:6px; flex-wrap:wrap; }
-  .tl-dot{
-    width:8px; height:8px; border-radius:999px;
-    background: rgba(0,0,0,.18);
-    border:0; cursor:pointer;
-  }
-  .tl-dot.active{ background: rgba(0,0,0,.55); }
-
-  /* 关键：外层不裁切，避免“被cut掉”；卡片内部自己滚动 */
-  .tl-stage{
-    position:relative;
-    overflow: visible;
-    padding: 6px 0 12px 0;
-  }
-
+  .tl-stage{ position: relative; overflow: visible; padding: 12px 56px 44px 56px; }
   .tl-track{
-    display:flex;
-    align-items:stretch;
-    gap:14px;
+    display:flex; align-items:stretch; gap:16px;
     transform: translateX(0);
-    transition: transform 420ms cubic-bezier(.2,.8,.2,1);
+    transition: transform 720ms cubic-bezier(.2,.85,.2,1);
     will-change: transform;
   }
 
   .tl-card{
-    width: min(76vw, 520px);
-    height: 360px;                 /* 固定高度避免上下跳动 */
+    width: min(74vw, 560px);
+    height: 440px;
     flex: 0 0 auto;
     border-radius: 18px;
-    padding: 16px;
+    padding: 16px 16px 14px 16px;
     background: rgba(255,255,255,.94);
     border: 1px solid rgba(0,0,0,.12);
-    box-shadow: 0 10px 24px rgba(0,0,0,.10);
-    overflow: auto;                /* 内容太长就卡片内部滚动，不会被cut */
+    box-shadow: 0 12px 28px rgba(0,0,0,.12);
+    overflow: hidden;
+    display:flex;
+    flex-direction: column;
   }
 
   .tl-meta{ display:flex; gap:10px; align-items:center; margin-bottom:10px; }
-  .tl-tag{
-    font-size:12px; padding:3px 8px; border-radius:999px;
-    border:1px solid rgba(0,0,0,.18);
-  }
+  .tl-tag{ font-size:12px; padding:3px 8px; border-radius:999px; border:1px solid rgba(0,0,0,.18); }
   .tl-date{ font-size:12px; opacity:.7; }
-  .tl-card h3{ margin:0 0 8px 0; font-size:18px; }
-  .tl-card p{ margin:0; line-height:1.5; opacity:.92; }
+  .tl-card h3{ margin:0 0 10px 0; font-size:18px; }
 
-  /* 放大当前卡片、缩小两侧预览 */
-  .tl-card{ transform: scale(.88); opacity:.55; transition: transform 420ms cubic-bezier(.2,.8,.2,1), opacity 420ms; }
-  .tl-card.is-active{ transform: scale(1); opacity: 1; }
-  .tl-card.is-near{ transform: scale(.93); opacity: .78; }
+  .tl-body{ overflow:auto; padding-right: 6px; }
+  .tl-body p{ margin:0 0 10px 0; line-height:1.55; opacity:.92; }
+  .tl-body p:last-child{ margin-bottom: 0; }
 
-  .tl-progress{
-    height:6px; background: rgba(0,0,0,.08);
-    border-radius:999px; overflow:hidden; margin-top:10px;
+  .tl-card{ transform: scale(.76); opacity:.35; transition: transform 720ms cubic-bezier(.2,.85,.2,1), opacity 720ms; }
+  .tl-card.is-near{ transform: scale(.88); opacity:.70; }
+  .tl-card.is-active{ transform: scale(1.10); opacity:1; }
+
+  .tl-arrow{
+    position:absolute; top: 50%; transform: translateY(-55%);
+    width: 44px; height: 44px;
+    border-radius: 999px;
+    border: 1px solid rgba(0,0,0,.18);
+    background: rgba(255,255,255,.92);
+    box-shadow: 0 10px 18px rgba(0,0,0,.12);
+    cursor:pointer; z-index: 5;
+    font-size: 24px; line-height: 44px; text-align:center;
+    user-select:none;
   }
-  .tl-bar{ height:100%; width:0%; background: rgba(0,0,0,.45); transition: width .18s linear; }
+  .tl-left{ left: 8px; }
+  .tl-right{ right: 8px; }
+  .tl-arrow:disabled{ opacity:.35; cursor:not-allowed; }
+
+  .tl-dots{
+    position:absolute; left:50%; bottom: 10px; transform: translateX(-50%);
+    display:flex; gap:8px; z-index: 5;
+    padding: 6px 10px; border-radius: 999px;
+    background: rgba(255,255,255,.72);
+    border: 1px solid rgba(0,0,0,.10);
+    backdrop-filter: blur(6px);
+  }
+  .tl-dot{ width:8px; height:8px; border-radius:999px; background: rgba(0,0,0,.20); border:0; cursor:pointer; }
+  .tl-dot.active{ background: rgba(0,0,0,.60); }
+
+  .tl-progress{ height:6px; background: rgba(0,0,0,.08); border-radius:999px; overflow:hidden; margin-top:10px; }
+  .tl-bar{ height:100%; width:0%; background: rgba(0,0,0,.45); transition: width .22s linear; }
 </style>
 
 <script>
@@ -170,7 +196,6 @@
 
   let index = 0;
 
-  // 生成 dots
   const dots = cards.map((_, i) => {
     const b = document.createElement("button");
     b.type = "button";
@@ -180,41 +205,34 @@
     return b;
   });
 
+  function getCurrentTranslateX(el){
+    const m = new DOMMatrixReadOnly(getComputedStyle(el).transform);
+    return m.isIdentity ? 0 : m.m41;
+  }
+
   function layout() {
-    // 把“当前卡片”移动到视野中央
     const active = cards[index];
     const stageRect = stage.getBoundingClientRect();
     const aRect = active.getBoundingClientRect();
-    const trackRect = track.getBoundingClientRect();
 
     const stageCenter = stageRect.left + stageRect.width / 2;
     const cardCenter  = aRect.left + aRect.width / 2;
 
     const dx = stageCenter - cardCenter;
     const currentTx = getCurrentTranslateX(track);
-    const nextTx = currentTx + dx;
+    track.style.transform = `translateX(${currentTx + dx}px)`;
 
-    track.style.transform = `translateX(${nextTx}px)`;
-
-    // 高亮缩放状态
     cards.forEach((c, i) => {
       c.classList.remove("is-active", "is-near");
       if (i === index) c.classList.add("is-active");
       else if (Math.abs(i - index) === 1) c.classList.add("is-near");
     });
 
-    // dots + progress
     dots.forEach((d, i) => d.classList.toggle("active", i === index));
-    bar.style.width = ((index) / Math.max(1, cards.length - 1)) * 100 + "%";
+    bar.style.width = (index / Math.max(1, cards.length - 1)) * 100 + "%";
 
-    // 按钮禁用
     prev.disabled = index === 0;
     next.disabled = index === cards.length - 1;
-  }
-
-  function getCurrentTranslateX(el){
-    const m = new DOMMatrixReadOnly(getComputedStyle(el).transform);
-    return m.isIdentity ? 0 : m.m41;
   }
 
   function goTo(i){
@@ -225,13 +243,11 @@
   prev.addEventListener("click", () => goTo(index - 1));
   next.addEventListener("click", () => goTo(index + 1));
 
-  // 键盘左右键
   window.addEventListener("keydown", (e) => {
     if (e.key === "ArrowLeft") goTo(index - 1);
     if (e.key === "ArrowRight") goTo(index + 1);
   });
 
-  // 可选：手机左右滑动（不需要滚轮）
   let startX = null;
   stage.addEventListener("touchstart", (e) => startX = e.touches[0].clientX, {passive:true});
   stage.addEventListener("touchend", (e) => {
@@ -242,14 +258,11 @@
     startX = null;
   }, {passive:true});
 
-  // 初始定位：让第一张居中显示并放大
   requestAnimationFrame(() => {
-    // 先给个初始 transform=0，避免取值 NaN
     track.style.transform = "translateX(0px)";
     layout();
   });
 
-  // 窗口大小变化重新居中
   window.addEventListener("resize", () => layout());
 </script>
 
