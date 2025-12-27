@@ -9,7 +9,6 @@
   <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet" />
 
   <style>
-    /* 不影响你全站 styles.css，只加地图必须的 */
     .map-wrap{
       max-width: 1100px;
       margin: 28px auto 60px auto;
@@ -20,8 +19,18 @@
       height: 650px;
       border: 1px solid #000;
     }
-
-    /* 自定义 Marker（更像项目地图点） */
+    .debug {
+      border: 1px solid #000;
+      padding: 10px 12px;
+      margin: 12px 0 0 0;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-size: 12px;
+      line-height: 1.4;
+      white-space: pre-wrap;
+      background: #fff;
+      color: #111;
+    }
+    .debug.ok { opacity: .7; }
     .mkr{
       width: 12px; height: 12px;
       border-radius: 999px;
@@ -36,27 +45,13 @@
       font-family: "Times New Roman", Georgia, serif;
       min-width: 220px;
     }
-    .popup .t{
-      font-size: 18px;
-      font-weight: 700;
-      margin: 0 0 6px 0;
-    }
-    .popup .s{
-      font-size: 14px;
-      color: #444;
-      margin: 0 0 8px 0;
-      line-height: 1.35;
-    }
-    .popup .c{
-      font-size: 13px;
-      color: #666;
-      margin: 0;
-    }
+    .popup .t{ font-size: 18px; font-weight: 700; margin: 0 0 6px 0; }
+    .popup .s{ font-size: 14px; color: #444; margin: 0 0 8px 0; line-height: 1.35; }
+    .popup .c{ font-size: 13px; color: #666; margin: 0; }
   </style>
 </head>
 
 <body>
-  <!-- 你全站统一 header（保留 dropdown） -->
   <header class="site-header">
     <h1 class="site-title">Cantonese Culture in the Americas</h1>
     <nav class="site-nav">
@@ -81,11 +76,10 @@
 
   <main class="map-wrap">
     <h2 class="page-title">Map</h2>
-    <p class="page-subtitle">
-      3D Mapbox map with animated routes (maritime + flight).
-    </p>
+    <p class="page-subtitle">3D Mapbox + animated routes</p>
 
     <div id="map" aria-label="Interactive 3D map"></div>
+    <div id="debug" class="debug ok">Loading Mapbox… (如果一直停在这里，通常是 token / style / 网络被拦截)</div>
 
     <div class="footer">© Cantonese Culture in the Americas</div>
   </main>
@@ -94,19 +88,26 @@
   <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
 
   <script>
-    // =========================
-    // 1) CONFIG
-    // =========================
+    const debugEl = document.getElementById("debug");
+    function logDebug(msg, isError=false){
+      debugEl.className = "debug" + (isError ? "" : " ok");
+      debugEl.textContent = msg;
+    }
+
+    // ✅ 1) 必须换成你的 token（不换=100% 空白 + 401）
     mapboxgl.accessToken = "YOUR_MAPBOX_TOKEN_HERE";
 
-    // 你的 Studio 样式（你说改成 v0 的那个）
+    // ✅ 2) 你的 Studio 样式（如果 Private，会 401/403 导致空白）
     const STYLE_URL = "mapbox://styles/kevincat100/cmjneo20k000v01sxghqb6aqr";
 
-    // 初始视角：center 到 Cambodia 附近（你要求）
+    // ✅ 3) fallback：先保证地图一定能显示（用官方公开样式）
+    const FALLBACK_STYLE = "mapbox://styles/mapbox/light-v11";
+
+    // 初始视角（Cambodia 附近）
     const map = new mapboxgl.Map({
       container: "map",
       style: STYLE_URL,
-      center: [104.9, 12.6],  // Cambodia-ish
+      center: [104.9, 12.6],
       zoom: 3.4,
       pitch: 58,
       bearing: 0,
@@ -115,315 +116,131 @@
 
     map.addControl(new mapboxgl.NavigationControl({ visualizePitch: true }), "top-right");
 
-    // =========================
-    // 2) DATA: POINTS
-    // 规则：主标题=过去名字；副标题=现在名字（没有就空）；国家
-    // =========================
-    const points = [
-      {
-        id: "siyi",
-        past: "Si Yi",
-        now: "Sze Yup region of Guangdong",
-        country: "China",
-        coord: [112.5, 22.8],
-        color: "blue"
-      },
-      {
-        id: "ayutthaya",
-        past: "Ayutthaya Kingdom",
-        now: "Ayutthaya",
-        country: "Thailand",
-        coord: [100.57, 14.35],
-        color: "blue"
-      },
-      {
-        id: "hatien",
-        past: "Hà Tiên",
-        now: "",
-        country: "Vietnam",
-        coord: [104.49, 10.39],
-        color: "blue"
-      },
-      {
-        id: "saigon",
-        past: "Saigon",
-        now: "Ho Chi Minh City",
-        country: "Vietnam",
-        coord: [106.63, 10.82],
-        color: "blue"
-      },
-      {
-        id: "penang",
-        past: "Penang",
-        now: "",
-        country: "Malaysia",
-        coord: [100.33, 5.41],
-        color: "blue"
-      },
-      {
-        id: "singapore",
-        past: "Singapore",
-        now: "",
-        country: "Singapore",
-        coord: [103.82, 1.35],
-        color: "blue"
-      },
-      {
-        id: "hongkong",
-        past: "Hong Kong",
-        now: "",
-        country: "China",
-        coord: [114.17, 22.32],
-        color: "gray"
-      },
-      {
-        id: "hawaii",
-        past: "Hawaiʻi",
-        now: "",
-        country: "USA",
-        coord: [-157.86, 21.31],
-        color: "gray"
-      },
-      {
-        id: "sf",
-        past: "San Francisco",
-        now: "",
-        country: "USA",
-        coord: [-122.42, 37.77],
-        color: "blue"
-      },
-      {
-        id: "california",
-        past: "California",
-        now: "",
-        country: "USA",
-        coord: [-120.0, 36.8],
-        color: "gray"
-      }
-    ];
+    map.on("error", (e) => {
+      const detail = (e && e.error) ? (e.error.message || String(e.error)) : JSON.stringify(e);
+      logDebug("❌ Mapbox error:\n" + detail + "\n\n常见原因：\n- token 没换/无效（401）\n- 你的 style 是 Private（403）\n- 网络/插件拦截 mapbox.com 资源\n\n我现在会自动切到 fallback 公共样式测试…", true);
 
-    function popupHTML(p){
-      const sub = p.now ? `<div class="s">${p.now}</div>` : "";
-      return `
-        <div class="popup">
-          <div class="t">${p.past}</div>
-          ${sub}
-          <div class="c">${p.country}</div>
-        </div>
-      `;
-    }
-
-    // =========================
-    // 3) DATA: ROUTES
-    // 蓝色：海路/迁徙水路（#3d85c6）+ 流动效果
-    // 灰色：飞行航线（#666666）直接向东穿越太平洋，经过夏威夷附近
-    // =========================
-
-    // 3.1 海路：Si Yi → Ayutthaya（绕过 Ca Mau，不走新加坡/马六甲）
-    // 做法：给一串“水上点”靠近南海—泰国湾方向（不走马六甲）
-    const route_blue_1 = [
-      get("siyi"),
-      [112.0, 20.2],   // South China Sea
-      [110.6, 16.5],   // mid sea
-      [109.8, 12.0],   // near Vietnam coast
-      [102.8, 10.6],   // Gulf of Thailand entry
-      [100.7, 12.2],   // up gulf
-      get("ayutthaya")
-    ];
-
-    // 3.2 海路：Ayutthaya → Hà Tiên → Saigon
-    const route_blue_2 = [
-      get("ayutthaya"),
-      [101.5, 12.6],   // gulf water
-      [103.1, 10.6],
-      get("hatien"),
-      [105.5, 10.5],
-      get("saigon")
-    ];
-
-    // 3.3 海路：Si Yi → Penang → Singapore
-    const route_blue_3 = [
-      get("siyi"),
-      [110.5, 18.2],   // SCS
-      [108.5, 11.0],
-      [103.0, 7.5],
-      get("penang"),
-      get("singapore")
-    ];
-
-    // 3.4 蓝线：Si Yi → San Francisco（直接跨太平洋）
-    const route_blue_4 = [
-      get("siyi"),
-      [150.0, 28.0],   // pacific mid (eastbound)
-      [-170.0, 30.0],  // cross dateline (no date-change worry)
-      [-140.0, 35.0],
-      get("sf")
-    ];
-
-    // 3.5 灰色飞行：Vietnam → California（向东跨太平洋，经 Hawaiʻi 附近）
-    const route_gray_1 = [
-      get("saigon"),
-      [140.0, 22.0],
-      [-175.0, 25.0],
-      get("hawaii"),
-      [-135.0, 33.0],
-      get("california")
-    ];
-
-    // 3.6 灰色飞行：Hong Kong → California（向东跨太平洋，经 Hawaiʻi 附近）
-    const route_gray_2 = [
-      get("hongkong"),
-      [150.0, 28.0],
-      [-175.0, 30.0],
-      get("hawaii"),
-      [-135.0, 34.0],
-      get("california")
-    ];
-
-    function get(id){
-      const p = points.find(x => x.id === id);
-      return p.coord;
-    }
-
-    // =========================
-    // 4) MAP LOAD: 3D + ROUTES + MARKERS
-    // =========================
-    map.on("load", () => {
-      // ---- 4.1 Add 3D terrain + sky (if your style supports raster-dem) ----
-      // 给一个通用的 Mapbox DEM 源（不改你 Studio 样式的情况下也能用）
-      if (!map.getSource("mapbox-dem")) {
-        map.addSource("mapbox-dem", {
-          type: "raster-dem",
-          url: "mapbox://mapbox.mapbox-terrain-dem-v1",
-          tileSize: 512,
-          maxzoom: 14
-        });
-      }
-
-      map.setTerrain({ source: "mapbox-dem", exaggeration: 1.2 });
-
-      // sky layer
-      if (!map.getLayer("sky")) {
-        map.addLayer({
-          id: "sky",
-          type: "sky",
-          paint: {
-            "sky-type": "atmosphere",
-            "sky-atmosphere-sun-intensity": 8
-          }
-        });
-      }
-
-      // optional fog (nice cinematic)
-      if (map.setFog) {
-        map.setFog({
-          "range": [0.8, 8],
-          "horizon-blend": 0.2
-        });
-      }
-
-      // ---- 4.2 Add routes sources ----
-      addRoute("route-blue-1", route_blue_1);
-      addRoute("route-blue-2", route_blue_2);
-      addRoute("route-blue-3", route_blue_3);
-      addRoute("route-blue-4", route_blue_4);
-
-      addRoute("route-gray-1", route_gray_1);
-      addRoute("route-gray-2", route_gray_2);
-
-      // ---- 4.3 Add route layers (thin + flowing) ----
-      addFlowLine("route-blue-1", "#3d85c6", 2.2);
-      addFlowLine("route-blue-2", "#3d85c6", 2.2);
-      addFlowLine("route-blue-3", "#3d85c6", 2.2);
-      addFlowLine("route-blue-4", "#3d85c6", 2.2);
-
-      addFlowLine("route-gray-1", "#666666", 2.4);
-      addFlowLine("route-gray-2", "#666666", 2.4);
-
-      // ---- 4.4 Add markers ----
-      points.forEach(p => {
-        const el = document.createElement("div");
-        el.className = "mkr " + (p.color === "gray" ? "gray" : "blue");
-
-        new mapboxgl.Marker(el)
-          .setLngLat(p.coord)
-          .setPopup(new mapboxgl.Popup({ offset: 14 }).setHTML(popupHTML(p)))
-          .addTo(map);
-      });
-
-      // ---- 4.5 Animate dashed flow ----
-      animateDashes();
+      // 自动切到公开样式，确认是不是“你 style 权限”的问题
+      try { map.setStyle(FALLBACK_STYLE); } catch (_) {}
     });
 
+    map.on("load", () => {
+      logDebug("✅ Map loaded. If you still see blank: check token/style permissions in the message above.");
+    });
+
+    // =========================
+    // DATA
+    // =========================
+    const points = [
+      { id:"siyi", past:"Si Yi", now:"Sze Yup region of Guangdong", country:"China", coord:[112.5, 22.8], color:"blue" },
+      { id:"ayutthaya", past:"Ayutthaya Kingdom", now:"Ayutthaya", country:"Thailand", coord:[100.57, 14.35], color:"blue" },
+      { id:"hatien", past:"Hà Tiên", now:"", country:"Vietnam", coord:[104.49, 10.39], color:"blue" },
+      { id:"saigon", past:"Saigon", now:"Ho Chi Minh City", country:"Vietnam", coord:[106.63, 10.82], color:"blue" },
+      { id:"penang", past:"Penang", now:"", country:"Malaysia", coord:[100.33, 5.41], color:"blue" },
+      { id:"singapore", past:"Singapore", now:"", country:"Singapore", coord:[103.82, 1.35], color:"blue" },
+      { id:"hongkong", past:"Hong Kong", now:"", country:"China", coord:[114.17, 22.32], color:"gray" },
+      { id:"hawaii", past:"Hawaiʻi", now:"", country:"USA", coord:[-157.86, 21.31], color:"gray" },
+      { id:"sf", past:"San Francisco", now:"", country:"USA", coord:[-122.42, 37.77], color:"blue" },
+      { id:"california", past:"California", now:"", country:"USA", coord:[-120.0, 36.8], color:"gray" }
+    ];
+
+    function get(id){ return points.find(x => x.id === id).coord; }
+    function popupHTML(p){
+      const sub = p.now ? `<div class="s">${p.now}</div>` : "";
+      return `<div class="popup"><div class="t">${p.past}</div>${sub}<div class="c">${p.country}</div></div>`;
+    }
+
+    const route_blue_1 = [ get("siyi"), [112.0,20.2],[110.6,16.5],[109.8,12.0],[102.8,10.6],[100.7,12.2], get("ayutthaya") ];
+    const route_blue_2 = [ get("ayutthaya"), [101.5,12.6],[103.1,10.6], get("hatien"), [105.5,10.5], get("saigon") ];
+    const route_blue_3 = [ get("siyi"), [110.5,18.2],[108.5,11.0],[103.0,7.5], get("penang"), get("singapore") ];
+    const route_blue_4 = [ get("siyi"), [150.0,28.0],[-170.0,30.0],[-140.0,35.0], get("sf") ];
+
+    const route_gray_1 = [ get("saigon"), [140.0,22.0],[-175.0,25.0], get("hawaii"), [-135.0,33.0], get("california") ];
+    const route_gray_2 = [ get("hongkong"), [150.0,28.0],[-175.0,30.0], get("hawaii"), [-135.0,34.0], get("california") ];
+
     function addRoute(id, coords){
-      map.addSource(id, {
-        type: "geojson",
-        data: {
-          type: "Feature",
-          properties: {},
-          geometry: {
-            type: "LineString",
-            coordinates: coords
-          }
-        }
-      });
+      map.addSource(id, { type:"geojson", data:{ type:"Feature", geometry:{ type:"LineString", coordinates:coords } } });
     }
 
     function addFlowLine(sourceId, color, width){
-      // 实线底（淡一点）
       map.addLayer({
         id: sourceId + "-base",
         type: "line",
         source: sourceId,
-        layout: { "line-cap": "round", "line-join": "round" },
-        paint: {
-          "line-color": color,
-          "line-width": width,
-          "line-opacity": 0.28
-        }
+        layout: { "line-cap":"round", "line-join":"round" },
+        paint: { "line-color": color, "line-width": width, "line-opacity": 0.28 }
       });
-
-      // 虚线（流动）
       map.addLayer({
         id: sourceId + "-dash",
         type: "line",
         source: sourceId,
-        layout: { "line-cap": "round", "line-join": "round" },
-        paint: {
-          "line-color": color,
-          "line-width": width,
-          "line-opacity": 0.95,
-          "line-dasharray": [2, 2],
-          "line-translate": [0, 0]
-        }
+        layout: { "line-cap":"round", "line-join":"round" },
+        paint: { "line-color": color, "line-width": width, "line-opacity": 0.95, "line-dasharray": [2,2] }
       });
     }
 
-    // 让虚线“流动”：不断改变 dasharray 组合
     function animateDashes(){
-      const dashSteps = [
-        [0, 4, 3],
-        [1, 4, 2],
-        [2, 4, 1],
-        [3, 4, 0]
-      ];
+      const dashSteps = [[0,4,3],[1,4,2],[2,4,1],[3,4,0]];
+      const dashLayerIds = ["route-blue-1-dash","route-blue-2-dash","route-blue-3-dash","route-blue-4-dash","route-gray-1-dash","route-gray-2-dash"];
       let step = 0;
-
-      const dashLayerIds = [
-        "route-blue-1-dash","route-blue-2-dash","route-blue-3-dash","route-blue-4-dash",
-        "route-gray-1-dash","route-gray-2-dash"
-      ];
-
       function tick(){
         const s = dashSteps[step];
-        dashLayerIds.forEach(id => {
-          if (map.getLayer(id)) map.setPaintProperty(id, "line-dasharray", s);
-        });
+        dashLayerIds.forEach(id => { if (map.getLayer(id)) map.setPaintProperty(id, "line-dasharray", s); });
         step = (step + 1) % dashSteps.length;
         requestAnimationFrame(tick);
       }
       tick();
     }
+
+    function ensure3D(){
+      try{
+        if (!map.getSource("mapbox-dem")) {
+          map.addSource("mapbox-dem", { type:"raster-dem", url:"mapbox://mapbox.mapbox-terrain-dem-v1", tileSize:512, maxzoom:14 });
+        }
+        map.setTerrain({ source:"mapbox-dem", exaggeration: 1.2 });
+        if (!map.getLayer("sky")) {
+          map.addLayer({ id:"sky", type:"sky", paint:{ "sky-type":"atmosphere", "sky-atmosphere-sun-intensity": 8 } });
+        }
+      }catch(e){
+        // 如果你的账户/样式不支持 terrain，这里不会让页面挂掉
+      }
+    }
+
+    // 每次 style load 后都要重新加 layers（因为 setStyle 会清空 layer/source）
+    map.on("style.load", () => {
+      ensure3D();
+
+      // sources exist?
+      const want = [
+        ["route-blue-1", route_blue_1, "#3d85c6", 2.2],
+        ["route-blue-2", route_blue_2, "#3d85c6", 2.2],
+        ["route-blue-3", route_blue_3, "#3d85c6", 2.2],
+        ["route-blue-4", route_blue_4, "#3d85c6", 2.2],
+        ["route-gray-1", route_gray_1, "#666666", 2.4],
+        ["route-gray-2", route_gray_2, "#666666", 2.4],
+      ];
+
+      try{
+        want.forEach(([id, coords, color, w]) => {
+          if (!map.getSource(id)) addRoute(id, coords);
+          if (!map.getLayer(id+"-base")) addFlowLine(id, color, w);
+        });
+
+        // markers
+        points.forEach(p => {
+          const el = document.createElement("div");
+          el.className = "mkr " + (p.color === "gray" ? "gray" : "blue");
+          new mapboxgl.Marker(el)
+            .setLngLat(p.coord)
+            .setPopup(new mapboxgl.Popup({ offset: 14 }).setHTML(popupHTML(p)))
+            .addTo(map);
+        });
+
+        animateDashes();
+      }catch(e){
+        logDebug("❌ JS runtime error:\n" + (e.message || String(e)), true);
+      }
+    });
   </script>
 </body>
 </html>
