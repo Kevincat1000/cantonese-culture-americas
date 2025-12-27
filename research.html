@@ -2,41 +2,47 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Research | Cantonese Culture in the Americas</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="style.css">
+  <title>Research</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<header>
-  <div class="site-title">
-    <a href="index.html">Cantonese Culture in the Americas</a>
-  </div>
-  <nav>
+<header class="site-header">
+  <h1 class="site-title">Cantonese Culture in the Americas</h1>
+  <nav class="site-nav">
     <a href="index.html">Home</a>
-    <a href="timeline.html">Timeline</a>
-    <a href="research.html">Research</a>
+
+    <div class="dropdown">
+      <button type="button" aria-haspopup="true" aria-expanded="false">Timeline</button>
+      <div class="dropdown-menu" role="menu">
+        <a href="timeline-phase1.html">Phase 1</a>
+        <a href="timeline-phase2.html">Phase 2</a>
+        <a href="timeline-phase3.html">Phase 3</a>
+        <a href="timeline-phase4.html">Phase 4</a>
+        <a href="map.html">Map</a>
+      </div>
+    </div>
+
+    <a class="active" href="research.html">Research</a>
     <a href="archives.html">Archives</a>
     <a href="resources.html">Resources</a>
   </nav>
 </header>
 
-<main>
-  <h1>Research</h1>
+<main class="main">
+  <h2 class="page-title">Research</h2>
+  <p class="page-subtitle">Oral history interviews, themes, and analytical framing.</p>
 
-  <h2>Oral History Interviews</h2>
-  <p>Interviews with Cantonese individuals whose families migrated through Vietnam to the United States.</p>
+  <h3 class="section-title">Core Framework</h3>
+  <p class="p">Diaspora (Guangdong → Hong Kong → Vietnam → U.S.), Race & Power (law, language hierarchy), Cultural Survival (food, opera, Cantonese), Intergenerational Memory, Public Scholarship.</p>
 
-  <h2>Cantonese Yum Cha Culture</h2>
-  <p>Video research on dim sum as a site of cultural continuity and community.</p>
+  <h3 class="section-title">Methods</h3>
+  <p class="p">Oral history + visual archives + mapping + phased timeline narrative.</p>
 
-  <h2>Cantonese / Hong Kong Language Survey</h2>
-  <p>Visual research on language, identity, and power.</p>
+  <div class="footer">© Cantonese Culture in the Americas</div>
 </main>
 
-<footer>
-  <p>© Cantonese Culture in the Americas</p>
-</footer>
-
+<script src="nav.js"></script>
 </body>
 </html>
