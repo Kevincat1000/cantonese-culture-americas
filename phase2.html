@@ -14,22 +14,23 @@
   <!-- Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
-  <!-- Injectors: Footer only (No Header) -->
+  <!-- Injectors: Footer only -->
   <script src="./assets/footer.js" defer></script>
 
   <style>
     :root {
       /* Phase II Theme: Earth, Iron & Rust */
-      --bg-color: #f7f5f0; /* 米灰纸张色 */
-      --bg-dark: #2c241b;  /* 深咖啡色 */
-      --accent-rust: #c05634; /* 铁锈红/赭石色 */
+      --bg-color: #f7f5f0;
+      --bg-paper: #eae6dd;
+      --accent-rust: #c05634; /* 铁锈红 */
       --text-main: #1f1a16;
-      --text-muted: #5e544a;
+      --text-muted: #4a4238;
+      --text-light: #f4f4f4;
       
       --font-body: 'Gentium Book Plus', serif;
       --font-heading: 'Exo', sans-serif;
       
-      --max-width: 900px;
+      --max-width: 1100px;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -40,351 +41,341 @@
       font-family: var(--font-body);
       background: var(--bg-color);
       color: var(--text-main);
-      line-height: 1.7;
+      line-height: 1.8;
       overflow-x: hidden;
     }
 
     a { color: inherit; text-decoration: none; transition: color 0.3s; }
 
-    /* --- 1. 悬浮导航 (Floating Nav) --- */
+    /* --- Nav --- */
     .nav-float {
-      position: fixed;
-      top: 30px; left: 30px;
-      z-index: 1000;
+      position: fixed; top: 30px; left: 30px; z-index: 1000;
       display: flex; align-items: center; gap: 15px;
-      color: var(--text-main); 
-      transition: all 0.3s ease;
+      color: var(--text-main); transition: all 0.3s ease;
     }
     
-    /* 深色背景下的导航样式 */
     .nav-float.on-dark { color: white; }
-    .nav-float.on-dark .nav-icon-circle { 
-      border-color: rgba(255,255,255,0.3); 
-      background: rgba(255,255,255,0.1); 
-    }
+    .nav-float.on-dark .nav-icon-circle { border-color: rgba(255,255,255,0.3); background: rgba(255,255,255,0.1); }
 
     .nav-icon-circle {
       width: 50px; height: 50px;
-      border: 1px solid rgba(0,0,0,0.15);
-      border-radius: 50%;
+      border: 1px solid rgba(0,0,0,0.15); border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      transition: all 0.3s ease;
-      background: rgba(255,255,255,0.6);
-      backdrop-filter: blur(5px);
+      transition: all 0.3s ease; background: rgba(255,255,255,0.6); backdrop-filter: blur(5px);
     }
 
     .nav-text {
-      font-family: var(--font-heading);
-      font-size: 12px; font-weight: 600;
+      font-family: var(--font-heading); font-size: 12px; font-weight: 600;
       text-transform: uppercase; letter-spacing: 1px;
-      opacity: 0; transform: translateX(-10px);
-      transition: all 0.3s ease;
+      opacity: 0; transform: translateX(-10px); transition: all 0.3s ease;
     }
 
     .nav-float:hover .nav-icon-circle {
-      background-color: var(--accent-rust);
-      border-color: var(--accent-rust);
-      color: #fff; transform: scale(1.1);
+      background-color: var(--accent-rust); border-color: var(--accent-rust); color: #fff; transform: scale(1.1);
     }
-    
-    .nav-float:hover .nav-text { 
-      opacity: 1; transform: translateX(0); 
-      color: var(--accent-rust); 
-    }
+    .nav-float:hover .nav-text { opacity: 1; transform: translateX(0); color: var(--accent-rust); }
     .nav-float.on-dark:hover .nav-text { color: var(--accent-rust); }
 
-    /* --- 2. Hero Section (居中、视差背景) --- */
-    .hero {
-      position: relative;
-      height: 100vh;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      text-align: center;
-      color: white;
-      overflow: hidden;
-      background: #000;
+
+    /* --- Hero --- */
+    .hero-section {
+      position: relative; height: 100vh; width: 100%;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden; background: #000;
     }
 
     .hero-bg {
       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      /* 旧金山/铁路时代的黑白背景图 */
       background-image: url('https://images.unsplash.com/photo-1533552809703-999059f632ac?q=80&w=1600&auto=format&fit=crop'); 
       background-size: cover; background-position: center;
-      opacity: 0.5;
-      transform: scale(1.05);
-      /* 缓慢呼吸感动画 */
-      animation: slowZoom 20s infinite alternate; 
+      opacity: 0.5; transform: scale(1.05); animation: slowZoom 20s infinite alternate; 
     }
-    
     @keyframes slowZoom { from { transform: scale(1.05); } to { transform: scale(1.15); } }
 
     .hero-content {
-      position: relative; z-index: 10;
-      max-width: 900px; padding: 0 20px;
-      transform: translateY(20px); opacity: 0;
-      animation: fadeUp 1.2s ease-out forwards;
+      position: relative; z-index: 10; max-width: 900px; padding: 0 20px;
+      text-align: center; color: white;
+      transform: translateY(20px); opacity: 0; animation: fadeUp 1.2s ease-out forwards;
     }
-    
     @keyframes fadeUp { to { transform: translateY(0); opacity: 1; } }
 
     .hero-label {
-      font-family: var(--font-heading);
-      font-size: 14px; font-weight: 700; letter-spacing: 4px;
-      text-transform: uppercase;
-      color: var(--accent-rust);
-      margin-bottom: 20px; display: block;
+      font-family: var(--font-heading); font-size: 14px; font-weight: 700; letter-spacing: 4px;
+      text-transform: uppercase; color: var(--accent-rust); margin-bottom: 20px; display: block;
     }
 
-    h1 {
-      font-family: var(--font-heading);
-      font-size: clamp(3rem, 5vw, 4.5rem);
-      line-height: 1.1; font-weight: 700;
-      margin: 0 0 20px;
-      letter-spacing: -1px;
-      text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    .hero-title {
+      font-family: var(--font-heading); font-size: clamp(3rem, 5vw, 5rem);
+      line-height: 1.1; font-weight: 700; margin: 0 0 20px;
+      letter-spacing: -1px; text-shadow: 0 10px 30px rgba(0,0,0,0.5);
     }
 
-    .hero-lead {
-      font-size: 1.3rem;
-      font-weight: 400;
-      color: rgba(255,255,255,0.9);
+    .hero-subtitle {
+      font-size: 1.5rem; font-weight: 400; color: rgba(255,255,255,0.9);
       max-width: 700px; margin: 0 auto;
     }
 
-    /* Scroll Indicator */
-    .scroll-hint {
-      position: absolute; bottom: 40px;
-      display: flex; flex-direction: column; align-items: center; gap: 10px;
-      color: rgba(255,255,255,0.6);
-      font-family: var(--font-heading); font-size: 12px; letter-spacing: 1px;
-      z-index: 10;
-      animation: bounce 2s infinite;
-    }
-    @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(10px); } }
 
-
-    /* --- 3. Content Sections --- */
-    .section-wrap {
-      background: var(--bg-color);
-      position: relative; z-index: 2;
-      padding-top: 80px;
-      padding-bottom: 40px;
-    }
-
-    .container {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    /* 卡片式布局 */
-    .card {
-      background: #fff;
-      border: 1px solid #e5e0d8;
-      border-radius: 2px;
-      padding: 60px 50px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.04);
-      margin-bottom: 60px;
+    /* --- Layout Utilities --- */
+    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
+    
+    .section-wrap { padding: 100px 0; border-bottom: 1px solid rgba(0,0,0,0.05); }
+    .bg-paper { background-color: var(--bg-paper); }
+    .bg-white { background-color: #fff; }
+    
+    /* Summary Section Styling */
+    .bg-dark-rust { 
+      background-color: #2c241b; 
+      color: var(--text-light);
       position: relative;
     }
-    
-    /* 顶部铁锈色装饰条 */
-    .card::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 6px;
+    .bg-dark-rust::before {
+      content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 6px;
       background: var(--accent-rust);
     }
 
-    .h2 {
-      font-family: var(--font-heading);
-      font-size: 26px; font-weight: 700;
-      margin: 0 0 24px;
-      color: var(--text-main);
-      display: flex; align-items: center; gap: 15px;
+    /* Grid Layout */
+    .grid-2col {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+    }
+    .grid-reversed .text-col { order: 2; } /* Image Left, Text Right */
+    .grid-reversed .img-col { order: 1; }
+
+
+    /* --- Typography & Elements --- */
+    .section-title {
+      font-family: var(--font-heading); font-size: 28px; font-weight: 700;
+      margin-bottom: 24px; line-height: 1.3;
+      position: relative; padding-left: 20px;
+      border-left: 5px solid var(--accent-rust);
     }
     
-    /* 标题前的短线 */
-    .h2::before {
-      content: ''; width: 24px; height: 3px; background: var(--accent-rust);
-    }
+    .bg-dark-rust .section-title { color: white; border-left-color: var(--accent-rust); }
 
-    .p {
-      font-size: 1.15rem; color: var(--text-muted);
-      margin-bottom: 20px;
-    }
+    .p-text { font-size: 1.125rem; color: var(--text-muted); margin-bottom: 20px; text-align: justify; }
+    .bg-dark-rust .p-text { color: rgba(255,255,255,0.85); }
 
-    .list {
-      list-style: none; padding: 0; margin: 30px 0 0;
-      display: grid; gap: 15px;
+    /* Images */
+    .img-fluid {
+      width: 100%; height: 400px; object-fit: cover;
+      border-radius: 2px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      transition: transform 0.5s ease;
     }
-
-    .list li {
-      position: relative;
-      padding-left: 30px;
-      font-size: 1.1rem;
-      color: var(--text-main);
-    }
-
-    /* 列表前的点 */
-    .list li::before {
-      content: '•';
-      color: var(--accent-rust);
-      font-size: 24px;
-      position: absolute; left: 0; top: -5px;
-    }
+    .img-fluid:hover { transform: scale(1.02); }
     
-    /* 语言切换按钮 (右下角悬浮) */
-    .lang-float {
-      position: fixed; bottom: 30px; right: 30px; z-index: 999;
-      background: var(--bg-dark); color: white;
-      padding: 10px 18px; border-radius: 30px;
-      cursor: pointer; font-family: var(--font-heading); font-size: 13px; font-weight: 700;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-      transition: transform 0.2s;
-      display: flex; align-items: center; gap: 8px;
-    }
-    .lang-float:hover { transform: translateY(-2px); background: var(--accent-rust); }
-
-
-    /* --- Footer Placeholder (Injected via JS) --- */
-    .footer-wrapper {
-      margin-top: 40px;
+    /* Caption */
+    .img-caption {
+      display: block; margin-top: 10px; font-family: var(--font-heading);
+      font-size: 13px; color: var(--text-muted); opacity: 0.7; text-align: right;
     }
 
-    /* Mobile */
-    @media(max-width: 768px) {
-      .hero h1 { font-size: 2.8rem; }
-      .card { padding: 40px 24px; }
-      .nav-text { display: none; }
+
+    /* --- Phase Navigation --- */
+    .phase-nav {
+      margin-top: 60px; padding-top: 40px; 
+      border-top: 1px solid rgba(255,255,255,0.1); 
+      text-align: right;
+    }
+    .phase-link {
+      display: inline-flex; align-items: center; gap: 15px;
+      font-family: var(--font-heading); font-size: 1.5rem; font-weight: 700;
+      color: white; transition: color 0.3s;
+    }
+    .phase-link:hover { color: var(--accent-rust); }
+
+
+    /* --- Mobile --- */
+    @media(max-width: 900px) {
+      .grid-2col { grid-template-columns: 1fr; gap: 40px; }
+      .grid-reversed .text-col { order: 1; } 
+      .grid-reversed .img-col { order: 2; }
+      .hero-title { font-size: 3rem; }
+      .img-fluid { height: 300px; }
+      .section-wrap { padding: 60px 0; }
     }
   </style>
 </head>
 
 <body>
 
-  <!-- Nav: Back to Timeline -->
+  <!-- Nav -->
   <a href="timeline.html" class="nav-float on-dark" id="nav-btn">
     <div class="nav-icon-circle">
       <i data-lucide="arrow-left"></i>
     </div>
-    <span class="nav-text" data-i18n="navBack">Back to Timeline</span>
+    <span class="nav-text">Back to Timeline</span>
   </a>
 
-  <!-- Language Toggle -->
-  <div class="lang-float" id="langBtn" data-current="en">
-    <i data-lucide="globe" size="16"></i>
-    <span class="langLabel">EN / 中文</span>
-  </div>
+  <!-- Hero -->
+  <header class="hero-section">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <span class="hero-label">Timeline / Phase II</span>
+      <h1 class="hero-title">Building North America & The Pacific</h1>
+      <h2 class="hero-subtitle">1840s–1940s: Gold Rush, Railroads, and Exclusion</h2>
+    </div>
+  </header>
 
   <main>
-    <!-- Hero Section -->
-    <header class="hero">
-      <div class="hero-bg"></div>
-      <div class="hero-content">
-        <span class="hero-label" data-i18n="heroLabel">Timeline / Phase II</span>
-        <h1 data-i18n="title">Building North America & The Pacific</h1>
-        <p class="hero-lead" data-i18n="subtitle">1840s–1940s: Gold Rush, Railroads, and Exclusion</p>
-      </div>
-      
-      <div class="scroll-hint">
-        <span data-i18n="scroll">SCROLL</span>
-        <i data-lucide="chevron-down"></i>
-      </div>
-    </header>
-
-    <!-- Content Section -->
-    <section class="section-wrap">
+    
+    <!-- 1. Gold Rushes (White BG) -->
+    <section class="section-wrap bg-white">
       <div class="container">
-        
-        <!-- Info Card -->
-        <div class="card">
-          <div class="h2" data-i18n="h1">Overview</div>
-          <p class="p" data-i18n="p1">
-            Phase II marks the era of mass migration to the "Gold Mountains" of California, Australia, and Canada. 
-            It focuses on how Cantonese migrants built the infrastructure of the Pacific world while navigating 
-            severe racial exclusion and forming resilient enclaves (Chinatowns).
-          </p>
-          
-          <div style="height: 30px;"></div>
-
-          <div class="h2" data-i18n="h2">Key patterns</div>
-          <ul class="list">
-            <li data-i18n="li1">The Coolie Trade and indentured labor</li>
-            <li data-i18n="li2">Formation of the "Bachelor Society" and transnational families</li>
-            <li data-i18n="li3">Institutional resilience (Associations) against the Exclusion Acts</li>
-          </ul>
+        <div class="grid-2col">
+          <div class="text-col">
+            <h2 class="section-title">1848–1858: The North American Gold Rushes</h2>
+            <p class="p-text">
+              The discovery of gold in California triggered the first major wave of Cantonese migration to North America. Between 1848 and 1851, approximately 25,000 migrants arrived, hailing primarily from the Sze Yup (Four Counties) region. San Francisco served as the primary entry point, where migrants established the continent’s first Chinatown. This district functioned not only as a transit hub for newcomers but also as North America's earliest permanent Cantonese settlement.
+            </p>
+            <p class="p-text">
+              In 1858, the discovery of gold in British Columbia drew the migration northward. Cantonese miners, arriving from California or directly from southern China, founded Victoria’s Chinatown. Known as the “Gateway to Canada,” it remains the oldest Chinese enclave in the country.
+            </p>
+          </div>
+          <div class="img-col">
+            <img src="https://images.unsplash.com/photo-1622312676837-147385960098?q=80&w=1200&auto=format&fit=crop" alt="Gold Rush Stream" class="img-fluid">
+            <span class="img-caption">Miners panning for gold in the American West</span>
+          </div>
         </div>
-        
-        <!-- Footer will be injected here -->
-        <div class="footer-wrapper"></div>
-
       </div>
     </section>
+
+    <!-- 2. Six Companies (Paper BG) -->
+    <section class="section-wrap bg-paper">
+      <div class="container">
+        <div class="grid-2col grid-reversed">
+          <div class="text-col">
+            <h2 class="section-title">1849–1862: Institutional Power – The Rise of the "Six Companies"</h2>
+            <p class="p-text">
+              To maintain order and protection, Cantonese migrants established their first organization, the Sze Yup Association, in San Francisco in 1849. In 1854, the Taishanese group split off to form the Ning Yung Benevolent Association, which became the most powerful district association.
+            </p>
+            <p class="p-text">
+              By 1862, these Cantonese groups united to form the "Chinese Six Companies" (later the CCBA). Acting as the community's governing body, it managed banking, settled disputes, and organized legal defenses against discrimination. This transformed Cantonese migrants into an organized, self-governing entity with a robust economic structure and substantial social standing.
+            </p>
+          </div>
+          <div class="img-col">
+            <img src="https://images.unsplash.com/photo-1555403970-1349f4c3905e?q=80&w=1200&auto=format&fit=crop" alt="Chinatown Lanterns" class="img-fluid">
+            <span class="img-caption">San Francisco Chinatown, established mid-19th century</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Hawaii (White BG) -->
+    <section class="section-wrap bg-white">
+      <div class="container">
+        <div class="grid-2col">
+          <div class="text-col">
+            <h2 class="section-title">1850s–1900s: The Plantation Economy in Hawaii</h2>
+            <p class="p-text">
+              A distinct stream of Cantonese migration transformed Hawaii, beginning with contract laborers in 1852. Unlike the Sze Yup-dominated mainland, Hawaii’s community was overwhelmingly Heungshan (Zhongshan), comprising roughly 75% of the Chinese population.
+            </p>
+            <p class="p-text">
+              Between 1852 and 1899, approximately 46,000 migrants arrived. By 1884, they constituted 22% of the total population and held 49% of plantation jobs, forming the backbone of the sugar industry. By the 1890s, they also dominated rice cultivation, successfully transferring South China’s agricultural technology to the Pacific.
+            </p>
+          </div>
+          <div class="img-col">
+            <img src="https://images.unsplash.com/photo-1465529949603-90dcc6df42c5?q=80&w=1200&auto=format&fit=crop" alt="Hawaii Landscape" class="img-fluid">
+            <span class="img-caption">Plantation landscape in the Pacific</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Railroad (Paper BG) -->
+    <section class="section-wrap bg-paper">
+      <div class="container">
+        <div class="grid-2col grid-reversed">
+          <div class="text-col">
+            <h2 class="section-title">1865–1869: The Transcontinental Railroad</h2>
+            <p class="p-text">
+              During the construction of the Central Pacific Railroad, more than 12,000 Chinese laborers were recruited. Roughly 90% were Cantonese-speaking migrants from Guangdong, predominantly from the Sze Yup region. These workers formed the backbone of the project.
+            </p>
+            <p class="p-text">
+              Estimates suggest that several hundred to over one thousand laborers perished, often due to extreme cold, avalanches, and blasting accidents. From 1863 to 1869, the Central Pacific completed roughly 690 miles of track from Sacramento to Promontory Summit, joining the Union Pacific on May 10, 1869. The contributions of these Cantonese laborers were pivotal in accelerating U.S. economic integration and national expansion.
+            </p>
+          </div>
+          <div class="img-col">
+            <img src="https://images.unsplash.com/photo-1474487548417-781cb71495f3?q=80&w=1200&auto=format&fit=crop" alt="Railroad Tracks" class="img-fluid">
+            <span class="img-caption">Tracks forged through the Sierra Nevada</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Burlingame Treaty (White BG - Centered) -->
+    <section class="section-wrap bg-white">
+      <div class="container" style="max-width: 800px;">
+        <h2 class="section-title">1868: Diplomacy and Free Migration</h2>
+        <p class="p-text">
+          The Burlingame Treaty (1868) marked a high point in early U.S.–Qing relations. It affirmed reciprocal most-favored-nation treatment in travel and residence. Notably, it recognized the mutual advantage of free migration for trade, travel, or permanent residence while condemning coerced migration.
+        </p>
+        <p class="p-text">
+          In this diplomatic context, the Qing government soon launched initiatives such as the Chinese Educational Mission (1872–1881). More broadly, the treaty’s language of “free migration” helped legitimize and protect transpacific mobility in the late 1860s and early 1870s. Combined with labor demand and established Cantonese migrant networks, it reinforced the United States as a major destination for Cantonese workers until the agreement was later curtailed and ultimately undermined by restrictive policies in the 1880s.
+        </p>
+      </div>
+    </section>
+
+    <!-- 6. Exclusion (Paper BG) -->
+    <section class="section-wrap bg-paper">
+      <div class="container">
+        <div class="grid-2col">
+          <div class="text-col">
+            <h2 class="section-title">1882–1943: Exclusion, Resistance, and Renewal</h2>
+            <p class="p-text">
+              Following the completion of the Pacific Railroad, economic shifts fueled hostility specifically toward Cantonese labor. This culminated in the U.S. Chinese Exclusion Act of 1882, the first federal law banning a specific ethnic group. Canada followed with the 1885 Head Tax and the restrictive Chinese Immigration Act of 1923. These policies severed ties between Cantonese laborers and their hometowns and barred the entry of women, transforming North American Chinatowns into "Bachelor Societies" void of traditional family structures.
+            </p>
+            <p class="p-text">
+              The community challenged these restrictions through legal channels. In 1898, Wong Kim Ark, a Taishanese descendant born in San Francisco, appealed his denied entry to the Supreme Court. The ruling in United States v. Wong Kim Ark affirmed birthright citizenship (jus soli), securing the legal status of American-born Cantonese.
+            </p>
+            <p class="p-text">
+              World War II marked a turning point. Acknowledging China as an ally, the U.S. repealed exclusion via the Magnuson Act (1943). Crucially, the War Brides Act of 1945 allowed the entry of Cantonese women, ending the "Bachelor Society" era and revitalizing Chinatowns as centers of Cantonese commerce and culture.
+            </p>
+          </div>
+          <div class="img-col">
+            <img src="https://images.unsplash.com/photo-1577083639236-0f555f0b793d?q=80&w=1200&auto=format&fit=crop" alt="Court or Document" class="img-fluid">
+            <span class="img-caption">Documents of Exclusion and Citizenship</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Summary (Dark Rust Theme) -->
+    <section class="section-wrap bg-dark-rust">
+      <div class="container" style="max-width: 900px;">
+        <h2 class="section-title">Summary: From Labor to Legacy</h2>
+        <p class="p-text">
+          In this century of struggle, Cantonese migrants transformed from transient laborers into the architects of the Pacific and American frontiers. Anchored by powerful, benevolent associations (Huiguan) and clan networks, they not only survived but also organized. 
+        </p>
+        <p class="p-text">
+          These institutions funded the legal battles that defined American citizenship, managed the capital that fueled the Heungshan-led plantations of Hawaii, and coordinated the labor that built the Transcontinental Railroad. Through collective resistance and economic pragmatism, they turned exclusion into endurance, laying the physical, legal, and commercial foundations of a prosperous America.
+        </p>
+
+        <!-- Link to Next Phase -->
+        <div class="phase-nav">
+          <a href="phase3.html" class="phase-link">
+            <span>Next: Phase III</span>
+            <i data-lucide="arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <script>
-    // 1. Initialize Icons
     lucide.createIcons();
 
-    // 2. Nav Color Switch (Dark on Hero, Light on Content)
     const navBtn = document.getElementById('nav-btn');
     const heroHeight = window.innerHeight;
 
     window.addEventListener('scroll', () => {
         if(window.scrollY > heroHeight - 50) {
-            navBtn.classList.remove('on-dark'); // Scroll down: Dark text
+            navBtn.classList.remove('on-dark');
         } else {
-            navBtn.classList.add('on-dark'); // Top: White text
+            navBtn.classList.add('on-dark');
         }
     });
-
-    // 3. I18N Logic (Content Updated for Phase 2 Context)
-    const I18N = {
-      en: {
-        navBack: "Back to Timeline",
-        heroLabel: "Timeline / Phase II",
-        title: "Building North America & The Pacific",
-        subtitle: "1840s–1940s: Gold Rush, Railroads, and Exclusion",
-        scroll: "SCROLL TO EXPLORE",
-        h1: "Overview",
-        p1: "Phase II marks the era of mass migration to the 'Gold Mountains' of California, Australia, and Canada. It focuses on how Cantonese migrants built the infrastructure of the Pacific world while navigating severe racial exclusion and forming resilient enclaves (Chinatowns).",
-        h2: "Key patterns",
-        li1: "The Coolie Trade and indentured labor",
-        li2: "Formation of the 'Bachelor Society' and transnational families",
-        li3: "Institutional resilience (Associations) against the Exclusion Acts"
-      },
-      zh: {
-        navBack: "返回时间轴",
-        heroLabel: "时间轴 / 第二阶段",
-        title: "建设北美与太平洋",
-        subtitle: "1840年代–1940年代：淘金热、铁路与排华法案",
-        scroll: "向下滚动",
-        h1: "概览",
-        p1: "第二阶段标志着向加利福尼亚、澳大利亚和加拿大“金山”的大规模移民时代。本阶段聚焦粤籍移民如何在建设太平洋基础设施的同时，应对严酷的种族排斥并建立坚韧的飞地（唐人街）。",
-        h2: "关键特征",
-        li1: "苦力贸易与契约劳工",
-        li2: "“单身汉社会”的形成与跨国家庭",
-        li3: "排华法案背景下的制度性抗争（会馆）"
-      }
-    };
-
-    function applyLang(lang) {
-      document.querySelectorAll("[data-i18n]").forEach(el => {
-        const k = el.getAttribute("data-i18n");
-        if (I18N[lang] && I18N[lang][k]) el.textContent = I18N[lang][k];
-      });
-      
-      const btn = document.getElementById("langBtn");
-      btn.setAttribute("data-current", lang);
-      document.documentElement.lang = (lang === "en" ? "en" : "zh");
-    }
-
-    document.getElementById("langBtn").addEventListener("click", () => {
-      const curr = document.getElementById("langBtn").getAttribute("data-current") || "en";
-      applyLang(curr === "en" ? "zh" : "en");
-    });
-
-    // Initialize Language
-    applyLang("en");
   </script>
 </body>
 </html>
