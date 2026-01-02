@@ -11,7 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Gentium+Book+Plus:wght@400;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Exo:wght@400;600;700&display=swap" rel="stylesheet">
 
-  <!-- Icons (修复版链接) -->
+  <!-- Icons (US Standard Source - UMD Version) -->
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 
   <!-- Injectors: Footer only -->
@@ -19,12 +19,12 @@
 
   <style>
     :root {
-      /* Phase II Theme: Earth, Iron & Rust */
-      --bg-color: #f7f5f0;  /* 内容区浅米色 */
-      --bg-cover: #e6e0d4;  /* 封面深一点的米色，模仿截图 */
-      --bg-paper: #eae6dd;  /* 纸张背景 */
-      --accent-rust: #c05634; /* 铁锈红 */
-      --text-main: #2c241b; /* 深咖啡/黑色 */
+      /* Theme Variables */
+      --bg-color: #f7f5f0;  /* Content background */
+      --bg-cover: #dcd6cc;  /* Cover background (Matches screenshot beige) */
+      --bg-paper: #eae6dd;  /* Paper texture section */
+      --accent-rust: #c05634; /* Rust Red */
+      --text-main: #2c241b; /* Dark Brown/Black */
       --text-muted: #5e544a;
       
       --font-body: 'Gentium Book Plus', serif;
@@ -56,9 +56,9 @@
     
     .nav-icon-circle {
       width: 50px; height: 50px;
-      border: 1px solid rgba(0,0,0,0.15); border-radius: 50%;
+      border: 1px solid rgba(0,0,0,0.1); border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      transition: all 0.3s ease; background: rgba(255,255,255,0.6); backdrop-filter: blur(5px);
+      transition: all 0.3s ease; background: rgba(255,255,255,0.4); backdrop-filter: blur(5px);
     }
 
     .nav-text {
@@ -73,40 +73,39 @@
     .nav-float:hover .nav-text { opacity: 1; transform: translateX(0); color: var(--accent-rust); }
 
 
-    /* --- Hero Section (New Clean Design) --- */
+    /* --- Hero Section (Cover) --- */
     .hero-section {
       position: relative; 
-      height: 100vh; /* 全屏高度 */
+      height: 100vh; 
       width: 100%;
       display: flex; 
-      align-items: center; /* 垂直居中 */
-      padding-left: 10%;   /* 左侧留白，模仿截图布局 */
-      background-color: var(--bg-cover); /* 纯色背景 */
+      align-items: center; /* Vertically Center */
+      padding-left: 10%;   /* Left align padding */
+      padding-right: 5%;
+      background-color: var(--bg-cover); /* Plain Beige */
     }
 
     .hero-content {
-      position: relative; 
-      z-index: 10; 
-      max-width: 800px;
-      text-align: left; /* 左对齐 */
-      color: var(--text-main);
+      max-width: 900px;
+      text-align: left;
     }
 
     .hero-title {
-      font-family: var(--font-body); /* 使用衬线体更像截图 */
-      font-size: clamp(3.5rem, 6vw, 6rem);
+      font-family: var(--font-body); /* Serif font like screenshot */
+      font-size: clamp(3.5rem, 6vw, 6.5rem); /* Huge text */
       line-height: 1.1; 
       font-weight: 700; 
-      margin: 0 0 20px;
-      color: #3e3730; /* 深褐灰色 */
+      margin: 0 0 15px;
+      color: #3e3730;
     }
 
     .hero-subtitle {
-      font-family: var(--font-heading);
-      font-size: 1.8rem; 
-      font-weight: 600; 
-      color: var(--text-muted);
-      margin-top: 10px;
+      font-family: var(--font-body);
+      font-size: clamp(1.5rem, 3vw, 2.5rem); 
+      font-weight: 400; 
+      color: var(--text-main);
+      opacity: 0.9;
+      margin-top: 0;
     }
 
 
@@ -132,7 +131,7 @@
     .grid-2col {
       display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
     }
-    .grid-reversed .text-col { order: 2; } /* Image Left, Text Right */
+    .grid-reversed .text-col { order: 2; } 
     .grid-reversed .img-col { order: 1; }
 
 
@@ -202,7 +201,7 @@
     <span class="nav-text">Back to Timeline</span>
   </a>
 
-  <!-- Hero Section (Updated to match screenshot: Clean Text, No Boat) -->
+  <!-- Hero Section (Clean Beige Cover) -->
   <header class="hero-section">
     <div class="hero-content">
       <h1 class="hero-title">Phase II: 1840s–1940s</h1>
@@ -296,7 +295,7 @@
       </div>
     </section>
 
-    <!-- 5. Burlingame Treaty (White BG - Centered) -->
+    <!-- 5. Burlingame Treaty (White BG - Centered Focus) -->
     <section class="section-wrap bg-white">
       <div class="container" style="max-width: 800px;">
         <h2 class="section-title">1868: Diplomacy and Free Migration</h2>
@@ -357,8 +356,20 @@
   </main>
 
   <script>
-    // Initialize Icons
-    lucide.createIcons();
+    // Initialize Icons after DOM is loaded
+    document.addEventListener("DOMContentLoaded", function() {
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
+    });
+
+    const navBtn = document.getElementById('nav-btn');
+    const heroHeight = window.innerHeight;
+
+    window.addEventListener('scroll', () => {
+        // Nav button logic (optional color change if needed in future)
+        // Currently keeping it consistent
+    });
   </script>
 </body>
 </html>
