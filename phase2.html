@@ -3,97 +3,297 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Phase II | Timeline</title>
+  <title>Phase II: 1840s–1940s | Cantonese Migration</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gentium+Book+Plus:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Exo:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Injectors: Footer only (No Header per Phase 1 consistency) -->
+  <script src="./assets/footer.js" defer></script>
+
   <style>
-    :root{--bg:#fff;--text:#0b0f19;--muted:#4b5563;--line:#e5e7eb;--blue-100:#e6f2ff;--shadow:0 10px 30px rgba(0,0,0,.06);
-      --radius:18px;--max:1220px;--font:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,"Noto Sans","PingFang SC","Microsoft YaHei",sans-serif;}
-    *{box-sizing:border-box} html,body{height:100%}
-    body{margin:0;font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.55}
-    a{color:inherit;text-decoration:none}
-    .container{max-width:var(--max);margin:0 auto;padding:0}
-    .pad{padding:0}
-    .header{position:sticky;top:0;z-index:1000;background:rgba(255,255,255,.92);backdrop-filter:saturate(180%) blur(10px);border-bottom:1px solid var(--line);}
-    .nav{height:72px;display:flex;align-items:center;justify-content:space-between;gap:14px}
-    .brand{display:flex;align-items:center;gap:12px;min-width:220px}
-    .brand img{width:44px;height:44px;border-radius:12px;object-fit:cover}
-    .brand .title{font-weight:650;letter-spacing:.2px}
-    .nav-right{display:flex;align-items:center;gap:12px}
-    .nav-item{position:relative;font-size:14px;font-weight:650;letter-spacing:.2px;padding:10px 12px;border-radius:12px}
-    .nav-item:hover{background:#f4f6f8}
-    .dropdown{position:absolute;top:44px;left:0;width:360px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow);border-radius:16px;padding:10px;display:none}
-    .nav-item::after{content:"";position:absolute;left:0;right:0;top:40px;height:10px;display:none}
-    .nav-item:hover::after{display:block}
-    .nav-item:hover .dropdown{display:block}
-    .dropdown a{display:block;padding:10px 12px;border-radius:12px;font-size:13px;font-weight:650}
-    .dropdown a span{display:block;margin-top:3px;font-weight:520;color:var(--muted);font-size:12px;line-height:1.25}
-    .dropdown a:hover{background:var(--blue-100)}
-    .lang{display:flex;align-items:center;gap:8px;border:1px solid var(--line);padding:9px 11px;border-radius:999px;font-size:13px;font-weight:800;cursor:pointer;user-select:none}
-    .lang:hover{background:#f4f6f8}
-    .lang svg{width:18px;height:18px}
-    .hero{padding:46px 0 10px}
-    h1{font-size:54px;line-height:1.06;margin:0 0 10px;font-weight:900;letter-spacing:-.02em}
-    .lead{font-size:18px;color:var(--muted);margin:0 0 18px;max-width:980px}
-    .wrap{padding:0 0 44px}
-    .card{border:1px solid var(--line);border-radius:var(--radius);padding:18px;background:#fff;box-shadow:0 10px 26px rgba(0,0,0,.03)}
-    .h2{font-size:18px;font-weight:900;margin:0 0 10px}
-    .p{margin:0 0 12px;font-size:16px;color:#111827;max-width:980px}
-    .list{margin:0;padding-left:18px;color:#111827}
-    .list li{margin:6px 0}
-    .footer{border-top:1px solid var(--line);padding:22px 0;color:var(--muted);font-size:13px}
+    :root {
+      /* Phase II Theme: Earth & Iron (19th Century North America) */
+      --bg-color: #f7f5f0;
+      --bg-dark: #2c241b; /* 深咖啡色 */
+      --accent-rust: #c05634; /* 铁锈红/赭石色 */
+      --text-main: #1f1a16;
+      --text-muted: #5e544a;
+      
+      --font-body: 'Gentium Book Plus', serif;
+      --font-heading: 'Exo', sans-serif;
+      
+      --max-width: 1000px;
+    }
+
+    * { box-sizing: border-box; }
+    
+    html { scroll-behavior: smooth; }
+    
+    body {
+      margin: 0;
+      font-family: var(--font-body);
+      background: var(--bg-color);
+      color: var(--text-main);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; transition: color 0.3s; }
+
+    /* --- 1. Nav (Consistent with Phase 1) --- */
+    .nav-float {
+      position: fixed;
+      top: 30px; left: 30px;
+      z-index: 1000;
+      display: flex; align-items: center; gap: 15px;
+      color: var(--text-main); /* Default dark on light bg */
+      transition: all 0.3s ease;
+    }
+    
+    /* Dark mode for Hero section */
+    .nav-float.on-dark { color: white; }
+    .nav-float.on-dark .nav-icon-circle { border-color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.1); }
+
+    .nav-icon-circle {
+      width: 50px; height: 50px;
+      border: 1px solid rgba(0,0,0,0.15);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.3s ease;
+      background: rgba(255,255,255,0.5);
+      backdrop-filter: blur(5px);
+    }
+
+    .nav-text {
+      font-family: var(--font-heading);
+      font-size: 12px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 1px;
+      opacity: 0; transform: translateX(-10px);
+      transition: all 0.3s ease;
+    }
+
+    .nav-float:hover .nav-icon-circle {
+      background-color: var(--accent-rust);
+      border-color: var(--accent-rust);
+      color: #fff; transform: scale(1.1);
+    }
+    .nav-float:hover .nav-text { opacity: 1; transform: translateX(0); color: var(--accent-rust); }
+    .nav-float.on-dark:hover .nav-text { color: var(--accent-rust); }
+
+    /* --- 2. Hero Section (Centered) --- */
+    .hero {
+      position: relative;
+      height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      color: white;
+      overflow: hidden;
+      background: #000; /* Fallback */
+    }
+
+    .hero-bg {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      /* 建议替换为：加州金矿/旧金山唐人街早期/太平洋铁路 的黑白老照片 */
+      background-image: url('https://images.unsplash.com/photo-1533552809703-999059f632ac?q=80&w=1600&auto=format&fit=crop'); 
+      background-size: cover; background-position: center;
+      opacity: 0.6; /* Dim for text readability */
+      transform: scale(1.05);
+      animation: slowZoom 20s infinite alternate; /* 缓慢呼吸感 */
+    }
+    
+    @keyframes slowZoom { from { transform: scale(1.05); } to { transform: scale(1.15); } }
+
+    .hero-content {
+      position: relative; z-index: 10;
+      max-width: 900px; padding: 0 20px;
+      transform: translateY(20px); opacity: 0;
+      animation: fadeUp 1.2s ease-out forwards;
+    }
+    
+    @keyframes fadeUp { to { transform: translateY(0); opacity: 1; } }
+
+    .hero-label {
+      font-family: var(--font-heading);
+      font-size: 14px; font-weight: 700; letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--accent-rust);
+      margin-bottom: 20px; display: block;
+    }
+
+    h1 {
+      font-family: var(--font-heading);
+      font-size: clamp(3rem, 6vw, 5rem); /* 响应式大字体 */
+      line-height: 1.1; font-weight: 700;
+      margin: 0 0 20px;
+      letter-spacing: -1px;
+      text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .hero-lead {
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: rgba(255,255,255,0.9);
+      max-width: 700px; margin: 0 auto;
+    }
+
+    /* Scroll Indicator */
+    .scroll-hint {
+      position: absolute; bottom: 40px;
+      display: flex; flex-direction: column; align-items: center; gap: 10px;
+      color: rgba(255,255,255,0.6);
+      font-family: var(--font-heading); font-size: 12px; letter-spacing: 1px;
+      z-index: 10;
+      animation: bounce 2s infinite;
+    }
+    @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(10px); } }
+
+
+    /* --- 3. Content Sections --- */
+    .section-wrap {
+      background: var(--bg-color);
+      position: relative; z-index: 2;
+    }
+
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 80px 24px;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid #e5e0d8;
+      border-radius: 4px; /* Phase 2: 更硬朗的边角 */
+      padding: 60px 50px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.04);
+      margin-bottom: 60px;
+      position: relative;
+    }
+    
+    /* 装饰：顶部彩色条 */
+    .card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 6px;
+      background: var(--accent-rust);
+    }
+
+    .h2 {
+      font-family: var(--font-heading);
+      font-size: 28px; font-weight: 700;
+      margin: 0 0 24px;
+      color: var(--text-main);
+      display: flex; align-items: center; gap: 15px;
+    }
+    
+    .h2::before {
+      content: ''; width: 24px; height: 2px; background: var(--accent-rust);
+    }
+
+    .p {
+      font-size: 1.15rem; color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .list {
+      list-style: none; padding: 0; margin: 30px 0 0;
+      display: grid; gap: 15px;
+    }
+
+    .list li {
+      position: relative;
+      padding-left: 30px;
+      font-size: 1.1rem;
+      color: var(--text-main);
+    }
+
+    .list li::before {
+      content: '•';
+      color: var(--accent-rust);
+      font-size: 24px;
+      position: absolute; left: 0; top: -5px;
+    }
+    
+    /* Language Toggle (Floating Bottom Right) */
+    .lang-float {
+      position: fixed; bottom: 30px; right: 30px; z-index: 999;
+      background: var(--bg-dark); color: white;
+      padding: 10px 18px; border-radius: 30px;
+      cursor: pointer; font-family: var(--font-heading); font-size: 13px; font-weight: 700;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      transition: transform 0.2s;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .lang-float:hover { transform: translateY(-2px); background: var(--accent-rust); }
+
+
+    /* --- Footer --- */
+    .footer-custom {
+      border-top: 1px solid #e5e0d8;
+      padding: 40px 0;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+    
+    /* Mobile */
+    @media(max-width: 768px) {
+      .hero h1 { font-size: 3rem; }
+      .card { padding: 40px 24px; }
+      .nav-text { display: none; } /* Mobile hide text */
+    }
   </style>
 </head>
+
 <body>
-  <header class="header">
-    <div class="container pad">
-      <nav class="nav">
-        <a class="brand" href="index.html"><img src="assets/logo.jpeg" alt="Logo"/><div class="title">Cantonese in Americas</div></a>
-        <div class="nav-right">
-          <a class="nav-item" href="index.html" data-i18n="navHome">Home</a>
-          <div class="nav-item" role="button" tabindex="0">
-            <span data-i18n="navTimeline">Timeline</span>
-            <div class="dropdown">
-              <a href="phase1.html"><span data-i18n="phase1Title">Phase I</span><span data-i18n="phaseSub">...</span></a>
-              <a href="phase2.html"><span data-i18n="phase2Title">Phase II</span><span data-i18n="phaseSub">...</span></a>
-              <a href="phase3.html"><span data-i18n="phase3Title">Phase III</span><span data-i18n="phaseSub">...</span></a>
-              <a href="phase4.html"><span data-i18n="phase4Title">Phase IV</span><span data-i18n="phaseSub">...</span></a>
-            </div>
-          </div>
-          <div class="nav-item" role="button" tabindex="0">
-            <span data-i18n="navResearch">Research</span>
-            <div class="dropdown" style="width:300px">
-              <a href="oral.html" data-i18n="navOral">Oral History</a>
-              <a href="culture.html" data-i18n="navCulture">Culture History</a>
-              <a href="influence.html" data-i18n="navInfluence">Influence Research</a>
-            </div>
-          </div>
-          <a class="nav-item" href="archives.html" data-i18n="navArchives">Archives</a>
-          <a class="nav-item" href="resources.html" data-i18n="navResources">Resources</a>
-          <div class="lang" id="langBtn" data-current="en">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z" stroke="currentColor" stroke-width="1.6"/>
-              <path d="M2 12h20" stroke="currentColor" stroke-width="1.6"/>
-              <path d="M12 2c2.7 2.6 4.3 6.1 4.3 10S14.7 19.4 12 22c-2.7-2.6-4.3-6.1-4.3-10S9.3 4.6 12 2Z" stroke="currentColor" stroke-width="1.6"/>
-            </svg>
-            <span class="langLabel">EN</span>
-          </div>
-        </div>
-      </nav>
+
+  <!-- Nav: Back to Timeline -->
+  <a href="timeline.html" class="nav-float on-dark" id="nav-btn">
+    <div class="nav-icon-circle">
+      <i data-lucide="arrow-left"></i>
     </div>
-  </header>
+    <span class="nav-text" data-i18n="navBack">Back to Timeline</span>
+  </a>
+
+  <!-- Lang Toggle -->
+  <div class="lang-float" id="langBtn" data-current="en">
+    <i data-lucide="globe" size="16"></i>
+    <span class="langLabel">EN / 中文</span>
+  </div>
 
   <main>
-    <section class="hero">
-      <div class="container pad">
-        <h1 data-i18n="title">Phase II</h1>
-        <p class="lead" data-i18n="subtitle">17th–19th Centuries: Early Migration within Southeast Asia</p>
+    <!-- Hero Section -->
+    <header class="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-content">
+        <span class="hero-label" data-i18n="heroLabel">Phase II</span>
+        <h1 data-i18n="title">Building North America & The Pacific</h1>
+        <p class="hero-lead" data-i18n="subtitle">1840s–1940s: Migration, Labor, and Exclusion</p>
       </div>
-    </section>
+      
+      <div class="scroll-hint">
+        <span data-i18n="scroll">SCROLL</span>
+        <i data-lucide="chevron-down"></i>
+      </div>
+    </header>
 
-    <section class="wrap">
-      <div class="container pad">
+    <!-- Content Section -->
+    <section class="section-wrap">
+      <div class="container">
+        
+        <!-- Overview Card -->
         <div class="card">
           <div class="h2" data-i18n="h1">Overview</div>
           <p class="p" data-i18n="p1">Phase II focuses on settlement, institutions, and cultural consolidation in port cities—how dialect, ritual, and association life organized community under colonial rule.</p>
+          
+          <div style="height: 30px;"></div>
+
           <div class="h2" data-i18n="h2">Key patterns</div>
           <ul class="list">
             <li data-i18n="li1">Clan associations and huiguan governance</li>
@@ -101,57 +301,84 @@
             <li data-i18n="li3">Labor, mobility, and changing legal status</li>
           </ul>
         </div>
-
-        <footer class="footer">
+        
+        <!-- Footer -->
+        <footer class="footer-custom">
           <div class="container pad">© <span id="year"></span> <span data-i18n="footerText">Cantonese Culture in the Americas · Built for public scholarship.</span></div>
         </footer>
+
       </div>
     </section>
   </main>
 
   <script>
-    document.getElementById("year").textContent=new Date().getFullYear();
-    const I18N={
-      en:{
-        navHome:"Home",navTimeline:"Timeline",navResearch:"Research",navArchives:"Archives",navResources:"Resources",
-        navOral:"Oral History",navCulture:"Culture History",navInfluence:"Influence Research",
-        phase1Title:"Phase I",phase2Title:"Phase II",phase3Title:"Phase III",phase4Title:"Phase IV",
-        phaseSub:"17th–19th Centuries: Early Migration within Southeast Asia",
-        title:"Phase II",subtitle:"17th–19th Centuries: Early Migration within Southeast Asia",
-        h1:"Overview",
-        p1:"Phase II focuses on settlement, institutions, and cultural consolidation in port cities—how dialect, ritual, and association life organized community under colonial rule.",
-        h2:"Key patterns",
-        li1:"Clan associations and huiguan governance",
-        li2:"Temple building and festival calendars",
-        li3:"Labor, mobility, and changing legal status",
-        footerText:"Cantonese Culture in the Americas · Built for public scholarship."
+    // 1. Icon Init
+    lucide.createIcons();
+
+    // 2. Year Init
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // 3. Nav Color Switch (Dark on Hero, Light on Content)
+    const navBtn = document.getElementById('nav-btn');
+    const heroHeight = window.innerHeight;
+
+    window.addEventListener('scroll', () => {
+        if(window.scrollY > heroHeight - 50) {
+            navBtn.classList.remove('on-dark'); // Become dark text on light bg
+        } else {
+            navBtn.classList.add('on-dark'); // Stay white text on dark hero
+        }
+    });
+
+    // 4. I18N Logic
+    const I18N = {
+      en: {
+        navBack: "Back to Timeline",
+        heroLabel: "Timeline / Phase II",
+        title: "Building North America & The Pacific",
+        subtitle: "1840s–1940s: Migration, Labor, and Exclusion",
+        scroll: "SCROLL TO EXPLORE",
+        h1: "Overview",
+        p1: "Phase II focuses on settlement, institutions, and cultural consolidation in port cities—how dialect, ritual, and association life organized community under colonial rule.",
+        h2: "Key patterns",
+        li1: "Clan associations and huiguan governance",
+        li2: "Temple building and festival calendars",
+        li3: "Labor, mobility, and changing legal status",
+        footerText: "Cantonese Culture in the Americas · Built for public scholarship."
       },
-      zh:{
-        navHome:"主页",navTimeline:"时间线",navResearch:"研究",navArchives:"档案",navResources:"资源",
-        navOral:"口述史",navCulture:"文化史",navInfluence:"影响研究",
-        phase1Title:"第一阶段",phase2Title:"第二阶段",phase3Title:"第三阶段",phase4Title:"第四阶段",
-        phaseSub:"17–19 世纪：东南亚内部的早期迁移",
-        title:"第二阶段",subtitle:"17–19 世纪：东南亚内部的早期迁移",
-        h1:"概览",
-        p1:"第二阶段聚焦港口城市中的定居、制度与文化整合：方言、仪式与会馆生活如何在殖民秩序下组织社群。",
-        h2:"关键特征",
-        li1:"宗族组织与会馆治理",
-        li2:"建庙与节庆历法的形成",
-        li3:"劳工流动与法律身份的变化",
-        footerText:"美洲的粤语文化 · 面向公众的公共学术项目。"
+      zh: {
+        navBack: "返回时间轴",
+        heroLabel: "时间轴 / 第二阶段",
+        title: "建设北美与太平洋",
+        subtitle: "1840年代–1940年代：迁移、劳工与排斥",
+        scroll: "向下滚动",
+        h1: "概览",
+        p1: "第二阶段聚焦港口城市中的定居、制度与文化整合：方言、仪式与会馆生活如何在殖民秩序下组织社群。",
+        h2: "关键特征",
+        li1: "宗族组织与会馆治理",
+        li2: "建庙与节庆历法的形成",
+        li3: "劳工流动与法律身份的变化",
+        footerText: "美洲的粤语文化 · 面向公众的公共学术项目。"
       }
     };
-    function applyLang(lang){
-      document.querySelectorAll("[data-i18n]").forEach(el=>{
-        const k=el.getAttribute("data-i18n"); if(I18N[lang] && I18N[lang][k]) el.textContent=I18N[lang][k];
+
+    function applyLang(lang) {
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const k = el.getAttribute("data-i18n");
+        if (I18N[lang] && I18N[lang][k]) el.textContent = I18N[lang][k];
       });
-      const btn=document.getElementById("langBtn"); btn.setAttribute("data-current",lang);
-      btn.querySelector(".langLabel").textContent=(lang==="en"?"EN":"中文");
-      document.documentElement.lang=(lang==="en"?"en":"zh");
+      
+      const btn = document.getElementById("langBtn");
+      btn.setAttribute("data-current", lang);
+      document.documentElement.lang = (lang === "en" ? "en" : "zh");
     }
-    document.getElementById("langBtn").addEventListener("click",()=>{
-      const curr=document.getElementById("langBtn").getAttribute("data-current")||"en"; applyLang(curr==="en"?"zh":"en");
+
+    document.getElementById("langBtn").addEventListener("click", () => {
+      const curr = document.getElementById("langBtn").getAttribute("data-current") || "en";
+      applyLang(curr === "en" ? "zh" : "en");
     });
+
+    // Init
     applyLang("en");
   </script>
 </body>
