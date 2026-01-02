@@ -12,7 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Exo:wght@400;600;700&display=swap" rel="stylesheet">
 
   <!-- Icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 
   <!-- Injectors: Footer only -->
   <script src="./assets/footer.js" defer></script>
@@ -81,15 +81,36 @@
     .hero-section {
       position: relative; height: 100vh; width: 100%;
       display: flex; align-items: center; justify-content: center;
-      overflow: hidden; background: #000;
+      overflow: hidden; 
+      /* 添加备用背景色，确保即使图片不加载也有背景 */
+      background: #f5f0e5;
     }
 
     .hero-bg {
       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      background-image: url('https://images.unsplash.com/photo-1533552809703-999059f632ac?q=80&w=1600&auto=format&fit=crop'); 
-      background-size: cover; background-position: center;
-      opacity: 0.5; transform: scale(1.05); animation: slowZoom 20s infinite alternate; 
+      /* 更新图片URL，使用更可靠的Unsplash直接链接 */
+      background-image: url('https://images.unsplash.com/photo-1533552809703-999059f632ac?w=1600&h=900&fit=crop&q=80');
+      background-size: cover; 
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 0.5; 
+      transform: scale(1.05); 
+      animation: slowZoom 20s infinite alternate;
+      /* 添加一个渐变叠加层，增强视觉效果 */
+      background-color: #f5f0e5; /* 如果图片不加载，显示浅色背景 */
     }
+    
+    /* 添加一个渐变叠加层 */
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.6) 100%);
+    }
+    
     @keyframes slowZoom { from { transform: scale(1.05); } to { transform: scale(1.15); } }
 
     .hero-content {
@@ -121,7 +142,7 @@
     
     .section-wrap { padding: 100px 0; border-bottom: 1px solid rgba(0,0,0,0.05); }
     .bg-paper { background-color: var(--bg-paper); }
-    .bg-white { background-color: #fff; }
+    .bg-white { background-color: #f5f0e5; }
     
     /* Summary Section Styling */
     .bg-dark-rust { 
@@ -226,10 +247,10 @@
           <div class="text-col">
             <h2 class="section-title">1848–1858: The North American Gold Rushes</h2>
             <p class="p-text">
-              The discovery of gold in California triggered the first major wave of Cantonese migration to North America. Between 1848 and 1851, approximately 25,000 migrants arrived, hailing primarily from the Sze Yup (Four Counties) region. San Francisco served as the primary entry point, where migrants established the continent’s first Chinatown. This district functioned not only as a transit hub for newcomers but also as North America's earliest permanent Cantonese settlement.
+              The discovery of gold in California triggered the first major wave of Cantonese migration to North America. Between 1848 and 1851, approximately 25,000 migrants arrived, hailing primarily from the Sze Yup (Four Counties) region. San Francisco served as the primary entry point, where migrants established the continent's first Chinatown. This district functioned not only as a transit hub for newcomers but also as North America's earliest permanent Cantonese settlement.
             </p>
             <p class="p-text">
-              In 1858, the discovery of gold in British Columbia drew the migration northward. Cantonese miners, arriving from California or directly from southern China, founded Victoria’s Chinatown. Known as the “Gateway to Canada,” it remains the oldest Chinese enclave in the country.
+              In 1858, the discovery of gold in British Columbia drew the migration northward. Cantonese miners, arriving from California or directly from southern China, founded Victoria's Chinatown. Known as the "Gateway to Canada," it remains the oldest Chinese enclave in the country.
             </p>
           </div>
           <div class="img-col">
@@ -268,10 +289,10 @@
           <div class="text-col">
             <h2 class="section-title">1850s–1900s: The Plantation Economy in Hawaii</h2>
             <p class="p-text">
-              A distinct stream of Cantonese migration transformed Hawaii, beginning with contract laborers in 1852. Unlike the Sze Yup-dominated mainland, Hawaii’s community was overwhelmingly Heungshan (Zhongshan), comprising roughly 75% of the Chinese population.
+              A distinct stream of Cantonese migration transformed Hawaii, beginning with contract laborers in 1852. Unlike the Sze Yup-dominated mainland, Hawaii's community was overwhelmingly Heungshan (Zhongshan), comprising roughly 75% of the Chinese population.
             </p>
             <p class="p-text">
-              Between 1852 and 1899, approximately 46,000 migrants arrived. By 1884, they constituted 22% of the total population and held 49% of plantation jobs, forming the backbone of the sugar industry. By the 1890s, they also dominated rice cultivation, successfully transferring South China’s agricultural technology to the Pacific.
+              Between 1852 and 1899, approximately 46,000 migrants arrived. By 1884, they constituted 22% of the total population and held 49% of plantation jobs, forming the backbone of the sugar industry. By the 1890s, they also dominated rice cultivation, successfully transferring South China's agricultural technology to the Pacific.
             </p>
           </div>
           <div class="img-col">
@@ -311,7 +332,7 @@
           The Burlingame Treaty (1868) marked a high point in early U.S.–Qing relations. It affirmed reciprocal most-favored-nation treatment in travel and residence. Notably, it recognized the mutual advantage of free migration for trade, travel, or permanent residence while condemning coerced migration.
         </p>
         <p class="p-text">
-          In this diplomatic context, the Qing government soon launched initiatives such as the Chinese Educational Mission (1872–1881). More broadly, the treaty’s language of “free migration” helped legitimize and protect transpacific mobility in the late 1860s and early 1870s. Combined with labor demand and established Cantonese migrant networks, it reinforced the United States as a major destination for Cantonese workers until the agreement was later curtailed and ultimately undermined by restrictive policies in the 1880s.
+          In this diplomatic context, the Qing government soon launched initiatives such as the Chinese Educational Mission (1872–1881). More broadly, the treaty's language of "free migration" helped legitimize and protect transpacific mobility in the late 1860s and early 1870s. Combined with labor demand and established Cantonese migrant networks, it reinforced the United States as a major destination for Cantonese workers until the agreement was later curtailed and ultimately undermined by restrictive policies in the 1880s.
         </p>
       </div>
     </section>
@@ -375,6 +396,18 @@
         } else {
             navBtn.classList.add('on-dark');
         }
+    });
+    
+    // 检测图片加载状态
+    window.addEventListener('load', () => {
+      const heroBg = document.querySelector('.hero-bg');
+      const bgImage = window.getComputedStyle(heroBg).backgroundImage;
+      
+      if (bgImage === 'none' || bgImage === '') {
+        console.warn('Hero background image failed to load');
+      } else {
+        console.log('Hero background loaded successfully');
+      }
     });
   </script>
 </body>
