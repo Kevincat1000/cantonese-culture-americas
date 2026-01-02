@@ -1,8 +1,8 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Phase II: 1840s–1940s | Cantonese Migration</title>
   
   <!-- Fonts -->
@@ -14,14 +14,14 @@
   <!-- Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
-  <!-- Injectors: Footer only (No Header per Phase 1 consistency) -->
+  <!-- Injectors: Footer only (No Header) -->
   <script src="./assets/footer.js" defer></script>
 
   <style>
     :root {
-      /* Phase II Theme: Earth & Iron (19th Century North America) */
-      --bg-color: #f7f5f0;
-      --bg-dark: #2c241b; /* 深咖啡色 */
+      /* Phase II Theme: Earth, Iron & Rust */
+      --bg-color: #f7f5f0; /* 米灰纸张色 */
+      --bg-dark: #2c241b;  /* 深咖啡色 */
       --accent-rust: #c05634; /* 铁锈红/赭石色 */
       --text-main: #1f1a16;
       --text-muted: #5e544a;
@@ -29,15 +29,14 @@
       --font-body: 'Gentium Book Plus', serif;
       --font-heading: 'Exo', sans-serif;
       
-      --max-width: 1000px;
+      --max-width: 900px;
     }
 
-    * { box-sizing: border-box; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     
     html { scroll-behavior: smooth; }
     
     body {
-      margin: 0;
       font-family: var(--font-body);
       background: var(--bg-color);
       color: var(--text-main);
@@ -47,19 +46,22 @@
 
     a { color: inherit; text-decoration: none; transition: color 0.3s; }
 
-    /* --- 1. Nav (Consistent with Phase 1) --- */
+    /* --- 1. 悬浮导航 (Floating Nav) --- */
     .nav-float {
       position: fixed;
       top: 30px; left: 30px;
       z-index: 1000;
       display: flex; align-items: center; gap: 15px;
-      color: var(--text-main); /* Default dark on light bg */
+      color: var(--text-main); 
       transition: all 0.3s ease;
     }
     
-    /* Dark mode for Hero section */
+    /* 深色背景下的导航样式 */
     .nav-float.on-dark { color: white; }
-    .nav-float.on-dark .nav-icon-circle { border-color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.1); }
+    .nav-float.on-dark .nav-icon-circle { 
+      border-color: rgba(255,255,255,0.3); 
+      background: rgba(255,255,255,0.1); 
+    }
 
     .nav-icon-circle {
       width: 50px; height: 50px;
@@ -67,7 +69,7 @@
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
       transition: all 0.3s ease;
-      background: rgba(255,255,255,0.5);
+      background: rgba(255,255,255,0.6);
       backdrop-filter: blur(5px);
     }
 
@@ -84,10 +86,14 @@
       border-color: var(--accent-rust);
       color: #fff; transform: scale(1.1);
     }
-    .nav-float:hover .nav-text { opacity: 1; transform: translateX(0); color: var(--accent-rust); }
+    
+    .nav-float:hover .nav-text { 
+      opacity: 1; transform: translateX(0); 
+      color: var(--accent-rust); 
+    }
     .nav-float.on-dark:hover .nav-text { color: var(--accent-rust); }
 
-    /* --- 2. Hero Section (Centered) --- */
+    /* --- 2. Hero Section (居中、视差背景) --- */
     .hero {
       position: relative;
       height: 100vh;
@@ -96,17 +102,18 @@
       text-align: center;
       color: white;
       overflow: hidden;
-      background: #000; /* Fallback */
+      background: #000;
     }
 
     .hero-bg {
       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      /* 建议替换为：加州金矿/旧金山唐人街早期/太平洋铁路 的黑白老照片 */
+      /* 旧金山/铁路时代的黑白背景图 */
       background-image: url('https://images.unsplash.com/photo-1533552809703-999059f632ac?q=80&w=1600&auto=format&fit=crop'); 
       background-size: cover; background-position: center;
-      opacity: 0.6; /* Dim for text readability */
+      opacity: 0.5;
       transform: scale(1.05);
-      animation: slowZoom 20s infinite alternate; /* 缓慢呼吸感 */
+      /* 缓慢呼吸感动画 */
+      animation: slowZoom 20s infinite alternate; 
     }
     
     @keyframes slowZoom { from { transform: scale(1.05); } to { transform: scale(1.15); } }
@@ -130,7 +137,7 @@
 
     h1 {
       font-family: var(--font-heading);
-      font-size: clamp(3rem, 6vw, 5rem); /* 响应式大字体 */
+      font-size: clamp(3rem, 5vw, 4.5rem);
       line-height: 1.1; font-weight: 700;
       margin: 0 0 20px;
       letter-spacing: -1px;
@@ -160,25 +167,28 @@
     .section-wrap {
       background: var(--bg-color);
       position: relative; z-index: 2;
+      padding-top: 80px;
+      padding-bottom: 40px;
     }
 
     .container {
       max-width: var(--max-width);
       margin: 0 auto;
-      padding: 80px 24px;
+      padding: 0 24px;
     }
 
+    /* 卡片式布局 */
     .card {
       background: #fff;
       border: 1px solid #e5e0d8;
-      border-radius: 4px; /* Phase 2: 更硬朗的边角 */
+      border-radius: 2px;
       padding: 60px 50px;
       box-shadow: 0 20px 40px rgba(0,0,0,0.04);
       margin-bottom: 60px;
       position: relative;
     }
     
-    /* 装饰：顶部彩色条 */
+    /* 顶部铁锈色装饰条 */
     .card::before {
       content: ''; position: absolute; top: 0; left: 0; right: 0; height: 6px;
       background: var(--accent-rust);
@@ -186,14 +196,15 @@
 
     .h2 {
       font-family: var(--font-heading);
-      font-size: 28px; font-weight: 700;
+      font-size: 26px; font-weight: 700;
       margin: 0 0 24px;
       color: var(--text-main);
       display: flex; align-items: center; gap: 15px;
     }
     
+    /* 标题前的短线 */
     .h2::before {
-      content: ''; width: 24px; height: 2px; background: var(--accent-rust);
+      content: ''; width: 24px; height: 3px; background: var(--accent-rust);
     }
 
     .p {
@@ -213,6 +224,7 @@
       color: var(--text-main);
     }
 
+    /* 列表前的点 */
     .list li::before {
       content: '•';
       color: var(--accent-rust);
@@ -220,7 +232,7 @@
       position: absolute; left: 0; top: -5px;
     }
     
-    /* Language Toggle (Floating Bottom Right) */
+    /* 语言切换按钮 (右下角悬浮) */
     .lang-float {
       position: fixed; bottom: 30px; right: 30px; z-index: 999;
       background: var(--bg-dark); color: white;
@@ -233,20 +245,16 @@
     .lang-float:hover { transform: translateY(-2px); background: var(--accent-rust); }
 
 
-    /* --- Footer --- */
-    .footer-custom {
-      border-top: 1px solid #e5e0d8;
-      padding: 40px 0;
-      text-align: center;
-      color: var(--text-muted);
-      font-size: 14px;
+    /* --- Footer Placeholder (Injected via JS) --- */
+    .footer-wrapper {
+      margin-top: 40px;
     }
-    
+
     /* Mobile */
     @media(max-width: 768px) {
-      .hero h1 { font-size: 3rem; }
+      .hero h1 { font-size: 2.8rem; }
       .card { padding: 40px 24px; }
-      .nav-text { display: none; } /* Mobile hide text */
+      .nav-text { display: none; }
     }
   </style>
 </head>
@@ -261,7 +269,7 @@
     <span class="nav-text" data-i18n="navBack">Back to Timeline</span>
   </a>
 
-  <!-- Lang Toggle -->
+  <!-- Language Toggle -->
   <div class="lang-float" id="langBtn" data-current="en">
     <i data-lucide="globe" size="16"></i>
     <span class="langLabel">EN / 中文</span>
@@ -272,9 +280,9 @@
     <header class="hero">
       <div class="hero-bg"></div>
       <div class="hero-content">
-        <span class="hero-label" data-i18n="heroLabel">Phase II</span>
+        <span class="hero-label" data-i18n="heroLabel">Timeline / Phase II</span>
         <h1 data-i18n="title">Building North America & The Pacific</h1>
-        <p class="hero-lead" data-i18n="subtitle">1840s–1940s: Migration, Labor, and Exclusion</p>
+        <p class="hero-lead" data-i18n="subtitle">1840s–1940s: Gold Rush, Railroads, and Exclusion</p>
       </div>
       
       <div class="scroll-hint">
@@ -287,78 +295,75 @@
     <section class="section-wrap">
       <div class="container">
         
-        <!-- Overview Card -->
+        <!-- Info Card -->
         <div class="card">
           <div class="h2" data-i18n="h1">Overview</div>
-          <p class="p" data-i18n="p1">Phase II focuses on settlement, institutions, and cultural consolidation in port cities—how dialect, ritual, and association life organized community under colonial rule.</p>
+          <p class="p" data-i18n="p1">
+            Phase II marks the era of mass migration to the "Gold Mountains" of California, Australia, and Canada. 
+            It focuses on how Cantonese migrants built the infrastructure of the Pacific world while navigating 
+            severe racial exclusion and forming resilient enclaves (Chinatowns).
+          </p>
           
           <div style="height: 30px;"></div>
 
           <div class="h2" data-i18n="h2">Key patterns</div>
           <ul class="list">
-            <li data-i18n="li1">Clan associations and huiguan governance</li>
-            <li data-i18n="li2">Temple building and festival calendars</li>
-            <li data-i18n="li3">Labor, mobility, and changing legal status</li>
+            <li data-i18n="li1">The Coolie Trade and indentured labor</li>
+            <li data-i18n="li2">Formation of the "Bachelor Society" and transnational families</li>
+            <li data-i18n="li3">Institutional resilience (Associations) against the Exclusion Acts</li>
           </ul>
         </div>
         
-        <!-- Footer -->
-        <footer class="footer-custom">
-          <div class="container pad">© <span id="year"></span> <span data-i18n="footerText">Cantonese Culture in the Americas · Built for public scholarship.</span></div>
-        </footer>
+        <!-- Footer will be injected here -->
+        <div class="footer-wrapper"></div>
 
       </div>
     </section>
   </main>
 
   <script>
-    // 1. Icon Init
+    // 1. Initialize Icons
     lucide.createIcons();
 
-    // 2. Year Init
-    document.getElementById("year").textContent = new Date().getFullYear();
-
-    // 3. Nav Color Switch (Dark on Hero, Light on Content)
+    // 2. Nav Color Switch (Dark on Hero, Light on Content)
     const navBtn = document.getElementById('nav-btn');
     const heroHeight = window.innerHeight;
 
     window.addEventListener('scroll', () => {
         if(window.scrollY > heroHeight - 50) {
-            navBtn.classList.remove('on-dark'); // Become dark text on light bg
+            navBtn.classList.remove('on-dark'); // Scroll down: Dark text
         } else {
-            navBtn.classList.add('on-dark'); // Stay white text on dark hero
+            navBtn.classList.add('on-dark'); // Top: White text
         }
     });
 
-    // 4. I18N Logic
+    // 3. I18N Logic (Content Updated for Phase 2 Context)
     const I18N = {
       en: {
         navBack: "Back to Timeline",
         heroLabel: "Timeline / Phase II",
         title: "Building North America & The Pacific",
-        subtitle: "1840s–1940s: Migration, Labor, and Exclusion",
+        subtitle: "1840s–1940s: Gold Rush, Railroads, and Exclusion",
         scroll: "SCROLL TO EXPLORE",
         h1: "Overview",
-        p1: "Phase II focuses on settlement, institutions, and cultural consolidation in port cities—how dialect, ritual, and association life organized community under colonial rule.",
+        p1: "Phase II marks the era of mass migration to the 'Gold Mountains' of California, Australia, and Canada. It focuses on how Cantonese migrants built the infrastructure of the Pacific world while navigating severe racial exclusion and forming resilient enclaves (Chinatowns).",
         h2: "Key patterns",
-        li1: "Clan associations and huiguan governance",
-        li2: "Temple building and festival calendars",
-        li3: "Labor, mobility, and changing legal status",
-        footerText: "Cantonese Culture in the Americas · Built for public scholarship."
+        li1: "The Coolie Trade and indentured labor",
+        li2: "Formation of the 'Bachelor Society' and transnational families",
+        li3: "Institutional resilience (Associations) against the Exclusion Acts"
       },
       zh: {
         navBack: "返回时间轴",
         heroLabel: "时间轴 / 第二阶段",
         title: "建设北美与太平洋",
-        subtitle: "1840年代–1940年代：迁移、劳工与排斥",
+        subtitle: "1840年代–1940年代：淘金热、铁路与排华法案",
         scroll: "向下滚动",
         h1: "概览",
-        p1: "第二阶段聚焦港口城市中的定居、制度与文化整合：方言、仪式与会馆生活如何在殖民秩序下组织社群。",
+        p1: "第二阶段标志着向加利福尼亚、澳大利亚和加拿大“金山”的大规模移民时代。本阶段聚焦粤籍移民如何在建设太平洋基础设施的同时，应对严酷的种族排斥并建立坚韧的飞地（唐人街）。",
         h2: "关键特征",
-        li1: "宗族组织与会馆治理",
-        li2: "建庙与节庆历法的形成",
-        li3: "劳工流动与法律身份的变化",
-        footerText: "美洲的粤语文化 · 面向公众的公共学术项目。"
+        li1: "苦力贸易与契约劳工",
+        li2: "“单身汉社会”的形成与跨国家庭",
+        li3: "排华法案背景下的制度性抗争（会馆）"
       }
     };
 
@@ -378,7 +383,7 @@
       applyLang(curr === "en" ? "zh" : "en");
     });
 
-    // Init
+    // Initialize Language
     applyLang("en");
   </script>
 </body>
