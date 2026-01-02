@@ -11,20 +11,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Gentium+Book+Plus:wght@400;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Exo:wght@400;600;700&display=swap" rel="stylesheet">
 
-  <!-- Icons (US Standard Source - UMD Version) -->
-  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-
-  <!-- Injectors: Footer only -->
-  <script src="./assets/footer.js" defer></script>
-
   <style>
     :root {
-      /* Theme Variables */
-      --bg-color: #f7f5f0;  /* Content background */
-      --bg-cover: #dcd6cc;  /* Cover background (Matches screenshot beige) */
-      --bg-paper: #eae6dd;  /* Paper texture section */
-      --accent-rust: #c05634; /* Rust Red */
-      --text-main: #2c241b; /* Dark Brown/Black */
+      /* Phase II Theme: Earth, Iron & Rust */
+      --bg-color: #f7f5f0;
+      --bg-cover: #e6e0d4;
+      --bg-paper: #eae6dd;
+      --accent-rust: #c05634;
+      --text-main: #2c241b;
       --text-muted: #5e544a;
       
       --font-body: 'Gentium Book Plus', serif;
@@ -47,65 +41,101 @@
 
     a { color: inherit; text-decoration: none; transition: color 0.3s; }
 
-    /* --- Nav (Back Button) --- */
+    /* --- Nav (Back Button) - 修复版 --- */
     .nav-float {
-      position: fixed; top: 30px; left: 30px; z-index: 1000;
-      display: flex; align-items: center; gap: 15px;
-      color: var(--text-main); transition: all 0.3s ease;
+      position: fixed; 
+      top: 30px; 
+      left: 30px; 
+      z-index: 1000;
+      display: flex; 
+      align-items: center; 
+      gap: 15px;
+      color: var(--text-main); 
+      transition: all 0.3s ease;
+      cursor: pointer; /* 添加指针 */
     }
     
     .nav-icon-circle {
-      width: 50px; height: 50px;
-      border: 1px solid rgba(0,0,0,0.1); border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      transition: all 0.3s ease; background: rgba(255,255,255,0.4); backdrop-filter: blur(5px);
+      width: 50px; 
+      height: 50px;
+      border: 1px solid rgba(0,0,0,0.15); 
+      border-radius: 50%;
+      display: flex; 
+      align-items: center; 
+      justify-content: center;
+      transition: all 0.3s ease; 
+      background: rgba(255,255,255,0.8); /* 增加不透明度 */
+      backdrop-filter: blur(5px);
+    }
+
+    /* 使用CSS绘制箭头，不依赖图标库 */
+    .nav-arrow {
+      width: 20px;
+      height: 20px;
+      border-left: 2.5px solid currentColor;
+      border-bottom: 2.5px solid currentColor;
+      transform: rotate(45deg);
+      margin-left: 4px;
     }
 
     .nav-text {
-      font-family: var(--font-heading); font-size: 12px; font-weight: 600;
-      text-transform: uppercase; letter-spacing: 1px;
-      opacity: 0; transform: translateX(-10px); transition: all 0.3s ease;
+      font-family: var(--font-heading); 
+      font-size: 12px; 
+      font-weight: 600;
+      text-transform: uppercase; 
+      letter-spacing: 1px;
+      opacity: 0; 
+      transform: translateX(-10px); 
+      transition: all 0.3s ease;
     }
 
     .nav-float:hover .nav-icon-circle {
-      background-color: var(--accent-rust); border-color: var(--accent-rust); color: #fff; transform: scale(1.1);
+      background-color: var(--accent-rust); 
+      border-color: var(--accent-rust); 
+      color: #fff; 
+      transform: scale(1.1);
     }
-    .nav-float:hover .nav-text { opacity: 1; transform: translateX(0); color: var(--accent-rust); }
+    .nav-float:hover .nav-text { 
+      opacity: 1; 
+      transform: translateX(0); 
+      color: var(--accent-rust); 
+    }
 
 
-    /* --- Hero Section (Cover) --- */
+    /* --- Hero Section --- */
     .hero-section {
       position: relative; 
-      height: 100vh; 
+      height: 100vh;
       width: 100%;
       display: flex; 
-      align-items: center; /* Vertically Center */
-      padding-left: 10%;   /* Left align padding */
-      padding-right: 5%;
-      background-color: var(--bg-cover); /* Plain Beige */
+      align-items: center;
+      padding-left: 10%;
+      background-color: var(--bg-cover);
     }
 
     .hero-content {
-      max-width: 900px;
+      position: relative; 
+      z-index: 10; 
+      max-width: 800px;
       text-align: left;
+      color: var(--text-main);
     }
 
     .hero-title {
-      font-family: var(--font-body); /* Serif font like screenshot */
-      font-size: clamp(3.5rem, 6vw, 6.5rem); /* Huge text */
+      font-family: var(--font-body);
+      font-size: clamp(3.5rem, 6vw, 6rem);
       line-height: 1.1; 
       font-weight: 700; 
-      margin: 0 0 15px;
+      margin: 0 0 20px;
       color: #3e3730;
     }
 
     .hero-subtitle {
-      font-family: var(--font-body);
-      font-size: clamp(1.5rem, 3vw, 2.5rem); 
-      font-weight: 400; 
-      color: var(--text-main);
-      opacity: 0.9;
-      margin-top: 0;
+      font-family: var(--font-heading);
+      font-size: 1.8rem; 
+      font-weight: 600; 
+      color: var(--text-muted);
+      margin-top: 10px;
     }
 
 
@@ -116,7 +146,6 @@
     .bg-paper { background-color: var(--bg-paper); }
     .bg-white { background-color: #fff; }
     
-    /* Summary Section Styling */
     .bg-dark-rust { 
       background-color: #2c241b; 
       color: #f4f4f4;
@@ -127,11 +156,10 @@
       background: var(--accent-rust);
     }
 
-    /* Grid Layout */
     .grid-2col {
       display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
     }
-    .grid-reversed .text-col { order: 2; } 
+    .grid-reversed .text-col { order: 2; }
     .grid-reversed .img-col { order: 1; }
 
 
@@ -148,7 +176,6 @@
     .p-text { font-size: 1.125rem; color: var(--text-muted); margin-bottom: 20px; text-align: justify; }
     .bg-dark-rust .p-text { color: rgba(255,255,255,0.85); }
 
-    /* Images */
     .img-fluid {
       width: 100%; height: 400px; object-fit: cover;
       border-radius: 2px;
@@ -157,7 +184,6 @@
     }
     .img-fluid:hover { transform: scale(1.02); }
     
-    /* Caption */
     .img-caption {
       display: block; margin-top: 10px; font-family: var(--font-heading);
       font-size: 13px; color: var(--text-muted); opacity: 0.7; text-align: right;
@@ -177,6 +203,15 @@
     }
     .phase-link:hover { color: var(--accent-rust); }
 
+    /* 右箭头 */
+    .arrow-right {
+      width: 20px;
+      height: 20px;
+      border-right: 2.5px solid currentColor;
+      border-top: 2.5px solid currentColor;
+      transform: rotate(45deg);
+    }
+
 
     /* --- Mobile --- */
     @media(max-width: 900px) {
@@ -193,15 +228,15 @@
 
 <body>
 
-  <!-- Nav -->
+  <!-- Nav - 修复后的版本，使用CSS箭头而非图标库 -->
   <a href="timeline.html" class="nav-float" id="nav-btn">
     <div class="nav-icon-circle">
-      <i data-lucide="arrow-left"></i>
+      <div class="nav-arrow"></div>
     </div>
     <span class="nav-text">Back to Timeline</span>
   </a>
 
-  <!-- Hero Section (Clean Beige Cover) -->
+  <!-- Hero Section -->
   <header class="hero-section">
     <div class="hero-content">
       <h1 class="hero-title">Phase II: 1840s–1940s</h1>
@@ -211,17 +246,17 @@
 
   <main>
     
-    <!-- 1. Gold Rushes (White BG) -->
+    <!-- 1. Gold Rushes -->
     <section class="section-wrap bg-white">
       <div class="container">
         <div class="grid-2col">
           <div class="text-col">
             <h2 class="section-title">1848–1858: The North American Gold Rushes</h2>
             <p class="p-text">
-              The discovery of gold in California triggered the first major wave of Cantonese migration to North America. Between 1848 and 1851, approximately 25,000 migrants arrived, hailing primarily from the Sze Yup (Four Counties) region. San Francisco served as the primary entry point, where migrants established the continent’s first Chinatown. This district functioned not only as a transit hub for newcomers but also as North America's earliest permanent Cantonese settlement.
+              The discovery of gold in California triggered the first major wave of Cantonese migration to North America. Between 1848 and 1851, approximately 25,000 migrants arrived, hailing primarily from the Sze Yup (Four Counties) region. San Francisco served as the primary entry point, where migrants established the continent's first Chinatown. This district functioned not only as a transit hub for newcomers but also as North America's earliest permanent Cantonese settlement.
             </p>
             <p class="p-text">
-              In 1858, the discovery of gold in British Columbia drew the migration northward. Cantonese miners, arriving from California or directly from southern China, founded Victoria’s Chinatown. Known as the “Gateway to Canada,” it remains the oldest Chinese enclave in the country.
+              In 1858, the discovery of gold in British Columbia drew the migration northward. Cantonese miners, arriving from California or directly from southern China, founded Victoria's Chinatown. Known as the "Gateway to Canada," it remains the oldest Chinese enclave in the country.
             </p>
           </div>
           <div class="img-col">
@@ -232,7 +267,7 @@
       </div>
     </section>
 
-    <!-- 2. Six Companies (Paper BG) -->
+    <!-- 2. Six Companies -->
     <section class="section-wrap bg-paper">
       <div class="container">
         <div class="grid-2col grid-reversed">
@@ -253,17 +288,17 @@
       </div>
     </section>
 
-    <!-- 3. Hawaii (White BG) -->
+    <!-- 3. Hawaii -->
     <section class="section-wrap bg-white">
       <div class="container">
         <div class="grid-2col">
           <div class="text-col">
             <h2 class="section-title">1850s–1900s: The Plantation Economy in Hawaii (The Sandalwood Mountains)</h2>
             <p class="p-text">
-              A distinct stream of Cantonese migration transformed Hawaii, beginning with contract laborers in 1852. Unlike the Sze Yup-dominated mainland, Hawaii’s community was overwhelmingly Heungshan (Zhongshan), comprising roughly 75% of the Chinese population.
+              A distinct stream of Cantonese migration transformed Hawaii, beginning with contract laborers in 1852. Unlike the Sze Yup-dominated mainland, Hawaii's community was overwhelmingly Heungshan (Zhongshan), comprising roughly 75% of the Chinese population.
             </p>
             <p class="p-text">
-              Between 1852 and 1899, approximately 46,000 migrants arrived. By 1884, they constituted 22% of the total population and held 49% of plantation jobs, forming the backbone of the sugar industry. By the 1890s, they also dominated rice cultivation, successfully transferring South China’s agricultural technology to the Pacific.
+              Between 1852 and 1899, approximately 46,000 migrants arrived. By 1884, they constituted 22% of the total population and held 49% of plantation jobs, forming the backbone of the sugar industry. By the 1890s, they also dominated rice cultivation, successfully transferring South China's agricultural technology to the Pacific.
             </p>
           </div>
           <div class="img-col">
@@ -274,7 +309,7 @@
       </div>
     </section>
 
-    <!-- 4. Railroad (Paper BG) -->
+    <!-- 4. Railroad -->
     <section class="section-wrap bg-paper">
       <div class="container">
         <div class="grid-2col grid-reversed">
@@ -295,7 +330,7 @@
       </div>
     </section>
 
-    <!-- 5. Burlingame Treaty (White BG - Centered Focus) -->
+    <!-- 5. Burlingame Treaty -->
     <section class="section-wrap bg-white">
       <div class="container" style="max-width: 800px;">
         <h2 class="section-title">1868: Diplomacy and Free Migration</h2>
@@ -303,12 +338,12 @@
           The Burlingame Treaty (1868) marked a high point in early U.S.–Qing relations. It affirmed reciprocal most-favored-nation treatment in travel and residence. Notably, it recognized the mutual advantage of free migration for trade, travel, or permanent residence while condemning coerced migration.
         </p>
         <p class="p-text">
-          In this diplomatic context, the Qing government soon launched initiatives such as the Chinese Educational Mission (1872–1881). More broadly, the treaty’s language of “free migration” helped legitimize and protect transpacific mobility in the late 1860s and early 1870s. Combined with labor demand and established Cantonese migrant networks, it reinforced the United States as a major destination for Cantonese workers until the agreement was later curtailed and ultimately undermined by restrictive policies in the 1880s.
+          In this diplomatic context, the Qing government soon launched initiatives such as the Chinese Educational Mission (1872–1881). More broadly, the treaty's language of "free migration" helped legitimize and protect transpacific mobility in the late 1860s and early 1870s. Combined with labor demand and established Cantonese migrant networks, it reinforced the United States as a major destination for Cantonese workers until the agreement was later curtailed and ultimately undermined by restrictive policies in the 1880s.
         </p>
       </div>
     </section>
 
-    <!-- 6. Exclusion (Paper BG) -->
+    <!-- 6. Exclusion -->
     <section class="section-wrap bg-paper">
       <div class="container">
         <div class="grid-2col">
@@ -332,7 +367,7 @@
       </div>
     </section>
 
-    <!-- 7. Summary (Dark Rust Theme) -->
+    <!-- 7. Summary -->
     <section class="section-wrap bg-dark-rust">
       <div class="container" style="max-width: 900px;">
         <h2 class="section-title">Summary: From Labor to Legacy</h2>
@@ -347,7 +382,7 @@
         <div class="phase-nav">
           <a href="phase3.html" class="phase-link">
             <span>Next: Phase III</span>
-            <i data-lucide="arrow-right"></i>
+            <div class="arrow-right"></div>
           </a>
         </div>
       </div>
@@ -355,21 +390,5 @@
 
   </main>
 
-  <script>
-    // Initialize Icons after DOM is loaded
-    document.addEventListener("DOMContentLoaded", function() {
-        if (typeof lucide !== 'undefined') {
-            lucide.createIcons();
-        }
-    });
-
-    const navBtn = document.getElementById('nav-btn');
-    const heroHeight = window.innerHeight;
-
-    window.addEventListener('scroll', () => {
-        // Nav button logic (optional color change if needed in future)
-        // Currently keeping it consistent
-    });
-  </script>
 </body>
 </html>
